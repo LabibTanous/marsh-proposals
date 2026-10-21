@@ -1340,7 +1340,7 @@ async function sendChoice() {
   pk.busy = true; $('#pkSend').disabled = true; pkSet('pkSending');
   const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 20000);
   try {
-    const r = await fetch('https://meatmoot-proposal.vercel.app/api/feedback', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(body), signal: ctl.signal });
+    const r = await fetch('https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(body), signal: ctl.signal });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || `HTTP ${r.status}`);
     pkSet('pkOk', 'ok');

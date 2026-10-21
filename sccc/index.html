@@ -1348,7 +1348,7 @@ function packageData() {
   const fields = { plan: ST.plan, pages: Object.fromEntries(c.pagesOn.map((d) => [d[0], ST.vids[d[0]]])), setup: setup.map((d) => d[0]), cardRestaurants: c.setupOn.includes('card') ? ST.cardN : 0, adBudget: ST.ads ? ST.adBudget : 0, addons: adds.map((d) => d[0]), total };
   return { fields, readable, total };
 }
-const FEEDBACK_URL = 'https://meatmoot-proposal.vercel.app/api/feedback';   // shared Marsh endpoint (this project holds no keys)
+const FEEDBACK_URL = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback';   // shared Marsh endpoint (this project holds no keys)
 const WA = '962795631364';   // Safi, the number already on the Next step
 function receiptData() {
   const c = calc(), m = c.months, lines = [], tbdL = [], name = $('#pkName').value.trim().slice(0, 80);
