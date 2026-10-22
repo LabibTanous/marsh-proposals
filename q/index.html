@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>أسئلة مارش</title>
+<style>
+:root{--bg:#fff;--fg:#151515;--mut:#6b6b6b;--line:#e4e4e4;--card:#fafafa;--acc:#E9212A;--ok:#128C3E}
+@media (prefers-color-scheme:dark){:root{--bg:#121212;--fg:#f1f1f1;--mut:#9b9b9b;--line:#2b2b2b;--card:#1a1a1a;--ok:#3ccf6e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,system-ui,"Segoe UI",Tahoma,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 80px}
+header{position:sticky;top:0;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);z-index:2}
+h1{font-size:20px;margin:0}
+.sub{color:var(--mut);font-size:14px}
+.bar{height:4px;background:var(--line);border-radius:2px;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:2px;width:0}
+h2{font-size:15px;color:var(--acc);margin:28px 0 8px}
+.q{border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0;background:var(--card)}
+.q.done{border-color:var(--ok)}
+.qt{font-weight:600}
+.en{color:var(--mut);font-size:13px;direction:ltr;text-align:right}
+.facts{font-size:14px;background:var(--bg);border-inline-start:3px solid var(--line);padding:6px 10px;margin:8px 0}
+label.o{display:flex;gap:8px;align-items:flex-start;padding:7px 0;cursor:pointer}
+label.o input{margin-top:5px}
+textarea{width:100%;min-height:60px;margin-top:8px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+.row{display:flex;gap:10px;align-items:center;margin-top:8px}
+button{padding:9px 18px;border:0;border-radius:8px;background:var(--acc);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+button:disabled{opacity:.5}
+.st{font-size:13px;color:var(--mut)}
+.st.ok{color:var(--ok)}
+.st.err{color:var(--acc)}
+.msg{padding:20px 0;color:var(--mut)}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>أسئلة مارش</h1>
+  <div class="sub">جاوب على اللي بتعرفه. كل جواب بينحفظ لحاله، وبتقدر ترجع تكمل بعدين.</div>
+  <div class="sub" id="count"></div>
+  <div class="bar"><i id="prog"></i></div>
+</header>
+<div id="list"><div class="msg">جاري التحميل…</div></div>
+</main>
+<script>
+const FN = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/safi-questions';
+const T = (location.hash || '').slice(1);
+const list = document.getElementById('list');
+let total = 0, done = new Set();
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const time = iso => { try { return new Date(iso).toLocaleString('ar-JO', {hour:'2-digit', minute:'2-digit', day:'numeric', month:'short'}); } catch { return ''; } };
+function progress() {
+  document.getElementById('count').textContent = `${done.size} من ${total} مجاوب`;
+  document.getElementById('prog').style.width = (total ? 100 * done.size / total : 0) + '%';
+}
+function card(q, saved) {
+  const d = document.createElement('div');
+  d.className = 'q' + (saved ? ' done' : '');
+  const opts = (q.options || []).map((o, i) =>
+    `<label class="o"><input type="radio" name="${q.id}" value="${esc(o)}" ${saved && saved.choice === o ? 'checked' : ''}><span>${esc(o)}</span></label>`).join('');
+  d.innerHTML = `<div class="qt">${esc(q.q_ar)}</div><div class="en">${esc(q.q_en)}</div>`
+    + (q.facts_ar ? `<div class="facts">${esc(q.facts_ar)}</div>` : '') + opts
+    + `<textarea placeholder="${q.options && q.options.length ? 'غير هيك أو ملاحظة' : 'اكتب هون'}">${esc(saved ? saved.note : '')}</textarea>`
+    + `<div class="row"><button type="button">حفظ</button><span class="st ${saved ? 'ok' : ''}">${saved ? 'محفوظ ' + time(saved.at) : ''}</span></div>`;
+  const btn = d.querySelector('button'), st = d.querySelector('.st'), ta = d.querySelector('textarea');
+  btn.onclick = async () => {
+    const r = d.querySelector('input[type=radio]:checked');
+    const choice = r ? r.value : '', note = ta.value.trim();
+    if (!choice && !note) { st.className = 'st err'; st.textContent = 'اختار جواب أو اكتب ملاحظة'; return; }
+    btn.disabled = true; st.className = 'st'; st.textContent = 'جاري الحفظ…';
+    try {
+      const res = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ t: T, id: q.id, choice, note }) });
+      const j = await res.json();
+      if (!res.ok || !j.ok) throw new Error(j.error || res.status);
+      st.className = 'st ok'; st.textContent = 'محفوظ ' + time(new Date().toISOString());
+      d.classList.add('done'); done.add(q.id); progress();
+    } catch (e) { st.className = 'st err'; st.textContent = 'ما انحفظ، جرب مرة ثانية'; }
+    btn.disabled = false;
+  };
+  return d;
+}
+(async () => {
+  if (!T) { list.innerHTML = '<div class="msg">الرابط ناقص.</div>'; return; }
+  try {
+    const res = await fetch(FN + '?t=' + encodeURIComponent(T), { cache: 'no-store' });
+    if (!res.ok) throw 0;
+    const j = await res.json();
+    list.innerHTML = '';
+    total = j.questions.length;
+    let topic = '';
+    for (const q of j.questions) {
+      if (q.topic !== topic) { topic = q.topic; const h = document.createElement('h2'); h.textContent = topic; list.appendChild(h); }
+      const s = j.saved && j.saved[q.id];
+      if (s) done.add(q.id);
+      list.appendChild(card(q, s));
+    }
+    progress();
+  } catch { list.innerHTML = '<div class="msg">ما قدرنا نحمّل الأسئلة. جرب بعد دقيقة.</div>'; }
+})();
+</script>
+</body>
+</html>
