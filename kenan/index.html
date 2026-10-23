@@ -420,6 +420,119 @@ html[lang=en] .asked p{font-weight:600}
 @media(max-width:1100px){.plans{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.plans{grid-template-columns:1fr}}
 @media print{.pv-frame{display:none}}
+/* buyer page section */
+.bstep{margin-top:56px}
+.bstep>h3{font-size:clamp(20px,1.9vw,27px)}
+.bstep>p.bp{color:var(--text2);max-width:70ch;margin-top:6px}
+.abroad{margin-top:30px;padding:18px 22px;border:1px solid var(--accent-b);border-radius:var(--radius);background:var(--accent-a);font-weight:700}
+.inside{margin-top:18px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
+.vid{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg3);aspect-ratio:16/10}
+.vid img{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center}
+.vid .play i{width:64px;height:64px;border-radius:50%;background:rgba(15,26,56,.72);display:grid;place-items:center;color:#fff;font-style:normal;font-size:22px}
+.vid .vtag{position:absolute;inset-inline-start:12px;bottom:12px;background:rgba(255,255,255,.92);color:#1b2c58;border-radius:8px;padding:3px 10px;font-size:13px;font-weight:700}
+.vlist{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.vlist li{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);font-size:14.5px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.bp-grid{margin-top:18px;display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.5fr) minmax(0,1fr);gap:14px;align-items:start}
+.bld{border:1px solid var(--line);border-radius:var(--radius);background:var(--bg2);padding:14px;display:flex;flex-direction:column;gap:6px}
+.bld .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:8px;align-items:center}
+.bld .fl{font-size:13px;font-weight:700;color:var(--text2);text-align:start;border-radius:8px;padding:6px 8px;min-height:40px;line-height:1.25}
+.bld .fl[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.bld .fl small{display:block;font-weight:500;font-size:11.5px;opacity:.8}
+.bld .cells{display:flex;gap:4px;direction:ltr}
+.cell{flex:1;min-height:40px;border-radius:6px;border:1.5px solid var(--accent);font-size:12px;font-weight:700;display:grid;place-items:center;background:var(--bg2);color:var(--accent)}
+.cell.rs{background:var(--sec);border-color:var(--sec);color:#fff}
+.cell.sd{background:repeating-linear-gradient(135deg,rgba(27,44,88,.85) 0 6px,rgba(27,44,88,.7) 6px 12px);border-color:#1b2c58;color:#fff}
+.cell[aria-pressed=true]{outline:3px solid var(--sec);outline-offset:2px}
+.cell.none{border-style:dashed;border-color:var(--line2);color:var(--muted);background:none;cursor:default;font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;color:var(--text2);margin-top:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-inline-end:4px;border:1.5px solid var(--accent)}
+.legend i.rs{background:var(--sec);border-color:var(--sec)}.legend i.sd{background:#1b2c58;border-color:#1b2c58}
+.plan-fig{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden}
+.pov{position:relative;direction:ltr}
+.pov img{width:100%;height:auto}
+.pov button{position:absolute;border:2px solid transparent;border-radius:8px;transition:background .2s,border-color .2s}
+.pov button:hover{border-color:var(--accent-b);background:rgba(27,44,88,.06)}
+.pov button.sd{background:rgba(27,44,88,.42)}
+.pov button.rs{background:rgba(209,178,149,.38)}
+.pov button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 2px #fff}
+.pov button span{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#fff;color:#1b2c58;border:1px solid #1b2c58;border-radius:999px;padding:1px 10px;font-size:12px;font-weight:800;white-space:nowrap;font-family:var(--ar)}
+.plan-fig figcaption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 12px;font-size:13px;color:var(--text2);border-top:1px solid var(--line);background:var(--bg2)}
+.unitp{border:1px solid var(--line2);border-radius:var(--radius);background:var(--bg2);padding:16px}
+.unitp h4{font-size:18px;margin-bottom:8px}
+.unitp dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.unitp dt{color:var(--text2)}
+.unitp dd{font-weight:700;text-align:end}
+.rooms{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;font-size:13.5px}
+.rooms b{display:block;margin-bottom:6px}
+.rooms ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;color:var(--text2)}
+.rooms li bdi{color:var(--text);font-family:var(--en)}
+.wab{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.wab .bub{background:#dcf8c6;color:#111;border-radius:12px 12px 12px 2px;padding:9px 12px;font-size:14px;margin-top:6px}
+.wab .wbtn{display:inline-flex;margin-top:8px;align-items:center;gap:8px;border-radius:999px;background:#1f8f4e;color:#fff;font-weight:800;padding:8px 16px;font-size:14px}
+.wab p.n{font-size:12.5px;color:var(--muted);margin-top:6px}
+.sys-chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.sys-panel{margin-top:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg2);padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 28px}
+.sys-panel .sr{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:8px 0;font-size:14.5px}
+.sys-panel .j2{grid-column:1/-1;color:var(--text2);font-size:13.5px}
+.tl{margin-top:18px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;counter-reset:s}
+.tl article{border:1px solid var(--line);border-radius:var(--radius);background:var(--bg2);overflow:hidden;display:flex;flex-direction:column}
+.tl .ph{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--bg3) 0 10px,var(--bg2) 10px 20px);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:12.5px;padding:8px}
+.tl .ph:has(img){padding:0}
+.tl .ph img{width:100%;height:100%;object-fit:cover}
+.tl .tx{padding:10px 12px;font-size:13.5px}
+.tl .tx b{display:block;font-size:15px}
+.tl .tx span{color:var(--text2)}
+.tl article.now{border-color:var(--accent)}
+.co{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co div{border:1px dashed var(--line2);border-radius:12px;padding:12px 14px;font-size:14.5px}
+@media(max-width:1100px){.bp-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr)}.unitp{grid-column:1/-1}.tl{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.inside,.bp-grid,.sys-panel,.co{grid-template-columns:1fr}.tl{grid-template-columns:repeat(2,minmax(0,1fr))}.rooms ul{grid-template-columns:1fr}}
+/* Marsh Iskan dashboard mini-mockup */
+.dapp{margin-top:40px;border:1px solid var(--line2);border-radius:20px;background:#F2F3F1;color:#1c1613;overflow:hidden;box-shadow:0 30px 70px var(--shadow);font-family:'Tajawal','Albert Sans',sans-serif}
+html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
+.dapp .bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fff;border-bottom:1px solid #e3e3df;flex-wrap:wrap}
+.dapp .bar b{font-size:15px}
+.dapp .bar .dwho{margin-inline-start:auto;font-size:13px;color:#6b6b66}
+.dapp .samp{font-size:12px;font-weight:800;color:#E9212A;border:1px dashed #E9212A;border-radius:6px;padding:1px 8px}
+.dapp .body{display:grid;grid-template-columns:200px minmax(0,1fr);min-height:380px}
+.dapp nav{background:#fff;border-inline-end:1px solid #e3e3df;padding:10px;display:flex;flex-direction:column;gap:4px}
+.dapp nav button{text-align:start;padding:9px 12px;border-radius:10px;font-size:14px;font-weight:700;color:#4a4a45;min-height:40px}
+.dapp nav button[aria-selected=true]{background:#E9212A;color:#fff}
+.dapp .pane{padding:18px}
+.dapp .card{background:#fff;border-radius:20px;padding:16px 18px}
+.dapp .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.dapp .kpis div{background:#fff;border-radius:16px;padding:12px 14px}
+.dapp .kpis b{display:block;font-size:24px;font-family:'Albert Sans',sans-serif;font-variant-numeric:tabular-nums}
+.dapp .kpis span{font-size:12.5px;color:#6b6b66}
+.dapp h5{font-size:14px;margin-bottom:10px}
+.dapp .brow{display:grid;grid-template-columns:150px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;padding:5px 0}
+.dapp .brow i{display:block;height:12px;border-radius:6px;background:#E9212A}
+.dapp .brow i.alt{background:#1b2c58}
+.dapp .brow bdi{font-family:'Albert Sans',sans-serif;text-align:end;font-variant-numeric:tabular-nums}
+.dapp table{width:100%;border-collapse:collapse;font-size:13.5px}
+.dapp th{color:#6b6b66;font-weight:700;text-align:start;padding:6px 8px;border-bottom:1px solid #e3e3df}
+.dapp td{padding:8px;border-bottom:1px solid #f0f0ec}
+.dapp td.n{font-family:'Albert Sans',sans-serif;text-align:end;font-variant-numeric:tabular-nums}
+.dapp .st{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700;background:#eef3ee;color:#2d6a3e}
+.dapp .st.w{background:#fff3df;color:#8a5a00}.dapp .st.x{background:#e9ecf4;color:#1b2c58}
+.dapp .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.dapp .week div{background:#fff;border-radius:14px;padding:10px;font-size:12.5px;min-height:110px;display:flex;flex-direction:column;gap:6px}
+.dapp .week div b{font-size:13px}
+.dapp .note{font-size:12.5px;color:#6b6b66;margin-top:10px}
+@media(max-width:900px){.dapp .body{grid-template-columns:1fr}.dapp nav{flex-direction:row;overflow-x:auto;border-inline-end:0;border-bottom:1px solid #e3e3df}.dapp nav button{white-space:nowrap}.dapp .week{grid-template-columns:repeat(2,minmax(0,1fr))}.dapp .kpis{grid-template-columns:1fr 1fr}.dapp .brow{grid-template-columns:110px minmax(0,1fr) 34px}.dapp .tw{overflow-x:auto}}
+/* plans: term + rhythm */
+.termseg{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.termseg button{border:1.5px solid var(--line2);border-radius:calc(var(--radius) + 2px);padding:14px 16px;text-align:start;background:var(--bg2);display:flex;flex-direction:column;gap:4px;min-height:46px}
+.termseg button b{font-size:17px}
+.termseg button span{font-size:13.5px;color:var(--text2)}
+.termseg button[aria-checked=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);background:linear-gradient(160deg,var(--accent-a),var(--bg2) 60%)}
+.termseg button:disabled{cursor:not-allowed;opacity:.7;border-style:dashed}
+.termseg .later{display:inline-block;width:max-content;font-size:12px;font-weight:700;color:var(--sec);border:1px dashed var(--sec);border-radius:6px;padding:0 8px}
+.rhythm{margin-top:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:16px 18px}
+.rhythm b{display:block;margin-bottom:4px}
+.rhythm p{color:var(--text2);font-size:14.5px}
+@media(max-width:760px){.termseg{grid-template-columns:1fr}}
 </style>
 <body>
 <div id="loader" aria-hidden="true"><div class="lt"><span data-t="loader"></span></div><div class="bar"><i id="lbar"></i></div></div>
@@ -492,9 +605,46 @@ html[lang=en] .asked p{font-weight:600}
   </div>
 </section>
 
-<section id="content" class="sec" data-n="s_content">
+<section id="buyer" class="sec" data-n="s_buyer">
   <div class="wrap">
     <span class="idx">04</span>
+    <h2 class="rv" data-t="buyH"></h2>
+    <p class="sub" data-t="buySub"></p>
+    <p class="abroad" data-t="buyAbroad"></p>
+    <div class="bstep"><h3 data-t="b1H"></h3><p class="bp" data-t="b1P"></p>
+      <div class="inside"><div class="vid"><img src="img/terrace.jpg" alt="" loading="lazy" id="vidImg"><div class="play"><i aria-hidden="true">▶</i></div><span class="vtag" data-t="b1Tag"></span></div><ul class="vlist" id="vidList"></ul></div>
+    </div>
+    <div class="bstep"><h3 data-t="b2H"></h3><p class="bp" data-t="b2P"></p>
+      <div class="bp-grid">
+        <div><div class="bld" id="bld"></div><div class="legend" id="legend"></div></div>
+        <figure class="plan-fig"><div class="pov" id="pov"></div><figcaption id="povCap"></figcaption></figure>
+        <div class="unitp" id="unitp" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="bstep"><h3 data-t="b3H"></h3><p class="bp" data-t="b3P"></p>
+      <div class="sys-chips chips" id="sysChips" role="group" style="justify-content:flex-start"></div>
+      <div class="sys-panel" id="sysPanel" aria-live="polite"></div>
+    </div>
+    <div class="bstep"><h3 data-t="b4H"></h3><p class="bp" data-t="b4P"></p>
+      <div class="tl" id="tl"></div>
+      <div class="co" id="co"></div>
+    </div>
+    <div class="bstep"><h3 data-t="b5H"></h3><p class="bp" data-t="b5P"></p></div>
+  </div>
+</section>
+
+<section id="dash" class="sec" data-n="s_dash">
+  <div class="wrap">
+    <span class="idx">05</span>
+    <h2 class="rv" data-t="dashH"></h2>
+    <p class="sub" data-t="dashSub"></p>
+    <div class="dapp" id="dapp"></div>
+  </div>
+</section>
+
+<section id="content" class="sec" data-n="s_content">
+  <div class="wrap">
+    <span class="idx">06</span>
     <h2 class="rv" data-t="contH"></h2>
     <p class="sub" data-t="contSub"></p>
     <div class="ideas" id="contList"></div>
@@ -503,7 +653,7 @@ html[lang=en] .asked p{font-weight:600}
 
 <section id="channels" class="sec" data-n="s_channels">
   <div class="wrap">
-    <span class="idx">05</span>
+    <span class="idx">07</span>
     <h2 class="rv" data-t="chanH"></h2>
     <p class="sub" data-t="chanSub"></p>
     <div class="flow-grid">
@@ -517,7 +667,7 @@ html[lang=en] .asked p{font-weight:600}
 
 <section id="phases" class="sec" data-n="s_phases">
   <div class="wrap">
-    <span class="idx">06</span>
+    <span class="idx">08</span>
     <h2 class="rv" data-t="phasesH"></h2>
     <p class="sub" data-t="phasesSub"></p>
     <div class="phases" id="phaseList"></div>
@@ -526,7 +676,7 @@ html[lang=en] .asked p{font-weight:600}
 
 <section id="terms" class="sec" data-n="s_terms">
   <div class="wrap">
-    <span class="idx">07</span>
+    <span class="idx">09</span>
     <h2 class="rv" data-t="termsH"></h2>
     <div class="terms-grid" id="termsGrid"></div>
   </div>
@@ -534,7 +684,7 @@ html[lang=en] .asked p{font-weight:600}
 
 <section id="next" class="next" data-n="s_next">
   <div class="wrap">
-    <span class="idx">08</span>
+    <span class="idx">10</span>
     <h2 class="rv" data-t="nextH"></h2>
     <p data-t="nextP"></p>
     <ol class="steps" id="nextSteps"></ol>
@@ -550,6 +700,9 @@ html[lang=en] .asked p{font-weight:600}
     <h2 data-t="plansH"></h2>
     <ol class="guide-steps" id="guideSteps"></ol>
     <p class="scope" data-t="plansScope"></p>
+    <h3 style="margin-top:26px" data-t="termH"></h3>
+    <div class="termseg" id="termSeg" role="radiogroup"></div>
+    <div class="rhythm"><b data-t="rhythmH"></b><p data-t="rhythmP"></p></div>
     <div class="sugg" id="sugg" aria-live="polite"></div>
     <div class="cust-h"><h3 data-t="custH"></h3></div>
     <p class="sub" data-t="plansSub"></p>
@@ -583,7 +736,9 @@ const FILL = {
   pkgs: { p400: 400, p700: 700, p1000: 1000, p2000: 2000 },   // JOD a month
   msg: 150,                                                     // JOD a month, messages and leads list
   adsPct: 15, adBudgetDefault: 300,                             // ads management: 15 % of the ad budget; the budget is paid to Meta
-  once: { page: null, hero: null, next: null, photos: null },   // one time, price to be set
+  once: { page: null, hero: null, next: null, photos: null },   // one time, price to confirm (Safi)
+  term3: { p400: null, p700: null, p1000: null, p2000: null },  // 3-month start price per package: to confirm (Safi 41:49)
+  yearly: null,                                                 // yearly paid in advance: later (Labib 41:37), price to confirm
   suggested: { pkg: 'p700', msg: false, ads: false, once: ['page', 'hero'] },
 };
 
@@ -598,7 +753,7 @@ const D = {
   heroLede: ['كنان للإسكان (شركة حيدر ومحمد القرعان للإسكان) تبني في الجبيهة، عمّان. هذا العرض يغطي 3 أشياء: صفحة لمشروع الجبيهة 3، والستوري والفيديو على إنستغرام، والإعلانات في الأردن والخليج.', 'Kenan Housing (Haidar and Mohammad Al-Quraan Housing Company) builds in Jubeiha, Amman. This proposal covers 3 things: a page for the Jubeiha 3 project, stories and videos on Instagram, and ads in Jordan and the Gulf.'],
   heroMeta: ['مُعدّ من مارش للتسويق والتطوير · صافي السكران ولبيب طنوس', 'Prepared by Marsh Marketing and Development · Safi Al-Sakran and Labib Tanous'],
   heroAlt: ['رندر الواجهة الأمامية لمشروع الجبيهة 3، من عرض كنان.', 'Front facade render of Jubeiha 3, from Kenan\'s deck.'],
-  s_top: ['الغلاف', 'Cover'], s_heard: ['ما قلته لنا', 'What you told us'], s_today: ['الحساب اليوم', 'The account today'], s_project: ['صفحة المشروع', 'The project page'], s_content: ['المحتوى', 'Content'], s_channels: ['الإعلانات', 'Ads'], s_phases: ['أول 30 يوماً', 'The first 30 days'], s_terms: ['الشروط', 'Terms'], s_next: ['الخطوة التالية', 'Next step'], s_plans: ['الباقات والأسعار', 'Plans and fees'], s_page: ['صفحة المشروع', 'The project page'],
+  s_top: ['الغلاف', 'Cover'], s_heard: ['ما قلته لنا', 'What you told us'], s_today: ['الحساب اليوم', 'The account today'], s_project: ['صفحة المشروع', 'The project page'], s_content: ['المحتوى', 'Content'], s_channels: ['الإعلانات', 'Ads'], s_phases: ['أول 30 يوماً', 'The first 30 days'], s_terms: ['الشروط', 'Terms'], s_next: ['الخطوة التالية', 'Next step'], s_buyer: ['صفحة المشتري', 'The buyer page'], s_dash: ['لوحة مارش إسكان', 'Marsh Iskan dashboard'], s_plans: ['الباقات والأسعار', 'Plans and fees'], s_page: ['صفحة المشروع', 'The project page'],
 
   heardH: ['ما قلته لنا، وما نعمله', 'What you told us, and what we do'],
   heardSub: ['1–5: ما كتبه صافي يوم 18 تشرين الأول، بالنص. 6–10: من اجتماع 23 تشرين الأول، ملخّص.', '1–5: what Safi wrote on 18 October, word for word. 6–10: from the meeting on 23 October, in short.'],
@@ -700,9 +855,9 @@ const D = {
   terms: [
     [['مُعدّ لـ', 'Prepared for'], ['كنان للإسكان · شركة حيدر ومحمد القرعان للإسكان · الجبيهة، عمّان', 'Kenan Housing · Haidar and Mohammad Al-Quraan Housing Company · Jubeiha, Amman'], 'wide'],
     [['مُعدّ من', 'Prepared by'], ['مارش للتسويق والتطوير · صافي السكران ولبيب طنوس', 'Marsh Marketing and Development · Safi Al-Sakran and Labib Tanous'], 'wide'],
-    [['الباقات', 'Packages'], ['400، 700، 1,000، أو 2,000 دينار في الشهر. محتوى كل باقة مسودة يؤكدها صافي.', '400, 700, 1,000 or 2,000 JOD a month. The contents of each package are a draft that Safi confirms.'], ''],
+    [['الباقات', 'Packages'], ['400، 700، 1,000، أو 2,000 دينار في الشهر. محتوى كل باقة مسودة يؤكدها صافي. البداية شهرية أو 3 أشهر (سعر 3 أشهر للتأكيد). الدفع السنوي مقدّماً لاحقاً.', '400, 700, 1,000 or 2,000 JOD a month. The contents of each package are a draft that Safi confirms. Start monthly or for 3 months (the 3-month price is to confirm). Yearly, paid in advance, comes later.'], ''],
     [['إضافات شهرية', 'Monthly add-ons'], ['الرسائل وقائمة المهتمين 150 ديناراً في الشهر. إدارة إعلانات ميتا 15 % من ميزانية الإعلانات.', 'Messages and leads list 150 JOD a month. Meta ads management 15 % of the ad budget.'], ''],
-    [['لمرة واحدة', 'One time'], ['صفحة المشروع، الفيديو الرئيسي، صفحة كل مشروع جديد، والصور: السعر يُحدد بعد الاختيار.', 'The project page, the main video, a page for each next project, and the photos: the price is set after the choice.'], ''],
+    [['لمرة واحدة', 'One time'], ['صفحة المشروع، الفيديو الرئيسي، صفحة كل مشروع جديد، والصور: السعر للتأكيد.', 'The project page, the main video, a page for each next project, and the photos: the price is to confirm.'], ''],
     [['خارج الأسعار', 'Not in the fees'], ['ميزانية الإعلانات، وكلفة رسائل واتساب. يدفعها كنان مباشرة.', 'The ad budget and the WhatsApp message costs. Kenan pays them directly.'], ''],
     [['المحتوى', 'Content'], ['لا ننشر مواصفة أو ماركة قبل أن يؤكدها كنان. لا أسعار شقق ولا وعود بعائد في المحتوى.', 'No spec or brand goes up before Kenan confirms it. No flat prices and no promised returns in the content.'], 'wide'],
     [['الملكية والنتائج', 'Ownership and results'], ['الصفحات والصور والفيديو الخام ملك كنان. لا نعد بعدد مبيعات أو متابعين. التقرير يُظهر ما تجلبه كل قناة.', 'The pages, photos and raw footage stay Kenan\'s. No number of sales or followers is promised. The report shows what each channel brings.'], 'wide'],
@@ -719,6 +874,86 @@ const D = {
   foot: ['مارش للتسويق والتطوير · الأردن', 'Marsh Marketing and Development · Jordan'],
   safiName: ['صافي السكران', 'Safi Al-Sakran'], langL: ['اللغة', 'Language'], secL: ['الأقسام', 'Sections'], logoAlt: ['مارش للتسويق والتطوير', 'Marsh Marketing and Development'],
   modeL: ['فاتح أو داكن', 'Light or dark'], modeDark: ['داكن', 'dark'], modeLight: ['فاتح', 'light'],
+
+  /* the buyer page (Safi's voice note, 23 Oct 14:08, in his order) */
+  buyH: ['صفحة المشتري', 'The buyer page'],
+  buySub: ['ما يراه المشتري على صفحة الجبيهة 3، بترتيب ملاحظة صافي الصوتية يوم 23 تشرين الأول. كل قيمة «للتأكيد» يرسلها كنان قبل النشر.', 'What a buyer sees on the Jubeiha 3 page, in the order of Safi\'s voice note of 23 October. Kenan sends each value marked "To confirm" before the page goes live.'],
+  buyAbroad: ['المشتري في الخارج لا يأتي ليرى الشقة. يدفع، ولا يراها إلا عند الاستلام. لذلك تعرض الصفحة كل تفصيل.', 'A buyer abroad does not come to see the flat. They pay, and see it only at handover. So the page shows every detail.'],
+  b1H: ['1 · الشقة من الداخل', '1 · The flat from inside'],
+  b1P: ['فيديو 360 أو فيديو عادي لكل نوع شقة: من المدخل، على الدرج، حتى الروف. يُصوَّر في يوم التصوير.', 'A 360 video or a normal video for each flat type: from the entrance, up the stairs, to the roof. We film it on the shoot day.'],
+  b1Tag: ['فيديو 360 · يُصوَّر بعد الموافقة', '360 video · filmed after approval'],
+  vids: [[['جولة 360 داخل كل نوع شقة', 'A 360 tour inside each flat type'], 'tbd'], [['المدخل والدرج حتى الروف', 'The entrance and the stairs up to the roof'], 'tbd'], [['المساحة وتقسيم الشقة', 'The area and the layout of the flat'], 'tbd'], [['مواصفات الشقة', 'The flat specs'], 'b3']],
+  b3Link: ['في الخطوة 3', 'In step 3'],
+  b2H: ['2 · المخطط: اختر الطابق، ثم الشقة', '2 · The plan: pick a floor, then a flat'],
+  b2P: ['المخططات من ملف «كنان للإسكان - جبيهة 3» الذي أرسله كنان يوم 18 تشرين الأول. اضغط على شقة في المبنى أو على المخطط. الشقة المباعة عليها ظل.', 'The plans are from the "Kenan Housing - Jubeiha 3" file Kenan sent on 18 October. Tap a flat on the building or on the plan. A sold flat has a shade on it.'],
+  st_av: ['متاحة', 'Available'], st_rs: ['محجوزة', 'Reserved'], st_sd: ['مباعة', 'Sold'],
+  stSample: ['الحالات هنا عينة. كنان يغيّر حالة كل شقة من لوحته.', 'The statuses here are a sample. Kenan changes each flat\'s status from his dashboard.'],
+  fl_r: ['الروف', 'Roof'], fl_l: ['الطابق الأخير', 'Last floor'], fl_t: ['الطابق المتكرر', 'Typical floor'], fl_g: ['الطابق الأرضي', 'Ground floor'], fl_b: ['التسوية', 'Basement'],
+  typCount: ['عدد الطوابق للتأكيد', 'floor count to confirm'],
+  roofNote: ['الروف مع شقق الطابق الأخير (دوبلكس). التقسيم للتأكيد.', 'The roof goes with the last-floor flats (duplex). The split is to confirm.'],
+  c_L: ['يسار', 'Left'], c_R: ['يمين', 'Right'], c_one: ['شقة', 'Flat'], u_L: ['الشقة اليسرى', 'Left flat'], u_R: ['الشقة اليمنى', 'Right flat'], u_one: ['شقة التسوية', 'Basement flat'],
+  uFloor: ['الطابق', 'Floor'], uArea: ['المساحة', 'Area'], uBeds: ['غرف النوم', 'Bedrooms'], uStatus: ['الحالة', 'Status'], uVideo: ['فيديو الشقة', 'Flat video'],
+  areaNote: ['في منشورات كنان: 188 م²، 230 م²، ودوبلكس 230–270 م². أي مساحة لأي شقة: للتأكيد.', 'In Kenan\'s posts: 188 m², 230 m², and a 230–270 m² duplex. Which area goes with which flat: to confirm.'],
+  roomsH: ['الغرف بأبعادها (م)، من المخطط', 'Rooms with sizes (m), from the plan'],
+  roomsOther: ['الأبعاد مكتوبة على المخطط. قائمة الغرف تُدخل بنفس الطريقة لكل شقة.', 'The sizes are on the plan. The room list goes in the same way for each flat.'],
+  pickFlat: ['اختر شقة.', 'Pick a flat.'],
+  openPlan: ['افتح المخطط بحجم كامل', 'Open the plan full size'], approx: ['حدود الشقة على المخطط تقريبية.', 'The flat outline on the plan is approximate.'],
+  waL: ['زر واتساب برسالة جاهزة', 'WhatsApp button with a ready message'],
+  waMsg: ['مرحباً، أسأل عن {u} في {f}، مشروع الجبيهة 3.', 'Hello, I am asking about the {u} on the {f}, Jubeiha 3.'],
+  waBtn: ['اسأل على واتساب', 'Ask on WhatsApp'],
+  waNote: ['في الصفحة الحقيقية يفتح الزر واتساب على رقم كنان.', 'On the live page, the button opens WhatsApp to Kenan\'s number.'],
+  b3H: ['3 · مواصفات المبنى حسب النظام', '3 · Building specs by system'],
+  b3P: ['زر لكل نظام. تحته النوع والماركة. لا نعرض ماركة قبل أن يؤكدها كنان. «في الجبيهة 2» = مذكورة في منشورات مشروع الجبيهة 2 فقط.', 'A button for each system. Under it: the type and the brand. No brand goes up before Kenan confirms it. "In Jubeiha 2" = stated in the Jubeiha 2 posts only.'],
+  j2L: ['في الجبيهة 2:', 'In Jubeiha 2:'],
+  systems: [
+    [['الأساسات', 'Foundations'], [['نوع الأساس', 'Foundation type'], ['عمق الحفر', 'Dig depth'], ['صور الصبّ بتاريخها', 'Dated pour photos']], null],
+    [['الحنفيات والمواسير', 'Taps and pipes'], [['ماركة الخلاطات', 'Mixer brand'], ['نوع المواسير', 'Pipe type'], ['المضخات', 'Pumps']], ['خلاطات Grohe، مضخات Espa', 'Grohe mixers, Espa pumps']],
+    [['الكهرباء والإنارة', 'Electrical and lighting'], [['نوع اللمبة وLED', 'Lamp type and LED'], ['القواطع وعددها', 'Breakers and their count'], ['ماركة الأفياش', 'Socket brand']], ['19 قاطع Schneider لكل شقة', '19 Schneider breakers per flat']],
+    [['الدهان', 'Paint'], [['نوع الدهان', 'Paint type'], ['الماركة', 'Brand'], ['عدد الأوجه', 'Number of coats']], null],
+    [['العزل وشركات العزل', 'Insulation and the insulation firms'], [['عزل السطح', 'Roof insulation'], ['العزل المائي للحمامات', 'Bathroom waterproofing'], ['العزل الحراري', 'Thermal insulation'], ['الشركة المنفذة', 'The firm that does it']], null],
+    [['الحجر', 'Stone'], [['نوع الحجر', 'Stone type'], ['المصدر', 'Source'], ['طريقة التركيب', 'How it is fixed']], null],
+    [['الحديد', 'Steel'], [['نوع الحديد', 'Steel type'], ['المصنع', 'Maker'], ['صور الحديد قبل الصبّ', 'Steel photos before the pour']], null],
+    [['الحمام والبلاط', 'Bathroom and tiles'], [['زوايا 45°', '45° corners'], ['ماركة البلاط ومقاسه', 'Tile brand and size'], ['ماركة الروبة', 'Grout brand']], null],
+    [['الشبابيك', 'Windows'], [['نوع الألمنيوم', 'Aluminium type'], ['الزجاج', 'Glass']], ['ألمنيوم system 9000 بزجاج مزدوج', 'system 9000 aluminium with double glass']],
+    [['التدفئة والتكييف', 'Heating and AC'], [['البويلر والرديترات', 'Boiler and radiators'], ['نحاس التكييف', 'AC copper']], ['Arca-Imperial، نحاس Muller', 'Arca–Imperial, Muller copper']],
+  ],
+  b4H: ['4 · قوة الشركة: البناء من أول يوم', '4 · Company strength: the build from day one'],
+  b4P: ['خط زمني بالصور، بتاريخ كل صورة: الأساس، ثم الحديد، ثم الصبّة، حتى التشطيب. المشتري يرى كيف بُني المبنى.', 'A photo timeline, with the date of each photo: the foundation, then the steel, then the slab, up to finishing. The buyer sees how the building went up.'],
+  stagesB: [[['الحفر والأساس', 'Digging and foundation'], null], [['الحديد', 'Steel'], null], [['الصبّات', 'Concrete slabs'], null], [['البناء والحجر', 'Walls and stone'], null], [['التشطيب', 'Finishing'], ['الآن · منشورات 15 و16 و27 أيلول 2026', 'Now · posts of 15, 16 and 27 Sep 2026']]],
+  photoTbd: ['صور الموقع بتاريخها · للتأكيد', 'Dated site photos · to confirm'],
+  dateTbd: ['التاريخ للتأكيد', 'Date to confirm'],
+  co: [['المشاريع السابقة (منها الجبيهة 2): للتأكيد', 'Earlier projects (Jubeiha 2 is one): to confirm'], ['سنوات العمل والضمانات والتسجيل في دائرة الأراضي: للتأكيد', 'Years of work, warranties and Lands Department registration: to confirm']],
+  b5H: ['5 · ميزة لها مكانها', '5 · A feature with its own spot'],
+  b5P: ['أي ميزة في المبنى، مثل باب المدخل الزجاجي المنزلق، تأخذ مكاناً خاصاً على الصفحة، لا سطراً في قائمة. هل الميزة موجودة في الجبيهة 3: للتأكيد مع كنان.', 'Any feature of the building, such as a glass sliding entrance door, gets its own spot on the page, not a line in a list. Whether Jubeiha 3 has it: to confirm with Kenan.'],
+
+  /* Marsh Iskan dashboard */
+  dashH: ['لوحة مارش إسكان', 'Marsh Iskan dashboard'],
+  dashSub: ['لوحة كنان نفسه. فريق مارش يحدّثها، وكنان يراها من الموبايل. الأرقام هنا عينة لتوضيح الشكل، وليست أرقام كنان.', 'Kenan\'s own dashboard. The Marsh team updates it, and Kenan sees it on his phone. The numbers here are a sample to show the layout. They are not Kenan\'s numbers.'],
+  dTitle: ['مارش إسكان · كنان للإسكان · الجبيهة 3', 'Marsh Iskan · Kenan Housing · Jubeiha 3'],
+  dSample: ['بيانات عينة', 'Sample data'], dWho: ['آخر تحديث: فريق مارش', 'Last update: the Marsh team'],
+  dTabs: [['leads', ['المهتمون حسب المصدر', 'Leads by source']], ['units', ['الاستفسارات لكل شقة', 'Enquiries per flat']], ['site', ['صور الموقع', 'Site progress uploads']], ['cal', ['تقويم المحتوى', 'Content calendar']], ['ads', ['نتائج الإعلانات', 'Ads results']]],
+  dLeadsK: [['المهتمون هذا الشهر', 'Leads this month'], ['منهم من الخليج', 'Of them, from the Gulf'], ['حجزوا زيارة', 'Booked a visit']],
+  dSources: [[['إعلانات ميتا · الأردن', 'Meta ads · Jordan'], 22, 0], [['إعلانات ميتا · الخليج', 'Meta ads · the Gulf'], 17, 1], [['إنستغرام', 'Instagram'], 14, 0], [['رابط صفحة المشروع', 'Project page link'], 9, 1], [['فيسبوك', 'Facebook'], 6, 0], [['معرفة شخصية', 'Referral'], 3, 1]],
+  dLeadsN: ['كل مهتم يدخل من رابط فيه مصدره. القائمة في إضافة «الرسائل وقائمة المهتمين».', 'Each lead comes in on a link that carries its source. The list is in the "Messages and leads list" add-on.'],
+  dUnitsH: [['الشقة', 'Flat'], ['الحالة', 'Status'], ['استفسارات', 'Enquiries'], ['زيارات', 'Visits']],
+  dUnitsN: ['الشقق من مخطط الجبيهة 3. كنان يغيّر الحالة هنا، فتتغيّر على صفحة المشتري.', 'The flats are from the Jubeiha 3 plan. Kenan changes the status here, and it changes on the buyer page.'],
+  dSiteH: [['التاريخ', 'Date'], ['المرحلة', 'Stage'], ['ما رُفع', 'Upload'], ['على صفحة المشتري', 'On the buyer page']],
+  dSite: [['20 تشرين الأول', '20 Oct', ['التشطيب', 'Finishing'], ['حمام الماستر · 6 صور', 'Master bath · 6 photos'], 1], ['17 تشرين الأول', '17 Oct', ['التشطيب', 'Finishing'], ['الدهان · فيديو 0:40', 'Paint · video 0:40'], 1], ['13 تشرين الأول', '13 Oct', ['التشطيب', 'Finishing'], ['البلاط 120×120 · 4 صور', 'Tiles 120×120 · 4 photos'], 0]],
+  dYes: ['نُشر', 'Posted'], dWait: ['ينتظر موافقة كنان', 'Waits for Kenan'],
+  dSiteN: ['فريق الموقع يرفع الصور من الموبايل. لا شيء يُنشر قبل موافقة كنان.', 'The site team uploads photos from a phone. Nothing goes up before Kenan approves it.'],
+  dWeek: [[['السبت', 'Sat'], ['ريل: البلاط من قريب', 'Reel: the tiles up close'], 1], [['الأحد', 'Sun'], ['ريل: سؤال مشترٍ وجوابه', 'Reel: a buyer\'s question and its answer'], 1], [['الاثنين', 'Mon'], ['ريل: العزل', 'Reel: the insulation'], 1], [['الثلاثاء', 'Tue'], ['ريل: جولة في شقة', 'Reel: a flat tour'], 0], [['الأربعاء', 'Wed'], ['ريل: تقدّم الأسبوع', 'Reel: this week\'s progress'], 0], [['الخميس', 'Thu'], ['ريل: المدخل', 'Reel: the entrance'], 0], [['الجمعة', 'Fri'], ['ريل: الحي والأماكن القريبة', 'Reel: the area and places nearby'], 0]],
+  dOk: ['موافق', 'Approved'], dDraft: ['مسودة', 'Draft'],
+  dCalN: ['ريل كل يوم في فترة الإطلاق. كنان يوافق على كل ريل من هنا.', 'A reel each day in the launch period. Kenan approves each reel from here.'],
+  dAdsH: [['الحملة', 'Campaign'], ['الإنفاق (دينار)', 'Spend (JOD)'], ['الوصول', 'Reach'], ['رسائل', 'Messages'], ['كلفة الرسالة', 'Cost per message']],
+  dAds: [[['الأردن · فيديو قصير', 'Jordan · short video'], 150, 12400, 31], [['الخليج · الفيديو الرئيسي', 'The Gulf · main video'], 150, 8900, 18]],
+  dAdsN: ['الأرقام من مدير إعلانات ميتا. الميزانية يدفعها كنان لميتا.', 'The numbers come from Meta Ads Manager. Kenan pays the budget to Meta.'],
+
+  /* plans: term + rhythm */
+  termH: ['مدة البداية', 'Start term'],
+  termDefs: [['m1', ['شهري', 'Monthly'], ['أسعار الباقات أدناه (مسودة صافي).', 'The package prices below (Safi\'s draft).']], ['m3', ['3 أشهر', '3 months'], ['سعر كل باقة لـ 3 أشهر: للتأكيد.', 'The price of each package for 3 months: to confirm.']], ['y', ['سنوي، مدفوع مقدّماً', 'Yearly, paid in advance'], ['بعد الفترة الأولى. السعر للتأكيد.', 'After the first term. The price is to confirm.']]],
+  later: ['لاحقاً', 'Later'],
+  rhythmH: ['إيقاع المحتوى', 'Content rhythm'],
+  rhythmP: ['في فترة الإطلاق: ريل جديد كل يوم على صفحة كنان، من الموقع والتفاصيل وأسئلة المشترين. كل ريل يوافق عليه كنان قبل النشر. لا نعد بعدد مشاهدات أو مبيعات. عدد الريلز في كل باقة: للتأكيد مع صافي.', 'In the launch period: a new reel each day on Kenan\'s page, from the site, the details and buyer questions. Kenan approves each reel before it goes up. No number of views or sales is promised. The reel count in each package: to confirm with Safi.'],
 
   /* the page tab */
   pgH: ['صفحة مشروع الجبيهة 3', 'The Jubeiha 3 project page'],
@@ -745,7 +980,7 @@ const D = {
     ['p2000', ['باقة 2,000', 'Package 2,000'], [['30 ستوري في الشهر', '30 stories a month'], ['24 فيديو في الشهر: 12 بشخص، 12 بدون', '24 videos a month: 12 with a person, 12 without'], ['النشر على إنستغرام وفيسبوك', 'Posting on Instagram and Facebook'], ['صور التقدّم على صفحة المشروع كل أسبوع*', 'Progress photos on the project page every week*'], ['تقرير شهري واجتماع', 'A monthly report and meeting']]],
   ],
   pkgStar: ['* إذا كانت صفحة المشروع مبنية.', '* If the project page is built.'],
-  perMonth: ['دينار في الشهر', 'JOD a month'], jod: ['دينار', 'JOD'], tbd: ['يُحدد لاحقاً', 'To be set'],
+  perMonth: ['دينار في الشهر', 'JOD a month'], jod: ['دينار', 'JOD'], tbd: ['للتأكيد', 'To confirm'], toConf: ['للتأكيد', 'To confirm'],
   adBudgetL: ['ميزانية الإعلانات في الشهر (دينار)', 'Ad budget a month (JOD)'],
   monthlyH: ['إضافات شهرية', 'Monthly add-ons'],
   monthlyDefs: [
@@ -761,7 +996,7 @@ const D = {
   ],
   sumH: ['اختيارك', 'Your choice'],
   sPkg: ['الباقة', 'Package'], sMonthly: ['الإضافات الشهرية', 'Monthly add-ons'], sOnce: ['لمرة واحدة', 'One time'], sMonth: ['كل شهر', 'Each month'], sFirst: ['الشهر الأول', 'First month'],
-  sNote: ['البنود «يُحدد لاحقاً» نُسعّرها بعد أن ترسل اختيارك. ميزانية الإعلانات ليست في المجموع.', 'Items marked "To be set" are priced after you send your choice. The ad budget is not in the total.'],
+  sNote: ['البنود «للتأكيد» نُسعّرها بعد أن ترسل اختيارك. ميزانية الإعلانات ليست في المجموع.', 'We price the items marked "To confirm" after you send your choice. The ad budget is not in the total.'],
   pkWa: ['أرسل على واتساب', 'Send on WhatsApp'],
   waHead: ['اختيار كنان للإسكان من عرض مارش', 'Kenan Housing\'s choice from the Marsh proposal'],
   pkName: ['الاسم (اختياري)', 'Name (optional)'], pkSend: ['اطبع العرض PDF', 'Generate PDF'], pkSending: ['جاري الإرسال…', 'Sending…'],
@@ -828,6 +1063,83 @@ $('#stages').innerHTML = D.stages.map((s, i) => `<li style="top:${[13, 37, 61, 8
 $('#phaseList').innerHTML = D.phases.map(([t, w, items], i) => `<article class="phase"><div><span class="pn">0${i + 1}</span><h3>${span(t)}</h3><p class="when">${span(w)}</p></div><ul>${items.map(([b, s]) => `<li><b>${span(b)}</b><span>${span(s)}</span></li>`).join('')}</ul></article>`).join('');
 $('#paid').innerHTML = D.paid.map(([b, s]) => `<div><b>${span(b)}</b><span>${span(s)}</span></div>`).join('');
 
+/* ---------- the buyer page: building, plans, specs, timeline ---------- */
+const FLOORS = [
+  { id: 'r', img: 'img/plan-roof.jpg', units: [] },
+  { id: 'l', img: 'img/plan-last.jpg', units: ['lL', 'lR'] },
+  { id: 't', img: 'img/plan-typical.jpg', units: ['tL', 'tR'] },
+  { id: 'g', img: 'img/plan-ground.jpg', units: ['gL', 'gR'] },
+  { id: 'b', img: 'img/plan-basement.jpg', units: ['b1'] },
+];
+// box = flat outline on the plan image, in % of the image (left, top, width, height); approximate
+const UNITS = {
+  lL: { f: 'l', side: 'L', st: 'av', box: [25, 6, 27, 88] }, lR: { f: 'l', side: 'R', st: 'av', box: [52, 6, 30, 88] },
+  tL: { f: 't', side: 'L', st: 'rs', box: [23, 1, 29, 94] }, tR: { f: 't', side: 'R', st: 'sd', box: [52, 1, 29, 94] },
+  gL: { f: 'g', side: 'L', st: 'sd', box: [33, 17, 18, 56], plan: 'img/plan-ground-left.jpg' }, gR: { f: 'g', side: 'R', st: 'av', box: [51, 17, 22, 56], plan: 'img/plan-ground-right.jpg' },
+  b1: { f: 'b', side: 'one', st: 'av', box: [29, 19, 36, 73], beds: 4,
+    rooms: [['Master Bed Room', '4.95 × 3.45'], ['Master Bed Room', '4.45 × 3.45'], ['Bed Room', '3.95 × 3.60'], ['Bed Room', '3.70 × 3.45'], ['Dressing Room', '2.20 × 3.25'], ['Guest', '6.15 × 4.60'], ['Living', '6.05 × 4.60'], ['Kitchen', '5.10 × 5.05'], ['Maid & Laundry', '2.40 × 2.60'], ['Toilet', '2.30 × 2.79'], ['Toilet', '2.40 × 1.50'], ['Toilet', '2.35 × 1.70'], ['Toilet', '2.40 × 1.20'], ['Corridor', '4.50 × 1.10']] },
+};
+const BP = { f: 't', u: 'tL', sys: 0 };
+const unitName = (k) => T('u_' + UNITS[k].side);
+function renderBuyer() {
+  const tbdS = `<span class="tbd">${esc(T('toConf'))}</span>`;
+  $('#vidList').innerHTML = D.vids.map(([t, w]) => `<li><span>${rich(tx(t))}</span>${w === 'b3' ? `<span class="label">${esc(T('b3Link'))}</span>` : tbdS}</li>`).join('');
+  $('#vidImg').alt = T('b1Tag');
+  $('#bld').innerHTML = FLOORS.map((fl) => `<div class="row"><button type="button" class="fl" data-bfloor="${fl.id}" aria-pressed="${BP.f === fl.id}">${esc(T('fl_' + fl.id))}${fl.id === 't' ? `<small>${esc(T('typCount'))}</small>` : ''}</button><div class="cells">${fl.units.length ? fl.units.map((k) => `<button type="button" class="cell ${UNITS[k].st}" data-bunit="${k}" aria-pressed="${BP.u === k}" aria-label="${esc(unitName(k) + ' · ' + T('fl_' + fl.id) + ' · ' + T('st_' + UNITS[k].st))}">${esc(T('c_' + UNITS[k].side))}</button>`).join('') : `<span class="cell none">${esc(T('fl_r'))}</span>`}</div></div>`).join('');
+  $('#legend').innerHTML = ['av', 'rs', 'sd'].map((x) => `<span><i class="${x}"></i>${esc(T('st_' + x))}</span>`).join('') + `<span style="flex-basis:100%">${esc(T('stSample'))}</span>`;
+  const fl = FLOORS.find((x) => x.id === BP.f);
+  $('#pov').innerHTML = `<img src="${fl.img}" alt="${esc(T('fl_' + fl.id))}" width="1500" height="822" loading="lazy">` + fl.units.map((k) => { const u = UNITS[k], [l, t, w, h] = u.box; return `<button type="button" class="${u.st}" data-bunit="${k}" aria-pressed="${BP.u === k}" style="left:${l}%;top:${t}%;width:${w}%;height:${h}%" aria-label="${esc(unitName(k))}">${u.st === 'sd' ? `<span>${esc(T('st_sd'))}</span>` : ''}</button>`; }).join('');
+  $('#povCap').innerHTML = `<span>${esc(T('fl_' + fl.id))} · ${esc(fl.units.length ? T('approx') : T('roofNote'))}</span><a href="${fl.img}" target="_blank" rel="noopener">${esc(T('openPlan'))}</a>`;
+  const k = BP.u && UNITS[BP.u] && UNITS[BP.u].f === BP.f ? BP.u : null, up = $('#unitp');
+  if (!k) { up.innerHTML = `<p class="label">${esc(fl.units.length ? T('pickFlat') : T('roofNote'))}</p>`; }
+  else {
+    const u = UNITS[k], f = T('fl_' + u.f), n = unitName(k), msg = T('waMsg').replace('{u}', n).replace('{f}', f);
+    up.innerHTML = `<h4>${esc(n)} · ${esc(f)}</h4><dl>
+      <dt>${esc(T('uStatus'))}</dt><dd>${esc(T('st_' + u.st))} <span class="label">(${esc(T('dSample'))})</span></dd>
+      <dt>${esc(T('uArea'))}</dt><dd>${tbdS}</dd>
+      <dt>${esc(T('uBeds'))}</dt><dd>${u.beds ? `<bdi dir="ltr">${u.beds}</bdi>` : tbdS}</dd>
+      <dt>${esc(T('uVideo'))}</dt><dd>${tbdS}</dd></dl>
+      <p class="label" style="margin-top:8px">${rich(T('areaNote'))}</p>
+      <div class="rooms"><b>${esc(T('roomsH'))}</b>${u.rooms ? `<ul>${u.rooms.map(([r, d]) => `<li>${esc(r)} · <bdi dir="ltr">${d}</bdi></li>`).join('')}</ul>` : `<p>${esc(T('roomsOther'))}</p>`}${u.plan ? `<p style="margin-top:6px"><a href="${u.plan}" target="_blank" rel="noopener">${esc(T('openPlan'))}</a></p>` : ''}</div>
+      <div class="wab"><span class="label">${esc(T('waL'))}</span><div class="bub">${rich(msg)}</div><span class="wbtn" aria-hidden="true">${esc(T('waBtn'))}</span><p class="n">${esc(T('waNote'))}</p></div>`;
+  }
+  $('#sysChips').innerHTML = D.systems.map((x, i) => `<button type="button" class="chip${BP.sys === i ? ' on' : ''}" data-bsys="${i}" aria-pressed="${BP.sys === i}">${esc(tx(x[0]))}</button>`).join('');
+  const sy = D.systems[BP.sys];
+  $('#sysPanel').innerHTML = sy[1].map((x) => `<div class="sr"><span>${rich(tx(x))}</span>${tbdS}</div>`).join('') + (sy[2] ? `<p class="j2">${esc(T('j2L'))} ${rich(tx(sy[2]))}</p>` : '');
+  $('#tl').innerHTML = D.stagesB.map(([t, now], i) => `<article class="${now ? 'now' : ''}"><div class="ph">${now ? `<img src="page/assets/facade-night-1.jpg" alt="${esc(tx(t))}" loading="lazy">` : esc(T('photoTbd'))}</div><div class="tx"><b>${i + 1} · ${esc(tx(t))}</b><span>${now ? rich(tx(now)) : esc(T('dateTbd'))}</span></div></article>`).join('');
+  $('#co').innerHTML = D.co.map((x) => `<div>${rich(tx(x))}</div>`).join('');
+}
+document.addEventListener('click', (e) => {
+  const f = e.target.closest('[data-bfloor]'), u = e.target.closest('[data-bunit]'), sy = e.target.closest('[data-bsys]');
+  if (f) { BP.f = f.dataset.bfloor; const fl = FLOORS.find((x) => x.id === BP.f); BP.u = fl.units[0] || null; renderBuyer(); $(`[data-bfloor="${BP.f}"]`).focus({ preventScroll: true }); }
+  else if (u) { BP.u = u.dataset.bunit; BP.f = UNITS[BP.u].f; renderBuyer(); }
+  else if (sy) { BP.sys = +sy.dataset.bsys; renderBuyer(); $(`[data-bsys="${BP.sys}"]`).focus({ preventScroll: true }); }
+});
+
+/* ---------- Marsh Iskan dashboard mini-mockup (sample data) ---------- */
+const DS = { tab: 'leads' };
+function renderDash() {
+  const n = (v) => `<bdi dir="ltr">${fmt(v)}</bdi>`, th = (a) => `<tr>${a.map((x, i) => `<th${i ? ' class="n"' : ''}>${esc(tx(x))}</th>`).join('')}</tr>`;
+  let pane = '';
+  if (DS.tab === 'leads') {
+    const tot = D.dSources.reduce((a, x) => a + x[1], 0), gulf = 17, max = Math.max(...D.dSources.map((x) => x[1]));
+    pane = `<div class="kpis">${[[tot], [gulf], [12]].map(([v], i) => `<div><b>${n(v)}</b><span>${esc(tx(D.dLeadsK[i]))}</span></div>`).join('')}</div>
+      <div class="card"><h5>${esc(tx(D.dTabs[0][1]))}</h5>${D.dSources.map(([l, v, a]) => `<div class="brow"><span>${esc(tx(l))}</span><i style="width:${Math.round((v / max) * 100)}%"></i>${n(v)}</div>`).join('')}<p class="note">${esc(T('dLeadsN'))}</p></div>`;
+  } else if (DS.tab === 'units') {
+    const enq = { lL: 13, lR: 6, tL: 11, tR: 9, gL: 7, gR: 4, b1: 5 }, vis = { lL: 3, lR: 1, tL: 4, tR: 2, gL: 2, gR: 1, b1: 1 };
+    pane = `<div class="card tw"><table><thead>${th(D.dUnitsH)}</thead><tbody>${Object.keys(UNITS).map((k) => { const u = UNITS[k]; return `<tr><td>${esc(unitName(k))} · ${esc(T('fl_' + u.f))}</td><td class="n"><span class="st ${u.st === 'sd' ? 'x' : u.st === 'rs' ? 'w' : ''}">${esc(T('st_' + u.st))}</span></td><td class="n">${enq[k]}</td><td class="n">${vis[k]}</td></tr>`; }).join('')}</tbody></table><p class="note">${esc(T('dUnitsN'))}</p></div>`;
+  } else if (DS.tab === 'site') {
+    pane = `<div class="card tw"><table><thead>${th(D.dSiteH)}</thead><tbody>${D.dSite.map(([da, de, st, up, on]) => `<tr><td>${esc(LANG === 'ar' ? da : de)}</td><td>${esc(tx(st))}</td><td>${rich(tx(up))}</td><td class="n"><span class="st ${on ? '' : 'w'}">${esc(T(on ? 'dYes' : 'dWait'))}</span></td></tr>`).join('')}</tbody></table><p class="note">${esc(T('dSiteN'))}</p></div>`;
+  } else if (DS.tab === 'cal') {
+    pane = `<div class="week">${D.dWeek.map(([d, t, ok]) => `<div><b>${esc(tx(d))}</b><span>${esc(tx(t))}</span><span class="st ${ok ? '' : 'w'}" style="margin-top:auto;width:max-content">${esc(T(ok ? 'dOk' : 'dDraft'))}</span></div>`).join('')}</div><p class="note">${esc(T('dCalN'))}</p>`;
+  } else {
+    pane = `<div class="card tw"><table><thead>${th(D.dAdsH)}</thead><tbody>${D.dAds.map(([c, sp, re, ms]) => `<tr><td>${esc(tx(c))}</td><td class="n">${fmt(sp)}</td><td class="n">${fmt(re)}</td><td class="n">${ms}</td><td class="n">${(sp / ms).toFixed(1)}</td></tr>`).join('')}</tbody></table><p class="note">${esc(T('dAdsN'))}</p></div>`;
+  }
+  $('#dapp').innerHTML = `<div class="bar"><img src="assets/marsh-mark.svg" alt="" width="22" height="22"><b>${esc(T('dTitle'))}</b><span class="samp">${esc(T('dSample'))}</span><span class="dwho">${esc(T('dWho'))}</span></div>
+    <div class="body"><nav role="tablist" aria-label="${esc(T('dashH'))}">${D.dTabs.map(([k, l]) => `<button type="button" role="tab" data-dtab="${k}" aria-selected="${DS.tab === k}">${esc(tx(l))}</button>`).join('')}</nav><div class="pane" role="tabpanel">${pane}</div></div>`;
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('[data-dtab]'); if (b) { DS.tab = b.dataset.dtab; renderDash(); $(`[data-dtab="${DS.tab}"]`).focus({ preventScroll: true }); } });
+
 /* ---------- plans + totals: 4 monthly packages, 2 monthly add-ons, one-time items (price to be set) ---------- */
 const clampInt = (v, a, b, d) => { const n = Math.round(Number(v)); return Number.isFinite(n) ? Math.min(b, Math.max(a, n)) : d; };
 const PK = D.pkgDefs.map((d) => d[0]), ONCE = D.onceDefs.map((d) => d[0]);
@@ -837,7 +1149,9 @@ const ST = {
   ads: store.get('ads', FILL.suggested.ads) === true,
   adBudget: clampInt(store.get('adBudget', FILL.adBudgetDefault), 0, 100000, FILL.adBudgetDefault),
   once: new Set(store.get('once', FILL.suggested.once)),
+  term: store.get('term', 'm1') === 'm3' ? 'm3' : 'm1',
 };
+if (['m1', 'm3'].includes(qs.get('term'))) ST.term = qs.get('term');
 if (PK.includes(qs.get('pkg'))) ST.pkg = qs.get('pkg');
 if (!PK.includes(ST.pkg)) ST.pkg = FILL.suggested.pkg;
 ST.once = new Set([...ST.once].filter((k) => ONCE.includes(k)));
@@ -847,35 +1161,43 @@ const money = (v) => (v == null ? tbd() : jodH(v));
 const adsFee = () => Math.round((ST.adBudget * FILL.adsPct) / 100);
 const pkgDef = (k) => D.pkgDefs.find((d) => d[0] === k);
 function calc() {
-  const pkgM = FILL.pkgs[ST.pkg], monOn = [];
+  const pkgM = ST.term === 'm3' ? FILL.term3[ST.pkg] : FILL.pkgs[ST.pkg], pkgMiss = pkgM == null, monOn = [];
   let addM = 0;
   if (ST.msg) { addM += FILL.msg; monOn.push('msg'); }
   if (ST.ads) { addM += adsFee(); monOn.push('ads'); }
   const onceOn = ONCE.filter((k) => ST.once.has(k));
   let onceT = 0, onceMiss = false;
   onceOn.forEach((k) => { const v = FILL.once[k]; if (v == null) onceMiss = true; else onceT += v; });
-  const month = pkgM + addM;
-  return { pkgM, addM, monOn, onceOn, onceT, onceMiss, month, first: month + onceT };
+  const month = (pkgM || 0) + addM;
+  return { pkgM, pkgMiss, addM, monOn, onceOn, onceT, onceMiss: onceMiss || pkgMiss, month, first: month + onceT };
 }
 const withTbd = (n, miss) => (miss ? `${n ? `${jodH(n)} + ` : ''}${tbd()}` : jodH(n));
 function renderSum() {
   const c = calc();
   $('#sum').innerHTML = `<h3>${esc(T('sumH'))}</h3><div class="rows">
-    <div class="r"><span>${esc(T('sPkg'))} · ${esc(tx(pkgDef(ST.pkg)[1]))}</span><b>${jodH(c.pkgM)}</b></div>
+    <div class="r"><span>${esc(T('sPkg'))} · ${esc(tx(pkgDef(ST.pkg)[1]))} · ${esc(termName())}</span><b>${c.pkgMiss ? tbd() : jodH(c.pkgM)}</b></div>
     <div class="r"><span>${esc(T('sMonthly'))}</span><b>${c.monOn.length ? jodH(c.addM) : '—'}</b></div>
-    <div class="r"><span>${esc(T('sMonth'))}</span><b>${jodH(c.month)}</b></div>
-    <div class="r"><span>${esc(T('sOnce'))}</span><b>${c.onceOn.length ? withTbd(c.onceT, c.onceMiss) : '—'}</b></div>
+    <div class="r"><span>${esc(T('sMonth'))}</span><b>${withTbd(c.month, c.pkgMiss)}</b></div>
+    <div class="r"><span>${esc(T('sOnce'))}</span><b>${c.onceOn.length ? withTbd(c.onceT, ONCE.some((k) => ST.once.has(k) && FILL.once[k] == null)) : '—'}</b></div>
     <div class="r big"><span>${esc(T('sFirst'))}</span><b>${withTbd(c.first, c.onceMiss)}</b></div>
   </div><p class="note">${esc(T('sNote'))}</p>`;
   if (pk.key) pkStatus(T(pk.key), pk.kind);
   renderSugg();
   $('#pkWa').href = waHref(receiptData());
-  store.set('pkg', ST.pkg); store.set('msg', ST.msg); store.set('ads', ST.ads); store.set('adBudget', ST.adBudget); store.set('once', [...ST.once]);
+  store.set('term', ST.term); store.set('pkg', ST.pkg); store.set('msg', ST.msg); store.set('ads', ST.ads); store.set('adBudget', ST.adBudget); store.set('once', [...ST.once]);
 }
+const termName = () => tx(D.termDefs.find((d) => d[0] === ST.term)[1]);
+function renderTerm() {
+  $('#termSeg').innerHTML = D.termDefs.map(([k, n, s]) => k === 'y'
+    ? `<button type="button" role="radio" aria-checked="false" disabled><b>${esc(tx(n))}</b><span class="later">${esc(T('later'))}</span><span>${esc(tx(s))}</span></button>`
+    : `<button type="button" role="radio" data-term="${k}" aria-checked="${ST.term === k}" tabindex="${ST.term === k ? 0 : -1}"><b>${rich(tx(n))}</b><span>${rich(tx(s))}</span></button>`).join('');
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('[data-term]'); if (b && b.dataset.term !== ST.term) { ST.term = b.dataset.term; clearStatus(); renderPlans(); $(`[data-term="${ST.term}"]`).focus({ preventScroll: true }); } });
 function renderPlans() {
+  renderTerm();
   $('#plansEl').innerHTML = D.pkgDefs.map(([k, n, items]) => `<button type="button" class="plan" role="radio" aria-checked="${ST.pkg === k}" tabindex="${ST.pkg === k ? 0 : -1}" data-pkg="${k}">
       <div class="pt"><h3>${rich(tx(n))}</h3><span class="dot" aria-hidden="true"></span></div>
-      <div class="price"><b>${fmt(FILL.pkgs[k])}</b> ${esc(T('perMonth'))}</div>
+      <div class="price">${ST.term === 'm3' ? `${esc(termName())}: ${tbd()}<br><small>${fmt(FILL.pkgs[k])} ${esc(T('perMonth'))}</small>` : `<b>${fmt(FILL.pkgs[k])}</b> ${esc(T('perMonth'))}`}</div>
       <span class="draft">${esc(T('draft'))}</span>
       <ul>${items.map((t) => `<li>${rich(tx(t))}</li>`).join('')}</ul></button>`).join('') + `<p class="note" style="grid-column:1/-1;color:var(--muted);font-size:13px">${esc(T('pkgStar'))}</p>`;
   $('#monthlyList').innerHTML = D.monthlyDefs.map(([k, n, s]) => {
@@ -889,11 +1211,11 @@ function renderPlans() {
 }
 /* suggested plan: a preset of the picker below */
 const SG = { undo: null };
-const snap = () => ({ pkg: ST.pkg, msg: ST.msg, ads: ST.ads, adBudget: ST.adBudget, once: new Set(ST.once) });
+const snap = () => ({ term: ST.term, pkg: ST.pkg, msg: ST.msg, ads: ST.ads, adBudget: ST.adBudget, once: new Set(ST.once) });
 const put = (o) => Object.keys(o).forEach((k) => { ST[k] = o[k]; });
-const suggState = () => { const S = FILL.suggested; return { pkg: S.pkg, msg: S.msg, ads: S.ads, adBudget: ST.adBudget, once: new Set(S.once) }; };
+const suggState = () => { const S = FILL.suggested; return { term: 'm1', pkg: S.pkg, msg: S.msg, ads: S.ads, adBudget: ST.adBudget, once: new Set(S.once) }; };
 const sameSet = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
-const isSugg = () => { const o = suggState(); return ST.pkg === o.pkg && ST.msg === o.msg && ST.ads === o.ads && sameSet(ST.once, o.once); };
+const isSugg = () => { const o = suggState(); return ST.term === o.term && ST.pkg === o.pkg && ST.msg === o.msg && ST.ads === o.ads && sameSet(ST.once, o.once); };
 const calcFor = (o) => { const keep = snap(); put(o); const c = calc(); put(keep); return c; };
 function renderSugg() {
   const S = FILL.suggested, c = calcFor(suggState()), on = isSugg(), p = pkgDef(S.pkg);
@@ -945,35 +1267,38 @@ const pk = { busy: false, key: null, kind: '' };
 function pkStatus(msg, kind) { const el = $('#pkStatus'); el.textContent = msg || ''; el.className = 'st' + (kind ? ' ' + kind : ''); }
 function pkSet(key, kind) { pk.key = key; pk.kind = kind || ''; pkStatus(T(key), kind); }
 const pkId = () => { let id = store.get('cid', null); if (!id) { id = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).slice(0, 36); store.set('cid', id); } return id; };
-const totalTxt = (n, miss) => `${fmt(n)} JOD${miss ? ' + to be set' : ''}`;
+const totalTxt = (n, miss) => `${fmt(n)} JOD${miss ? ' + to confirm' : ''}`;
 function packageData() {
   const c = calc(), p = pkgDef(ST.pkg);
-  const onceTxt = c.onceOn.map((k) => D.onceDefs.find((d) => d[0] === k)[1][1] + ' (to be set)').join(', ') || 'None';
+  const onceTxt = c.onceOn.map((k) => D.onceDefs.find((d) => d[0] === k)[1][1] + ' (to confirm)').join(', ') || 'None';
   const monthly = [ST.msg ? `Messages and leads list ${FILL.msg} JOD a month` : '', ST.ads ? `Meta ads management ${FILL.adsPct} % of ${fmt(ST.adBudget)} JOD = ${fmt(adsFee())} JOD a month` : ''].filter(Boolean).join(', ') || 'None';
   const total = totalTxt(c.first, c.onceMiss);
   const readable = [
     ['Suggested plan', isSugg() ? 'Yes, as suggested' : 'No, changed'],
-    ['Package', `${p[1][1]}: ${fmt(c.pkgM)} JOD a month (contents are a draft)`],
+    ['Start term', ST.term === 'm3' ? '3 months (price to confirm)' : 'Monthly'],
+    ['Package', c.pkgMiss ? `${p[1][1]}: 3-month price to confirm (contents are a draft)` : `${p[1][1]}: ${fmt(c.pkgM)} JOD a month (contents are a draft)`],
     ['Monthly add-ons', monthly],
     ['Each month', `${fmt(c.month)} JOD`],
     ['One time', onceTxt],
     ['First month', total],
   ];
-  const fields = { pkg: ST.pkg, msg: ST.msg, adBudget: ST.ads ? ST.adBudget : 0, once: c.onceOn, month: c.month, total };
+  const fields = { term: ST.term, pkg: ST.pkg, msg: ST.msg, adBudget: ST.ads ? ST.adBudget : 0, once: c.onceOn, month: c.month, total };
   return { fields, readable, total };
 }
 const FEEDBACK_URL = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback';   // shared Marsh endpoint (this project holds no keys)
 const WA = '962795631364';   // Safi, the number on the Next step
 function receiptData() {
   const c = calc(), lines = [], tbdL = [], name = $('#pkName').value.trim().slice(0, 80), p = pkgDef(ST.pkg);
-  lines.push({ g: 'v', n: tx(p[1]), u: c.pkgM, q: 1, t: c.pkgM });
+  if (c.pkgMiss) tbdL.push(`${tx(p[1])} · ${termName()}`); else lines.push({ g: 'v', n: tx(p[1]), u: c.pkgM, q: 1, t: c.pkgM });
   if (ST.msg) lines.push({ g: 'm', n: tx(D.monthlyDefs[0][1]), u: FILL.msg, q: 1, t: FILL.msg });
   if (ST.ads) lines.push({ g: 'm', n: `${tx(D.monthlyDefs[1][1])} (${FILL.adsPct} % × ${fmt(ST.adBudget)})`, u: adsFee(), q: 1, t: adsFee() });
-  c.onceOn.forEach((k) => { const def = D.onceDefs.find((d) => d[0] === k), v = FILL.once[k]; if (v == null) tbdL.push(tx(def[1])); else lines.push({ g: 'o', n: tx(def[1]), u: v, q: 1, t: v }); });
+  const onceTbd = [];
+  c.onceOn.forEach((k) => { const def = D.onceDefs.find((d) => d[0] === k), v = FILL.once[k]; if (v == null) { tbdL.push(tx(def[1])); onceTbd.push(tx(def[1])); } else lines.push({ g: 'o', n: tx(def[1]), u: v, q: 1, t: v }); });
   return { v: 1, lang: LANG, name, date: new Date().toLocaleDateString(LANG === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
-    plan: tx(p[1]), months: 1, lines, tbd: tbdL, once: c.onceT, month: c.month, grand: c.first, adBudget: ST.ads ? ST.adBudget : 0, wa: WA };
+    plan: `${tx(p[1])} · ${termName()}`, months: ST.term === 'm3' ? 3 : 1, lines, tbd: tbdL, onceTbd, pkgTbd: c.pkgMiss, once: c.onceT, month: c.month, grand: c.first, adBudget: ST.ads ? ST.adBudget : 0, wa: WA };
 }
-const waText = (r) => [T('waHead') + (r.name ? ` · ${r.name}` : ''), r.plan, `${T('suggMonth')}: ${fmt(r.month)} ${T('jod')}`, `${T('suggOnce')}: ${r.tbd.length ? r.tbd.join(LANG === 'ar' ? '، ' : ', ') + ` (${T('tbd')})` : '—'}`, `${T('suggTotal')}: ${fmt(r.grand)} ${T('jod')}${r.tbd.length ? ` + ${T('tbd')}` : ''}`].join('\n');
+const amtTbd = (n, miss) => (miss ? (n ? `${fmt(n)} ${T('jod')} + ${T('tbd')}` : T('tbd')) : `${fmt(n)} ${T('jod')}`);
+const waText = (r) => [T('waHead') + (r.name ? ` · ${r.name}` : ''), r.plan, `${T('suggMonth')}: ${amtTbd(r.month, r.pkgTbd)}`, `${T('suggOnce')}: ${r.onceTbd.length ? r.onceTbd.join(LANG === 'ar' ? '، ' : ', ') + ` (${T('tbd')})` : '—'}`, `${T('suggTotal')}: ${amtTbd(r.grand, r.tbd.length > 0)}`].join('\n');
 const waHref = (r) => `https://wa.me/${WA}?text=${encodeURIComponent(waText(r))}`;
 const receiptUrl = (r) => `receipt.html#${encodeURIComponent(JSON.stringify(r))}`;
 async function sendChoice() {
@@ -1106,7 +1431,7 @@ function applyLang() {
   $('#langSeg').setAttribute('aria-label', T('langL')); $('#viewSeg').setAttribute('aria-label', T('viewL')); $('#index').setAttribute('aria-label', T('secL'));
   $('#heroImg').alt = T('heroAlt'); $('#shotA').alt = T('capA'); $('#shotB').alt = T('capB'); $('#shotC').alt = T('capC');
   $$('.logo-d,.logo-l').forEach((i) => { i.alt = T('logoAlt'); });
-  setChip(chipSel); renderPlans(); onScrollUI();
+  setChip(chipSel); renderBuyer(); renderDash(); renderPlans(); onScrollUI();
   store.set('lang', LANG);
   if (VIEW === 'pages') renderPages();
   buildIndex();

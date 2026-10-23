@@ -49,12 +49,12 @@ bdi{unicode-bidi:isolate}
   const L = {
     ar: { title: 'العرض المختار', client: 'العميل', date: 'التاريخ', plan: 'الباقة', none: '—', item: 'البند', unit: 'سعر الوحدة', qty: 'الكمية', total: 'المجموع', jod: 'دينار',
       v: 'الباقة الشهرية', o: 'مرة واحدة', m: 'شهرياً', once: 'المجموع لمرة واحدة', month: 'كل شهر', grand: 'مجموع الشهر الأول', months: (n) => (n === 1 ? 'شهر واحد' : `${n} أشهر`),
-      tbd: 'يُحدد لاحقاً', ads: (b) => `ميزانية الإعلانات ${b} دينار في الشهر تُدفع لميتا، وليست في المجموع.`, valid: 'الأسعار بالدينار الأردني. الأسعار ومحتوى الباقات مسودة.',
+      tbd: 'للتأكيد', ads: (b) => `ميزانية الإعلانات ${b} دينار في الشهر تُدفع لميتا، وليست في المجموع.`, valid: 'الأسعار بالدينار الأردني. الأسعار ومحتوى الباقات مسودة.',
       save: 'احفظ PDF', wa: 'أرسل على واتساب', back: 'رجوع إلى الخطط', hint: 'في نافذة الطباعة اختر «حفظ كـ PDF»، ثم أرسل الملف لنا.', empty: 'لا يوجد اختيار. ارجع إلى صفحة الخطط.',
       foot: 'مارش للتسويق والتطوير · كنان للإسكان' },
     en: { title: 'Chosen package', client: 'Client', date: 'Date', plan: 'Package', none: '—', item: 'Item', unit: 'Unit price', qty: 'Qty', total: 'Total', jod: 'JOD',
       v: 'Monthly package', o: 'One time', m: 'Monthly', once: 'One-time total', month: 'Each month', grand: 'First month total', months: (n) => (n === 1 ? '1 month' : `${n} months`),
-      tbd: 'To be set', ads: (b) => `The ad budget of ${b} JOD a month is paid to Meta and is not in the total.`, valid: 'Prices are in Jordanian dinars (JOD). Prices and package contents are a draft.',
+      tbd: 'To confirm', ads: (b) => `The ad budget of ${b} JOD a month is paid to Meta and is not in the total.`, valid: 'Prices are in Jordanian dinars (JOD). Prices and package contents are a draft.',
       save: 'Save PDF', wa: 'Send on WhatsApp', back: 'Back to the plans', hint: 'In the print window, choose "Save as PDF", then send the file to us.', empty: 'No choice found. Go back to the plans page.',
       foot: 'Marsh Marketing and Development · Kenan Housing' },
   };
@@ -85,14 +85,14 @@ bdi{unicode-bidi:isolate}
   const tbd = Array.isArray(r.tbd) ? r.tbd.filter((x) => typeof x === 'string') : [];
   sheet.append(el('div', { class: 'tot' }, [
     el('div', {}, [el('span', { text: t.once }), el('span', { text: money(r.once) })]),
-    el('div', {}, [el('span', { text: t.month }), el('span', { text: money(Math.round(r.month * 100) / 100) })]),
-    el('div', { class: 'g' }, [el('span', { text: t.grand }), el('span', { text: money(r.grand) + (tbd.length ? ` + ${t.tbd}` : '') })]),
+    el('div', {}, [el('span', { text: t.month }), el('span', { text: r.pkgTbd ? (r.month ? `${money(r.month)} + ${t.tbd}` : t.tbd) : money(Math.round(r.month * 100) / 100) })]),
+    el('div', { class: 'g' }, [el('span', { text: t.grand }), el('span', { text: tbd.length ? (r.grand ? `${money(r.grand)} + ${t.tbd}` : t.tbd) : money(r.grand) })]),
   ]));
   const notes = [t.valid]; if (tbd.length) notes.push(`${t.tbd}: ${tbd.join(lang === 'ar' ? '، ' : ', ')}`); if (+r.adBudget > 0) notes.push(t.ads(num(+r.adBudget)));
   sheet.append(el('div', { class: 'notes' }, notes.map((x) => el('p', { text: x }))));
   sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+962 79 563 1364 · marshteamjo@gmail.com' })]));
   out.append(sheet);
-  const waTxt = [`${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${money(r.once)}`, `${t.month}: ${money(Math.round(r.month))}`, `${t.grand}: ${money(r.grand)}${tbd.length ? ' + ' + t.tbd : ''}`].join('\n');
+  const waTxt = [`${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${money(r.once)}`, `${t.month}: ${r.pkgTbd ? t.tbd : money(Math.round(r.month))}`, `${t.grand}: ${tbd.length && !r.grand ? t.tbd : money(r.grand) + (tbd.length ? ' + ' + t.tbd : '')}`].join('\n');
   const save = el('button', { type: 'button', class: 'fill', text: t.save }); save.addEventListener('click', () => window.print());
   bar.append(save, el('a', { href: `https://wa.me/${/^\d{8,15}$/.test(String(r.wa)) ? r.wa : '962795631364'}?text=${encodeURIComponent(waTxt)}`, target: '_blank', rel: 'noopener', text: t.wa }), back, el('p', { text: t.hint }));
   bar.hidden = false;
