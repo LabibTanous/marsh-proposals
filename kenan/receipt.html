@@ -83,8 +83,9 @@ bdi{unicode-bidi:isolate}
     sheet.append(el('table', {}, [el('thead', {}, [el('tr', {}, [el('th', { text: t.item }), el('th', { class: 'n', text: t.unit }), el('th', { class: 'n', text: t.qty }), el('th', { class: 'n', text: t.total })])]), tb]));
   });
   const tbd = Array.isArray(r.tbd) ? r.tbd.filter((x) => typeof x === 'string') : [];
+  const onceTbd = Array.isArray(r.onceTbd) ? r.onceTbd.filter((x) => typeof x === 'string') : [];
   sheet.append(el('div', { class: 'tot' }, [
-    el('div', {}, [el('span', { text: t.once }), el('span', { text: money(r.once) })]),
+    el('div', {}, [el('span', { text: t.once }), el('span', { text: onceTbd.length ? (r.once ? `${money(r.once)} + ${t.tbd}` : t.tbd) : money(r.once) })]),
     el('div', {}, [el('span', { text: t.month }), el('span', { text: r.pkgTbd ? (r.month ? `${money(r.month)} + ${t.tbd}` : t.tbd) : money(Math.round(r.month * 100) / 100) })]),
     el('div', { class: 'g' }, [el('span', { text: t.grand }), el('span', { text: tbd.length ? (r.grand ? `${money(r.grand)} + ${t.tbd}` : t.tbd) : money(r.grand) })]),
   ]));
@@ -92,7 +93,7 @@ bdi{unicode-bidi:isolate}
   sheet.append(el('div', { class: 'notes' }, notes.map((x) => el('p', { text: x }))));
   sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+962 79 563 1364 · marshteamjo@gmail.com' })]));
   out.append(sheet);
-  const waTxt = [`${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${money(r.once)}`, `${t.month}: ${r.pkgTbd ? t.tbd : money(Math.round(r.month))}`, `${t.grand}: ${tbd.length && !r.grand ? t.tbd : money(r.grand) + (tbd.length ? ' + ' + t.tbd : '')}`].join('\n');
+  const waTxt = [`${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${onceTbd.length ? (r.once ? money(r.once) + ' + ' + t.tbd : t.tbd) : money(r.once)}`, `${t.month}: ${r.pkgTbd ? t.tbd : money(Math.round(r.month))}`, `${t.grand}: ${tbd.length && !r.grand ? t.tbd : money(r.grand) + (tbd.length ? ' + ' + t.tbd : '')}`].join('\n');
   const save = el('button', { type: 'button', class: 'fill', text: t.save }); save.addEventListener('click', () => window.print());
   bar.append(save, el('a', { href: `https://wa.me/${/^\d{8,15}$/.test(String(r.wa)) ? r.wa : '962795631364'}?text=${encodeURIComponent(waTxt)}`, target: '_blank', rel: 'noopener', text: t.wa }), back, el('p', { text: t.hint }));
   bar.hidden = false;
