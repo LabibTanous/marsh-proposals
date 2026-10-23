@@ -80,7 +80,7 @@ ul.notes li{margin:4px 0}
 
 <div class="tabs" role="tablist" aria-label="phone">
   <button class="tab" role="tab" id="tab-ios" aria-selected="true" aria-controls="steps" data-os="ios" data-t="iphone"></button>
-  <button class="tab" role="tab" id="tab-android" aria-selected="false" aria-controls="steps" data-os="android" data-t="android"></button>
+  <button class="tab" role="tab" id="tab-android" aria-selected="false" aria-controls="steps" data-os="android" data-t="androidL"></button>
 </div>
 
 <div id="steps" role="tabpanel" style="display:flex;flex-direction:column;gap:14px"></div>
@@ -109,7 +109,7 @@ var T = {
     g1:'مجموعة مريم أولًا.',
     g2:'ثم كل مجموعة عمل تريد أن ندرسها من أولها لآخرها. صدّر كل مجموعة وحدها.',
     groupsNote:'مجموعات العمل فقط. لا ترسل محادثات شخصية.',
-    iphone:'آيفون', android:'أندرويد',
+    iphone:'آيفون', androidL:'أندرويد',
     stepWord:'الخطوة',
     copy:'انسخ الرابط', copied:'تم النسخ', open:'افتح رابط الرفع',
     notesH:'ملاحظات',
@@ -139,7 +139,7 @@ var T = {
     g1:'Mariem’s group first.',
     g2:'Then each work group you want us to study from start to end. Export each group on its own.',
     groupsNote:'Work groups only. Do not send personal chats.',
-    iphone:'iPhone', android:'Android',
+    iphone:'iPhone', androidL:'Android',
     stepWord:'Step',
     copy:'Copy link', copied:'Copied', open:'Open the upload link',
     notesH:'Notes',
@@ -173,7 +173,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 function phone(os, n, L, rtl){
   var R='#E9212A', I='#141414', M='#9A9EA4', G='#E6E8E4', W='#FFFFFF';
   var x0 = rtl ? 150 : 30, anchor = rtl ? 'end' : 'start';
-  var out = '<svg viewBox="0 0 180 340" role="img" aria-label="'+esc(L.svgAlt)+'" xmlns="http://www.w3.org/2000/svg">';
+  var out = '<svg viewBox="0 0 180 340" style="direction:ltr" role="img" aria-label="'+esc(L.svgAlt)+'" xmlns="http://www.w3.org/2000/svg">';
   out += '<rect x="4" y="4" width="172" height="332" rx="26" fill="'+W+'" stroke="'+I+'" stroke-width="3"/>';
   out += '<rect x="66" y="12" width="48" height="8" rx="4" fill="'+I+'"/>';
   function t(x,y,s,o){o=o||{};return '<text x="'+x+'" y="'+y+'" font-size="'+(o.size||11)+'" font-weight="'+(o.w||500)+'" fill="'+(o.c||I)+'" text-anchor="'+(o.a||anchor)+'" font-family="IBM Plex Sans Arabic, system-ui, sans-serif">'+esc(s)+'</text>';}
