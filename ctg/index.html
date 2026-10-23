@@ -59,6 +59,39 @@ ol.q{padding-inline-start:22px;display:grid;gap:8px;font-weight:600}
 .note{font-size:13px;color:var(--muted);margin-top:10px}
 footer{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
 @media(min-width:720px){.facts{grid-template-columns:repeat(4,minmax(0,1fr))}.card{padding:22px}}
+
+/* shared notes */
+.nb{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.nb.inreel{grid-column:1/-1;margin-top:8px;padding-top:8px}
+.nbh{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.nbh .c{font-size:13.5px;font-weight:700;color:var(--muted)}
+.btn{font:inherit;font-weight:700;font-size:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 14px;min-height:40px;cursor:pointer}
+.btn.pri{background:var(--text);color:#fff;border-color:var(--text)}
+.btn.sm{font-size:13px;padding:5px 10px;min-height:34px;border-radius:10px}
+.btn:disabled{opacity:.5;cursor:default}
+.lnk{font:inherit;font-size:13px;font-weight:700;background:none;border:0;color:var(--acc);cursor:pointer;padding:6px 0;min-height:32px}
+.nts{display:grid;gap:8px;margin-top:10px}
+.nt{background:var(--bg);border-radius:14px;padding:10px 12px;font-size:14.5px}
+.inreel .nt{background:var(--card)}
+.nh{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:13px;color:var(--muted)}
+.nh b{color:var(--text);font-size:14px}
+.nx{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:4px}
+.sg{display:grid;gap:4px;margin-top:6px;font-size:14px}
+.sg del{background:rgba(233,33,42,.08);color:#9a1c22;border-radius:8px;padding:4px 8px;white-space:pre-wrap;overflow-wrap:anywhere}
+.sg ins{text-decoration:none;background:var(--ok-a);color:var(--ok);border-radius:8px;padding:4px 8px;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:600}
+.kids{display:grid;gap:6px;margin-top:8px;padding-inline-start:12px;border-inline-start:2px solid var(--line)}
+.kid{font-size:14px}
+.cmp{display:grid;gap:10px;margin-top:10px;background:var(--bg);border-radius:14px;padding:12px}
+.inreel .cmp{background:var(--card)}
+.cmp label{font-size:13px;font-weight:700;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;min-height:36px;cursor:pointer;color:var(--text)}
+.chip[aria-pressed=true]{background:var(--text);color:#fff;border-color:var(--text)}
+.cmp textarea,.cmp input,.cmp select{font:inherit;font-size:16px;width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--text)}
+.cmp textarea{min-height:84px;resize:vertical}
+.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.msg{font-size:13px;font-weight:600;color:var(--muted)}
+.msg.bad{color:var(--acc)}
 </style>
 </head>
 <body>
@@ -74,6 +107,12 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
   <h1 data-t="title"></h1>
   <p class="sub" data-t="updated"></p>
 
+  <section class="card" id="pagenotes">
+    <h2 data-t="pageH"></h2>
+    <p class="note" style="margin:0" data-t="pageD"></p>
+    <div class="nb" data-sec="page"></div>
+  </section>
+
   <section class="card">
     <h2 data-t="eventH"></h2>
     <div class="facts">
@@ -83,12 +122,14 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
       <div class="fact"><b id="gdays">–</b><span data-t="f4"></span></div>
     </div>
     <p class="note" data-t="venue"></p>
+    <div class="nb" data-sec="event"></div>
   </section>
 
   <section class="card">
     <h2 data-t="datesH"></h2>
     <ul class="dates" id="dates"></ul>
     <p class="note" data-t="datesNote"></p>
+    <div class="nb" data-sec="dates"></div>
   </section>
 
   <section class="card">
@@ -97,22 +138,26 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
     <h2 style="margin-top:18px" data-t="reelsH"></h2>
     <div class="reels" id="reels"></div>
     <p class="note" data-t="delNote"></p>
+    <div class="nb" data-sec="dels"></div>
   </section>
 
   <section class="card">
     <h2 data-t="palH"></h2>
     <div class="sw" id="pal"></div>
     <p class="note" data-t="palNote"></p>
+    <div class="nb" data-sec="pal"></div>
   </section>
 
   <section class="card">
     <h2 data-t="needH"></h2>
     <div class="rows" id="needs"></div>
+    <div class="nb" data-sec="needs"></div>
   </section>
 
   <section class="card">
     <h2 data-t="gotH"></h2>
     <div class="rows" id="got"></div>
+    <div class="nb" data-sec="got"></div>
   </section>
 
   <section class="card">
@@ -120,11 +165,13 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
     <div class="owner"><div class="av">ن</div><div><div class="t" style="font-weight:700" data-t="owner"></div><div class="note" style="margin:0" data-t="ownerRole"></div></div></div>
     <p class="note" data-t="signoff"></p>
     <p class="note" data-t="photo"></p>
+    <div class="nb" data-sec="owner"></div>
   </section>
 
   <section class="card">
     <h2 data-t="openH"></h2>
     <ol class="q" id="open"></ol>
+    <div class="nb" data-sec="open"></div>
   </section>
 
   <footer data-t="foot"></footer>
@@ -155,6 +202,8 @@ const T = {
   openH: ['للتأكيد', 'To confirm'],
   foot: ['هذه الصفحة للمتابعة الداخلية. كل بند «للتأكيد» ينتظر جواباً.', 'This page is for tracking. Each item marked "To confirm" waits for an answer.'],
   tbd: ['للتأكيد', 'To confirm'], ok: ['وصل', 'Received'],
+  pageH: ['ملاحظات على الصفحة كلها', 'Notes on the whole page'],
+  pageD: ['تحت كل قسم مكان للملاحظات والتعديلات. كل من معه الرابط يراها، ومارش تستلمها. الوقت بتوقيت الأردن.', 'Each section has a box for notes and edits. Everyone with the link sees them, and Marsh gets them. Times are Jordan time.'],
   past: ['مضى', 'Passed'], today: ['اليوم', 'Today'], day: ['يوم', 'day'], days: ['أيام', 'days'],
 };
 const DATES = [
@@ -205,7 +254,7 @@ const OPEN = [
 let L = 'ar';
 try { const s = localStorage.getItem('ctg-lang'); if (s === 'en' || s === 'ar') L = s; } catch (e) {}
 const i = () => (L === 'ar' ? 0 : 1);
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const day0 = (d) => { const x = new Date(d + 'T00:00:00'); return x; };
 function today() { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
 function diff(d) { return Math.round((day0(d) - today()) / 86400000); }
@@ -228,17 +277,168 @@ function render() {
     return `<li class="${cls}"><span class="what">${esc(w[i()])}</span><span class="left">${esc(leftTxt(s, e))}</span><span class="when">${esc(d[i()])}</span></li>`;
   }).join('');
   document.getElementById('dels').innerHTML = DELS.map(([t, d, due]) => `<div class="row"><span class="t">${esc(t[i()])}</span><span class="tag${due ? ' ok' : ''}">${esc(due ? due[i()] : T.tbd[i()])}</span><span class="d">${esc(d[i()])}</span></div>`).join('');
-  document.getElementById('reels').innerHTML = REELS.map(([t, p], k) => `<div class="reel"><span class="n">${k + 1}</span><span class="t">${esc(t[i()])}</span><span class="p" dir="ltr" style="text-align:start">${esc(Array.isArray(p) ? p[i()] : p)}</span></div>`).join('');
+  document.getElementById('reels').innerHTML = REELS.map(([t, p], k) => `<div class="reel"><span class="n">${k + 1}</span><span class="t">${esc(t[i()])}</span><span class="p" dir="ltr" style="text-align:start">${esc(Array.isArray(p) ? p[i()] : p)}</span><div class="nb inreel" data-sec="reel-${k + 1}"></div></div>`).join('');
   document.getElementById('pal').innerHTML = PAL.map(([n, h]) => `<div><i style="background:${h}"></i>${esc(n)}<code>${esc(h)}</code></div>`).join('');
   document.getElementById('needs').innerHTML = NEEDS.map(([t, d]) => `<div class="row"><span class="t">${esc(t[i()])}</span><span class="tag">${esc(T.tbd[i()])}</span><span class="d">${esc(d[i()])}</span></div>`).join('');
   document.getElementById('got').innerHTML = GOT.map(([t, d]) => `<div class="row"><span class="t">${esc(t[i()])}</span><span class="tag ok">${esc(T.ok[i()])}</span><span class="d">${esc(d[i()])}</span></div>`).join('');
   document.getElementById('open').innerHTML = OPEN.map((q) => `<li>${esc(q[i()])}</li>`).join('');
   document.title = L === 'ar' ? 'حفل CTG · الحالة' : 'CTG Gala · Status';
+  renderNotes();
 }
 document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => {
   L = b.dataset.lang; try { localStorage.setItem('ctg-lang', L); } catch (e) {} render();
 }));
+
+// ---- shared notes (site 'ctg' on the site-feedback function) ----
+const FN = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback';
+const NAMES = ['Safi', 'Mariem', 'Aya', 'Nour'];
+const N = {
+  notes: ['ملاحظات', 'Notes'], add: ['أضف ملاحظة', 'Add a note'], kNote: ['ملاحظة', 'Note'], kSug: ['تعديل مقترح', 'Suggested edit'],
+  name: ['اسمك', 'Your name'], other: ['اسم آخر', 'Other'], otherPh: ['اكتب اسمك', 'Type your name'], text: ['الملاحظة', 'Note'],
+  why: ['ملاحظة (اختياري)', 'Note (optional)'], line: ['أي سطر؟', 'Which line?'], lineOther: ['سطر آخر (الصق النص الحالي)', 'Another line (paste the current text)'],
+  oldPh: ['النص الحالي', 'Current text'], newL: ['النص الجديد', 'New text'], send: ['إرسال', 'Send'], cancel: ['إلغاء', 'Cancel'], reply: ['رد', 'Reply'],
+  replyPh: ['اكتب ردك', 'Write a reply'], sending: ['جارٍ الإرسال…', 'Sending…'], sent: ['وصلت. يراها الجميع.', 'Saved. Everyone sees it.'],
+  err: ['لم تُحفظ. حاول مرة أخرى.', 'Not saved. Try again.'], needName: ['اختر اسمك أولاً.', 'Pick your name first.'], needText: ['اكتب شيئاً أولاً.', 'Write something first.'],
+  loadErr: ['تعذّر تحميل الملاحظات. أعد فتح الصفحة.', 'Could not load the notes. Reload the page.'], loading: ['تحميل الملاحظات…', 'Loading notes…'],
+  more: ['عرض الكل', 'Show all'], less: ['عرض أقل', 'Show less'], applied: ['طُبّق', 'Applied'], sugg: ['تعديل مقترح', 'Suggested edit'],
+  marsh: ['مارش', 'Marsh'], none: ['لا ملاحظات بعد.', 'No notes yet.'],
+};
+const n = (k) => N[k][i()];
+const SEC = {
+  page: [() => [T.title[i()], T.updated[i()], T.foot[i()]], ['الصفحة كلها', 'Whole page']],
+  event: [() => [T.f1v[i()] + ' · ' + T.f1[i()], '70–100 · ' + T.f2[i()], '10 · ' + T.f3[i()], T.venue[i()]], T.eventH],
+  dates: [() => DATES.map(([, , w, d]) => w[i()] + ' · ' + d[i()]), T.datesH],
+  dels: [() => DELS.flatMap(([t, d]) => [t[i()], d[i()]]).concat(T.delNote[i()]), T.delH],
+  pal: [() => PAL.map(([nm, h]) => nm + ' ' + h), T.palH],
+  needs: [() => NEEDS.flatMap(([t, d]) => [t[i()], d[i()]]), T.needH],
+  got: [() => GOT.map(([t, d]) => t[i()] + ' · ' + d[i()]), T.gotH],
+  owner: [() => [T.owner[i()] + ' · ' + T.ownerRole[i()], T.signoff[i()], T.photo[i()]], T.whoH],
+  open: [() => OPEN.map((q) => q[i()]), T.openH],
+};
+REELS.forEach(([t, p], k) => { SEC['reel-' + (k + 1)] = [() => [t[i()], Array.isArray(p) ? p[i()] : p], [`ريل ${k + 1}`, `Reel ${k + 1}`]]; });
+const secLabel = (sec, lang) => SEC[sec][1][lang];
+let NOTES = [], NSTATE = 'loading', ME = '';
+try { ME = localStorage.getItem('ctg-name') || ''; } catch (e) {}
+const UI = { open: {}, kind: {}, all: {}, exp: {}, reply: null, busy: {}, msg: {} };
+const DRAFT = {};
+const AMMAN = () => new Intl.DateTimeFormat(L === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', { timeZone: 'Asia/Amman', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+const when = (iso) => { try { return AMMAN().format(new Date(iso)); } catch (e) { return ''; } };
+function snapshot() {
+  document.querySelectorAll('[data-d]').forEach((el) => { DRAFT[el.dataset.d] = el.value; });
+  const a = document.activeElement;
+  return a && a.dataset && a.dataset.d ? { d: a.dataset.d, s: a.selectionStart, e: a.selectionEnd } : null;
+}
+function restore(f) {
+  document.querySelectorAll('[data-d]').forEach((el) => { if (DRAFT[el.dataset.d] != null) el.value = DRAFT[el.dataset.d]; });
+  if (f) { const el = document.querySelector(`[data-d="${f.d}"]`); if (el) { el.focus({ preventScroll: true }); try { el.setSelectionRange(f.s, f.e); } catch (e) {} } }
+}
+function nameChips(key) {
+  const other = ME && !NAMES.includes(ME);
+  const pick = UI['nm' + key] ?? (other ? '__o' : ME);
+  return `<label>${n('name')}</label><div class="chips">${NAMES.map((x) => `<button type="button" class="chip" data-act="nm" data-k="${key}" data-v="${x}" aria-pressed="${pick === x}">${x}</button>`).join('')}<button type="button" class="chip" data-act="nm" data-k="${key}" data-v="__o" aria-pressed="${pick === '__o'}">${n('other')}</button></div>${pick === '__o' ? `<input data-d="${key}:name" maxlength="60" placeholder="${esc(n('otherPh'))}" value="${other ? esc(ME) : ''}">` : ''}`;
+}
+function composer(sec) {
+  const k = UI.kind[sec] || 'note', lines = SEC[sec][0]();
+  const sel = DRAFT[sec + ':line'] ?? '0';
+  return `<div class="cmp">${nameChips(sec)}
+    <div class="chips"><button type="button" class="chip" data-act="kind" data-k="${sec}" data-v="note" aria-pressed="${k === 'note'}">${n('kNote')}</button><button type="button" class="chip" data-act="kind" data-k="${sec}" data-v="suggest" aria-pressed="${k === 'suggest'}">${n('kSug')}</button></div>
+    ${k === 'suggest' ? `<label>${n('line')}</label><select data-d="${sec}:line" data-act="line" data-k="${sec}">${lines.map((x, j) => `<option value="${j}"${String(j) === sel ? ' selected' : ''}>${esc(x.length > 90 ? x.slice(0, 90) + '…' : x)}</option>`).join('')}<option value="o"${sel === 'o' ? ' selected' : ''}>${n('lineOther')}</option></select>
+    ${sel === 'o' ? `<textarea data-d="${sec}:old" maxlength="2000" dir="auto" placeholder="${esc(n('oldPh'))}"></textarea>` : ''}
+    <label>${n('newL')}</label><textarea data-d="${sec}:new" maxlength="2000" dir="auto"></textarea><label>${n('why')}</label><textarea data-d="${sec}:text" maxlength="2000" dir="auto" style="min-height:56px"></textarea>`
+    : `<label>${n('text')}</label><textarea data-d="${sec}:text" maxlength="2000" dir="auto"></textarea>`}
+    <div class="acts"><button type="button" class="btn pri" data-act="send" data-k="${sec}"${UI.busy[sec] ? ' disabled' : ''}>${UI.busy[sec] ? n('sending') : n('send')}</button><button type="button" class="btn" data-act="close" data-k="${sec}">${n('cancel')}</button>${msgHtml(sec)}</div></div>`;
+}
+function msgHtml(key) { const m = UI.msg[key]; return m ? `<span class="msg${m[1] ? ' bad' : ''}" role="status">${esc(n(m[0]))}</span>` : ''; }
+function noteHtml(x) {
+  const kids = NOTES.filter((y) => y.parent === x.id).sort((a, b) => a.at.localeCompare(b.at));
+  const tag = x.kind === 'suggest' ? `<span class="tag">${n('sugg')}</span>` : '';
+  const done = x.status === 'applied' ? `<span class="tag ok">${n('applied')}</span>` : '';
+  const sug = x.kind === 'suggest' ? `<div class="sg">${x.old ? `<del dir="auto">${esc(x.old)}</del>` : ''}<ins dir="auto">${esc(x.new)}</ins></div>` : '';
+  const rk = 'r' + x.id;
+  const rbox = UI.reply === x.id ? `<div class="cmp">${nameChips(rk)}<textarea data-d="${rk}:text" maxlength="2000" dir="auto" placeholder="${esc(n('replyPh'))}"></textarea><div class="acts"><button type="button" class="btn pri sm" data-act="sendr" data-k="${x.id}"${UI.busy[rk] ? ' disabled' : ''}>${UI.busy[rk] ? n('sending') : n('send')}</button><button type="button" class="btn sm" data-act="closer">${n('cancel')}</button>${msgHtml(rk)}</div></div>` : '';
+  const marsh = x.reply ? `<div class="kid"><div class="nh"><b>${n('marsh')}</b></div><div class="nx" dir="auto">${esc(x.reply)}</div></div>` : '';
+  const kidsH = kids.map((y) => `<div class="kid"><div class="nh"><b dir="auto">${esc(y.author)}</b><span>${esc(when(y.at))}</span></div><div class="nx" dir="auto">${esc(y.text)}</div></div>`).join('');
+  return `<div class="nt"><div class="nh"><b dir="auto">${esc(x.author)}</b><span>${esc(when(x.at))}</span>${tag}${done}</div>${sug}${x.text ? `<div class="nx" dir="auto">${esc(x.text)}</div>` : ''}${marsh || kidsH ? `<div class="kids">${marsh}${kidsH}</div>` : ''}${rbox}${UI.reply === x.id ? '' : `<button type="button" class="lnk" data-act="reply" data-k="${x.id}">${n('reply')}</button>`}</div>`;
+}
+function box(sec) {
+  const top = NOTES.filter((x) => x.section === sec && !x.parent).sort((a, b) => b.at.localeCompare(a.at));
+  const reel = sec.startsWith('reel-');
+  if (reel && !UI.exp[sec]) return `<div class="nbh"><button type="button" class="lnk" data-act="exp" data-k="${sec}">${top.length ? `${n('notes')} (${top.length})` : n('add')}</button></div>`;
+  const lim = UI.all[sec] ? top.length : 3;
+  const head = `<div class="nbh"><span class="c">${n('notes')}${top.length ? ` · ${top.length}` : ''}</span>${UI.open[sec] ? '' : `<button type="button" class="btn sm" data-act="open" data-k="${sec}">${n('add')}</button>`}</div>`;
+  const state = NSTATE === 'loading' ? `<p class="msg">${n('loading')}</p>` : NSTATE === 'fail' ? `<p class="msg bad">${n('loadErr')}</p>` : '';
+  const list = top.length ? `<div class="nts">${top.slice(0, lim).map(noteHtml).join('')}</div>` : '';
+  const more = top.length > 3 ? `<button type="button" class="lnk" data-act="all" data-k="${sec}">${UI.all[sec] ? n('less') : `${n('more')} (${top.length})`}</button>` : '';
+  return head + state + list + more + (UI.open[sec] ? composer(sec) : '') + (UI.msg[sec] && !UI.open[sec] ? `<p>${msgHtml(sec)}</p>` : '');
+}
+function renderNotes() {
+  const f = snapshot();
+  document.querySelectorAll('.nb[data-sec]').forEach((el) => { if (SEC[el.dataset.sec]) el.innerHTML = box(el.dataset.sec); });
+  restore(f);
+}
+async function loadNotes() {
+  try {
+    const r = await fetch(FN + '?site=ctg', { cache: 'no-store' });
+    const j = await r.json();
+    if (!r.ok || !j.ok || !Array.isArray(j.notes)) throw new Error('bad');
+    NOTES = j.notes.map((x) => ({ id: Number(x.id), at: String(x.at || ''), section: String(x.section || ''), author: String(x.author || ''), text: String(x.text || ''),
+      kind: String(x.kind || 'note'), parent: x.parent == null ? null : Number(x.parent), old: String(x.old || ''), new: String(x.new || ''), status: String(x.status || 'open'), reply: String(x.reply || '') }));
+    NSTATE = 'ok';
+  } catch (e) { if (NSTATE !== 'ok') NSTATE = 'fail'; }
+  renderNotes();
+}
+function author(key) {
+  const pick = UI['nm' + key] ?? (ME && !NAMES.includes(ME) ? '__o' : ME);
+  if (pick === '__o') return (DRAFT[key + ':name'] || '').trim().slice(0, 60);
+  return pick || '';
+}
+async function post(key, body) {
+  UI.busy[key] = true; UI.msg[key] = null; renderNotes();
+  try {
+    const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) throw new Error(j.error || 'failed');
+    ME = body.author; try { localStorage.setItem('ctg-name', ME); } catch (e) {}
+    UI.busy[key] = false; return true;
+  } catch (e) { UI.busy[key] = false; UI.msg[key] = ['err', 1]; renderNotes(); return false; }
+}
+document.addEventListener('change', (e) => { const t = e.target; if (t.dataset && t.dataset.act === 'line') { DRAFT[t.dataset.d] = t.value; renderNotes(); } });
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-act]'); if (!b || b.tagName === 'SELECT') return;
+  const k = b.dataset.k, a = b.dataset.act;
+  snapshot();
+  if (a === 'open') { UI.open[k] = true; UI.msg[k] = null; }
+  else if (a === 'close') { UI.open[k] = false; }
+  else if (a === 'exp') { UI.exp[k] = true; UI.open[k] = true; }
+  else if (a === 'all') { UI.all[k] = !UI.all[k]; }
+  else if (a === 'kind') { UI.kind[k] = b.dataset.v; }
+  else if (a === 'nm') { UI['nm' + k] = b.dataset.v; }
+  else if (a === 'reply') { UI.reply = Number(k); }
+  else if (a === 'closer') { UI.reply = null; }
+  else if (a === 'send') {
+    const kind = UI.kind[k] || 'note', who = author(k), text = (DRAFT[k + ':text'] || '').trim(), nw = (DRAFT[k + ':new'] || '').trim();
+    if (!who) { UI.msg[k] = ['needName', 1]; renderNotes(); return; }
+    if (kind === 'suggest' ? !nw : !text) { UI.msg[k] = ['needText', 1]; renderNotes(); return; }
+    let old = '';
+    if (kind === 'suggest') { const sel = DRAFT[k + ':line'] ?? '0'; old = sel === 'o' ? (DRAFT[k + ':old'] || '').trim() : (SEC[k][0]()[Number(sel)] || ''); }
+    const ok = await post(k, { site: 'ctg', page: 'ctg', section: k, label: secLabel(k, 1), author: who, lang: L, comment: text, fields: kind === 'suggest' ? { kind, old, new: nw } : { kind } });
+    if (ok) { document.querySelectorAll(`[data-d^="${k}:"]`).forEach((el) => el.remove()); ['text', 'new', 'old', 'line'].forEach((f) => { delete DRAFT[k + ':' + f]; }); UI.open[k] = false; UI.kind[k] = 'note'; UI.msg[k] = ['sent', 0]; await loadNotes(); }
+    return;
+  } else if (a === 'sendr') {
+    const id = Number(k), rk = 'r' + id, who = author(rk), text = (DRAFT[rk + ':text'] || '').trim(), par = NOTES.find((x) => x.id === id);
+    if (!par) return;
+    if (!who) { UI.msg[rk] = ['needName', 1]; renderNotes(); return; }
+    if (!text) { UI.msg[rk] = ['needText', 1]; renderNotes(); return; }
+    const ok = await post(rk, { site: 'ctg', page: 'ctg', section: par.section, label: secLabel(par.section, 1), author: who, lang: L, comment: text, fields: { kind: 'reply', parent: id } });
+    if (ok) { document.querySelectorAll(`[data-d^="${rk}:"]`).forEach((el) => el.remove()); delete DRAFT[rk + ':text']; UI.reply = null; await loadNotes(); }
+    return;
+  } else return;
+  renderNotes();
+});
 render();
+loadNotes();
+setInterval(() => { if (!document.hidden) loadNotes(); }, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) loadNotes(); });
 </script>
 </body>
 </html>
