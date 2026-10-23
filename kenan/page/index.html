@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kenan · Jubeiha 3</title>
+<meta name="description" content="Project link mockup for Kenan Housing, Jubeiha (3), Amman. Built by Marsh. Sample values are marked.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1B2C58">
+<link rel="icon" href="assets/kenan-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brandmark">
+      <img src="assets/kenan-logo.jpg" alt="" width="34" height="34">
+      <div class="bm-text"><b data-t="brand"></b><span data-t="brandSub"></span></div>
+    </div>
+    <button class="iconbtn langbtn" id="langBtn" type="button"></button>
+    <button class="iconbtn" id="themeBtn" type="button"></button>
+  </div>
+  <div class="viewswitch">
+    <div class="seg" role="group" id="viewSeg">
+      <button type="button" data-view="buyer" aria-pressed="true" data-t="viewBuyer"></button>
+      <button type="button" data-view="owner" aria-pressed="false" data-t="viewOwner"></button>
+    </div>
+    <div class="mock-note" data-t="mockNote"></div>
+  </div>
+</header>
+
+<main id="buyer" aria-live="polite"></main>
+<main id="owner" hidden></main>
+
+<footer class="foot" id="foot"></footer>
+
+<div class="scrim" id="scrim"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden></section>
+<section class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Viewer"></section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/map-roads.js" onerror="window.KENAN_MAP_ERR=true"></script>
+<script src="app.js"></script>
+</body>
+</html>
