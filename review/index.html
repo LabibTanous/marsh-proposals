@@ -111,7 +111,7 @@ body.intro #stage,body.intro #panel{display:none}
   </div>
   <div class="plist" id="plist"></div>
   <div class="compose">
-    <textarea id="noteTa"></textarea>
+    <textarea id="noteTa" maxlength="5500"></textarea>
     <div class="row">
       <button class="ib dark" id="noteSave" type="button"></button>
       <input class="who" id="who" autocomplete="name">
@@ -124,13 +124,13 @@ body.intro #stage,body.intro #panel{display:none}
   <div class="sheet">
     <h2 id="mTitle"></h2>
     <q id="mQuote"></q>
-    <textarea id="mTa"></textarea>
+    <textarea id="mTa" maxlength="5500"></textarea>
     <div class="row"><button class="ib red" id="mSave" type="button"></button><button class="ib" id="mCancel" type="button"></button><span class="st" id="mSt"></span></div>
   </div>
 </div>
 <script>
 const FN = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/marsh-dash-review';
-const KEY = decodeURIComponent((location.hash || '').slice(1));
+const KEY = (() => { try { return decodeURIComponent((location.hash || '').slice(1)); } catch (_) { return (location.hash || '').slice(1); } })();
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const store = { get(k, d) { try { const v = localStorage.getItem('md.' + k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } },
@@ -142,7 +142,7 @@ const T = {
     done: 'خلصت هالشاشة، التالي ›', doneLast: 'خلصت كل الشاشات', saving: 'جاري الحفظ…', saved: 'انحفظ ووصل للبيب', failed: 'ما انحفظ، جرب مرة ثانية', empty: 'اكتب ملاحظة أول',
     pinTitle: 'تعليق على هالجزء', cancel: 'إلغاء', noComments: 'لا توجد ملاحظات بعد على هالشاشة. اضغط «علّق» ثم اضغط على أي جزء.', noAll: 'لا توجد ملاحظات عامة بعد.',
     general: 'عامة', fixed: 'تم التعديل', open: 'مفتوحة', hidden: 'اضغط لتشوفها', of: 'من', start: 'ابدأ من أول شاشة', intro: 'البداية',
-    missing: 'الرابط ناقص. افتح الرابط الكامل اللي وصلك.', wrong: 'الرابط غلط أو قديم. اطلب الرابط من جديد.', loading: 'جاري التحميل…',
+    loadFail: 'ما قدرنا نحمّل الملاحظات. اضغط هون لتجرب مرة ثانية.', savedOnly: 'انحفظ', notSent: 'لم تُرسل بعد، رح نجرب تلقائياً', net: 'ما في اتصال. جرب بعد دقيقة.', missing: 'الرابط ناقص. افتح الرابط الكامل اللي وصلك.', wrong: 'الرابط غلط أو قديم. اطلب الرابط من جديد.', loading: 'جاري التحميل…',
     groups: { m: 'الإدارة', s: 'بوابات الموظفين' },
     iTitle: 'مراجعة لوحة مارش الداخلية', iA: 'شاشة: 3 للإدارة، و5 بوابات للموظفين على الكمبيوتر، و5 نفسها على الموبايل.',
     iB: 'البيانات من محادثاتك لغاية 22 أكتوبر. مين ماسك أي مهمة تجريبي، لحد ما تأكده. نصوص الرسائل الصوتية والملفات أمثلة.',
@@ -153,7 +153,7 @@ const T = {
     done: 'Done with this screen, next ›', doneLast: 'All screens done', saving: 'Saving…', saved: 'Saved and sent to Labib', failed: 'Not saved. Try again.', empty: 'Write a note first',
     pinTitle: 'Comment on this part', cancel: 'Cancel', noComments: 'No notes on this screen yet. Tap “Comment”, then tap any part.', noAll: 'No notes on the whole dashboard yet.',
     general: 'General', fixed: 'Fixed', open: 'Open', hidden: 'Tap to show it', of: 'of', start: 'Start with screen 1', intro: 'Start',
-    missing: 'The link is incomplete. Open the full link you received.', wrong: 'The link is wrong or old. Ask for a new link.', loading: 'Loading…',
+    loadFail: 'Could not load the notes. Tap here to try again.', savedOnly: 'Saved', notSent: 'Not sent yet; it will retry', net: 'No connection. Try again in a minute.', missing: 'The link is incomplete. Open the full link you received.', wrong: 'The link is wrong or old. Ask for a new link.', loading: 'Loading…',
     groups: { m: 'Management', s: 'Staff portals' },
     iTitle: 'Marsh internal dashboard review', iA: 'screens: 3 for management, 5 staff portals on a computer, and the same 5 on a phone.',
     iB: 'The data comes from your chats up to 22 Oct. Who holds each task is a mockup until you confirm it. Voice-note texts and files are examples.',
@@ -161,7 +161,7 @@ const T = {
     iC: 'Every note goes to Labib directly. The changes show here, on the same link.', iD: 'Computer screens read best on a computer or iPad. Phone screens read best on a phone.' }
 };
 
-let lang = store.get('lang', 'ar'), B = null, idx = -1, comments = [], cm = false, tab = 'screen', comp = null, win = null, pending = null;
+let loadErr = false, lang = store.get('lang', 'ar'), B = null, idx = -1, comments = [], cm = false, tab = 'screen', comp = null, win = null, pending = null;
 let seen = new Set(store.get('seen', []));
 const t = k => T[lang][k];
 const scr = () => B.screens[idx];
@@ -176,13 +176,13 @@ async function decrypt(txt) {
 }
 
 async function api(body) {
-  const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(Object.assign({ t: KEY, lang }, body)) });
+  const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(Object.assign({ t: KEY, lang }, body)), signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined });
   const j = await r.json().catch(() => ({}));
   if (!r.ok || !j.ok) throw new Error(j.error || r.status);
   return j;
 }
 async function loadComments() {
-  try { const r = await fetch(FN + '?t=' + encodeURIComponent(KEY), { cache: 'no-store' }); const j = await r.json(); if (j.ok) comments = j.comments; } catch (_) {}
+  try { const j = await api({ op: 'list' }); comments = j.comments; loadErr = false; } catch (_) { loadErr = true; }
   renderPanel(); renderIntro(); drawPins(); labels();
 }
 
@@ -231,12 +231,13 @@ function renderPanel() {
   const list = tab === 'all' ? comments.filter(c => c.kind === 'overall') : idx >= 0 ? comments.filter(c => c.screen === scr().id && (c.kind === 'pin' || c.kind === 'note')) : [];
   const pins = idx >= 0 ? comments.filter(c => c.screen === scr().id && c.kind === 'pin') : [];
   const when = iso => { try { return new Date(iso).toLocaleString(lang === 'ar' ? 'ar-JO' : 'en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (_) { return ''; } };
-  $('plist').innerHTML = list.length ? list.map(c => {
+  const errRow = loadErr ? `<button class="c" type="button" data-reload="1" style="border-color:var(--bad);color:var(--bad)">${esc(t('loadFail'))}</button>` : '';
+  $('plist').innerHTML = errRow + (list.length ? list.map(c => {
     const pi = pins.indexOf(c);
     const head = `<span class="top">${pi >= 0 ? `<span class="pnum num">${pi + 1}</span>` : `<span class="pnum gen">•</span>`}<strong>${esc(c.author)}</strong><span class="num">${esc(when(c.at))}</span><span class="chip ${c.status === 'fixed' ? 'ok' : ''}">${esc(c.status === 'fixed' ? t('fixed') : t('open'))}</span></span>`;
     const body = (c.anchor && c.anchor.text ? `<q>${esc(c.anchor.text.slice(0, 120))}</q>` : '') + `<span class="txt">${esc(c.text)}</span>` + (c.reply ? `<span class="reply">${esc(c.reply)}</span>` : '');
     return pi >= 0 ? `<button class="c" type="button" data-pin="${c.id}">${head}${body}</button>` : `<div class="c">${head}${body}</div>`;
-  }).join('') : `<div class="empty">${esc(tab === 'all' ? t('noAll') : t('noComments'))}</div>`;
+  }).join('') : (loadErr ? '' : `<div class="empty">${esc(tab === 'all' ? t('noAll') : t('noComments'))}</div>`));
 }
 
 // ---------- screen ----------
@@ -260,12 +261,14 @@ const FRAME_CSS = `html.__cm,html.__cm *{cursor:crosshair!important}.__hl{outlin
 .__pin.__fixed{background:#15803D}
 @media (max-width:700px){header[style*="999px"]{border-radius:20px!important}nav[style*="position: fixed"]{flex-wrap:nowrap!important;overflow-x:auto!important;justify-content:flex-start!important;max-width:calc(100% - 16px)!important;scrollbar-width:none}nav[style*="position: fixed"] a{white-space:nowrap;flex:none}}.__flash{animation:__f 1.2s ease 2}@keyframes __f{50%{transform:scale(1.5)}}`;
 
+const draftKey = () => (tab === 'all' ? 'all' : idx >= 0 ? scr().id : 'all');
+function loadDraft() { $('noteTa').value = store.get('draft.' + draftKey(), ''); }
 function show(i, push) {
   idx = i; cm = false; document.body.classList.remove('cm');
   document.body.classList.toggle('intro', i < 0);
   if (push !== false) history.replaceState(null, '', location.pathname + '?s=' + (i < 0 ? '' : B.screens[i].id) + location.hash);
   store.set('last', i < 0 ? '' : B.screens[i].id);
-  labels(); renderPanel();
+  labels(); renderPanel(); loadDraft();
   if (i < 0) { renderIntro(); $('intro').scrollTop = 0; return; }
   size();
   const f = $('f');
@@ -287,13 +290,15 @@ function show(i, push) {
     }, true);
     d.addEventListener('submit', e => e.preventDefault(), true);
     win.addEventListener('scroll', () => {}, { passive: true });
-    comp = win.DCLite.mount(B.screens[i].html, { root: d.getElementById('app'), onRender: c => {
+    comp = null;
+    try { comp = win.DCLite.mount(B.screens[i].html, { root: d.getElementById('app'), state: { lang }, onRender: c => {
+      if (!comp) return;
       if (c.state.lang && c.state.lang !== lang) { lang = c.state.lang; store.set('lang', lang); labels(); renderPanel(); }
       setTimeout(drawPins, 0);
-    } });
-    if (comp.state.lang !== lang) comp.setState({ lang });
+    } }); } catch (err) { d.getElementById('app').innerHTML = '<p style="font:16px system-ui;padding:24px;color:#B91C1C">' + esc(t('failed')) + '</p>'; return; }
     win.addEventListener('resize', drawPins);
-    setTimeout(drawPins, 400); // after web fonts settle
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(() => setTimeout(drawPins, 50));
+    new win.ResizeObserver(() => drawPins()).observe(d.getElementById('app'));
   };
   f.srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="app"></div><script>${B.runtime}<\/script></body></html>`;
 }
@@ -315,22 +320,23 @@ function startPin(e) {
   const el = pickEl(e.target); if (!el) return;
   const r = el.getBoundingClientRect(), d = win.document.documentElement;
   const state = {}; for (const [k, v] of Object.entries(comp.state || {})) if (v == null || ['string', 'number', 'boolean'].includes(typeof v)) state[k] = v;
-  pending = { path: pathOf(el), text: textOf(el), ox: r.width ? (e.clientX - r.left) / r.width : 0, oy: r.height ? (e.clientY - r.top) / r.height : 0,
+  pending = { path: pathOf(el), tag: el.tagName, text: textOf(el), ox: r.width ? (e.clientX - r.left) / r.width : 0, oy: r.height ? (e.clientY - r.top) / r.height : 0,
     x: (e.clientX + win.scrollX) / d.scrollWidth, y: e.clientY + win.scrollY, w: win.innerWidth, state };
   $('mQuote').textContent = pending.text || '—'; $('mTa').value = store.get('draft.pin', ''); $('mSt').textContent = ''; $('mSt').className = 'st';
   $('modal').classList.add('show'); setTimeout(() => $('mTa').focus(), 30);
 }
 
 function drawPins() {
-  if (!win || idx < 0) return;
+  if (!win || idx < 0 || !comp) return;
   const d = win.document, layer = d.getElementById('__pins'); if (!layer) return;
   const pins = comments.filter(c => c.screen === scr().id && c.kind === 'pin' && c.anchor);
   layer.innerHTML = '';
   pins.forEach((c, n) => {
     const a = c.anchor; let x = null, y = null;
     const el = byPath(a.path);
-    if (el && textOf(el).slice(0, 40) === String(a.text || '').slice(0, 40)) { const r = el.getBoundingClientRect(); x = r.left + win.scrollX + r.width * a.ox; y = r.top + win.scrollY + r.height * a.oy; }
-    else if (Math.abs((a.w || 0) - win.innerWidth) < 40 && sameState(a.state)) { x = a.x * d.documentElement.scrollWidth; y = a.y; }
+    const sameLang = !a.state || !a.state.lang || a.state.lang === comp.state.lang;
+    if (el && (sameLang ? textOf(el).slice(0, 40) === String(a.text || '').slice(0, 40) : el.tagName === a.tag)) { const r = el.getBoundingClientRect(); x = r.left + win.scrollX + r.width * a.ox; y = r.top + win.scrollY + r.height * a.oy; }
+    else if (sameLang && Math.abs((a.w || 0) - win.innerWidth) < 40 && sameState(a.state)) { x = a.x * d.documentElement.scrollWidth; y = a.y; }
     if (x == null) return;
     const p = d.createElement('div'); p.className = '__pin' + (c.status === 'fixed' ? ' __fixed' : ''); p.dataset.id = c.id; p.textContent = n + 1;
     p.style.left = x + 'px'; p.style.top = y + 'px'; layer.appendChild(p);
@@ -363,48 +369,66 @@ async function save(kind, text, stEl, btn, extra) {
   btn.disabled = true; stEl.className = 'st'; stEl.textContent = t('saving');
   try {
     const s = idx >= 0 ? scr() : null;
-    await api(Object.assign({ kind, text, author, screen: kind === 'overall' ? 'all' : s.id, title: kind === 'overall' ? 'Whole dashboard' : s.en }, extra || {}));
-    stEl.className = 'st ok'; stEl.textContent = t('saved'); btn.disabled = false;
-    await loadComments(); return true;
-  } catch (e) { stEl.className = 'st err'; stEl.textContent = t('failed'); btn.disabled = false; return false; }
+    const j = await api(Object.assign({ kind, text, author, screen: kind === 'overall' ? 'all' : s.id, title: kind === 'overall' ? 'Whole dashboard' : s.en }, extra || {}));
+    stEl.className = 'st ok'; stEl.textContent = j.notified === false ? t('savedOnly') : t('saved');
+  } catch (e) { stEl.className = 'st err'; stEl.textContent = navigator.onLine === false ? t('net') : t('failed'); btn.disabled = false; return false; }
+  loadComments().finally(() => { btn.disabled = false; });
+  return true;
 }
 
 // ---------- wiring ----------
 document.addEventListener('click', e => {
   const go = e.target.closest('[data-go]'); if (go) { show(+go.dataset.go); return; }
   const pin = e.target.closest('[data-pin]'); if (pin) { gotoPin(pin.dataset.pin); }
+  if (e.target.closest('[data-reload]')) loadComments();
 });
 $('prev').onclick = () => show(idx - 1);
 $('next').onclick = () => show(idx + 1);
 $('pick').onchange = e => show(+e.target.value);
-$('langBtn').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; store.set('lang', lang); if (comp) comp.setState({ lang }); labels(); renderPanel(); renderIntro(); };
+$('langBtn').onclick = () => { if (!B) return; lang = lang === 'ar' ? 'en' : 'ar'; store.set('lang', lang); if (comp) comp.setState({ lang }); labels(); renderPanel(); renderIntro(); };
 $('cmBtn').onclick = () => {
+  if (!B) return;
   if (idx < 0) { show(0); }
   cm = !cm; document.body.classList.toggle('cm', cm);
   if (win) win.document.documentElement.classList.toggle('__cm', cm);
   if (cm && window.innerWidth <= 1100) closePanel();
   labels();
 };
-$('panelBtn').onclick = () => { document.body.classList.contains('panel-open') ? closePanel() : openPanel(); if (idx < 0) tab = 'all'; labels(); renderPanel(); };
-$('tabScreen').onclick = () => { tab = 'screen'; labels(); renderPanel(); };
-$('tabAll').onclick = () => { tab = 'all'; labels(); renderPanel(); };
-$('noteTa').oninput = e => store.set('draft.' + tab, e.target.value);
+$('panelBtn').onclick = () => { if (!B) return; document.body.classList.contains('panel-open') ? closePanel() : openPanel(); if (idx < 0) tab = 'all'; labels(); renderPanel(); };
+$('tabScreen').onclick = () => { tab = 'screen'; labels(); renderPanel(); loadDraft(); };
+$('tabAll').onclick = () => { tab = 'all'; labels(); renderPanel(); loadDraft(); };
+$('noteTa').oninput = e => store.set('draft.' + draftKey(), e.target.value);
 $('noteSave').onclick = async () => {
   const ok = await save(tab === 'all' ? 'overall' : 'note', $('noteTa').value, $('noteSt'), $('noteSave'));
-  if (ok) { $('noteTa').value = ''; store.set('draft.' + tab, ''); }
+  if (ok) { $('noteTa').value = ''; store.set('draft.' + draftKey(), ''); }
 };
 $('doneBtn').onclick = async () => {
   const s = scr();
-  if (!seen.has(s.id)) { seen.add(s.id); store.set('seen', [...seen]); api({ kind: 'seen', screen: s.id, title: s.en, total: B.screens.length, author: $('who').value.trim() || 'Safi' }).catch(() => {}); }
+  if (tab === 'screen' && $('noteTa').value.trim()) {
+    const ok = await save('note', $('noteTa').value, $('noteSt'), $('noteSave'));
+    if (!ok) return;
+    $('noteTa').value = ''; store.set('draft.' + s.id, '');
+  }
+  if (!seen.has(s.id)) {
+    seen.add(s.id); store.set('seen', [...seen]);
+    const q = store.get('seenq', []); q.push({ kind: 'seen', screen: s.id, title: s.en, total: B.screens.length, author: $('who').value.trim() || 'Safi' }); store.set('seenq', q);
+    flushSeen();
+  }
   if (idx < B.screens.length - 1) show(idx + 1); else show(-1);
 };
+// screens marked done wait in an outbox until the server has them
+async function flushSeen() {
+  let q = store.get('seenq', []);
+  while (q.length) { try { await api(q[0]); } catch (_) { return; } q = store.get('seenq', []).slice(1); store.set('seenq', q); }
+}
+window.addEventListener('online', flushSeen);
 $('mTa').oninput = e => store.set('draft.pin', e.target.value);
 $('mCancel').onclick = () => { $('modal').classList.remove('show'); pending = null; };
 $('modal').onclick = e => { if (e.target.id === 'modal') $('mCancel').onclick(); };
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { if ($('modal').classList.contains('show')) $('mCancel').onclick(); else if (cm) $('cmBtn').onclick(); } });
 $('mSave').onclick = async () => {
   const ok = await save('pin', $('mTa').value, $('mSt'), $('mSave'), { anchor: pending });
-  if (ok) { store.set('draft.pin', ''); setTimeout(() => { $('modal').classList.remove('show'); pending = null; }, 500); }
+  if (ok) { $('mSave').disabled = true; store.set('draft.pin', ''); setTimeout(() => { $('modal').classList.remove('show'); pending = null; $('mSave').disabled = false; }, 500); }
 };
 window.addEventListener('resize', () => { size(); setTimeout(drawPins, 50); });
 new ResizeObserver(() => { document.documentElement.style.setProperty('--barh', $('bar').offsetHeight + 'px'); size(); }).observe($('bar'));
@@ -412,12 +436,14 @@ new ResizeObserver(() => { document.documentElement.style.setProperty('--barh', 
 (async () => {
   $('who').value = store.get('who', '');
   if (!KEY) { document.body.innerHTML = `<div class="msg">${esc(t('missing'))}</div>`; return; }
-  try { const r = await fetch('b.txt', { cache: 'no-store' }); B = await decrypt(await r.text()); }
-  catch (_) { document.body.innerHTML = `<div class="msg">${esc(t('wrong'))}</div>`; return; }
+  let txt;
+  try { const r = await fetch('b.txt', { cache: 'no-store' }); if (!r.ok) throw 0; txt = await r.text(); }
+  catch (_) { document.body.innerHTML = `<div class="msg">${esc(t('net'))}<br><br><button class="ib red" type="button" onclick="location.reload()">↻</button></div>`; return; }
+  try { B = await decrypt(txt); } catch (_) { document.body.innerHTML = `<div class="msg">${esc(t('wrong'))}</div>`; return; }
   const q = new URLSearchParams(location.search).get('s') || '';
   const j = B.screens.findIndex(s => s.id === q);
   show(j, false);
-  loadComments();
+  loadComments(); flushSeen();
 })();
 </script>
 </body>
