@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CTG · مراجعة الفيديوهات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F3F1;--card:#fff;--ink:#141414;--ink2:#5B5F66;--line:#E3E5E1;--red:#E9212A;--ok:#15803D;--okbg:#E7F5EC}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'IBM Plex Sans Arabic',system-ui,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border-radius:20px;padding:12px 16px}
+h1{font-size:20px;margin:0}
+.sub{color:var(--ink2);font-size:13px}
+.btn{font:inherit;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;color:var(--ink)}
+.btn.pri{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.how{background:#fff;border-radius:20px;padding:12px 16px;margin-top:12px;font-size:14px}
+.how ol{margin:4px 0 0;padding-inline-start:20px}
+.name{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;background:#fff;border-radius:20px;padding:12px 16px}
+input,textarea{font:inherit;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff;color:var(--ink)}
+.grid{display:grid;gap:12px;margin-top:12px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.card{background:#fff;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h2{font-size:16px;margin:0;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ver{font-size:12px;color:var(--ink2);font-weight:500}
+video{width:100%;max-height:520px;background:#000;border-radius:12px}
+.cmp{display:flex;gap:8px;align-items:flex-start}
+.stamp{font:600 13px/1 ui-monospace,monospace;background:var(--ink);color:#fff;border-radius:8px;padding:6px 8px;border:0;cursor:pointer;white-space:nowrap;direction:ltr}
+.cmp textarea{flex:1;min-height:44px;resize:vertical}
+.notes{display:flex;flex-direction:column;gap:6px;max-height:320px;overflow:auto}
+.note{display:flex;gap:8px;align-items:flex-start;border-top:1px solid var(--line);padding-top:6px;font-size:14px}
+.note .who{color:var(--ink2);font-size:12px}
+.tag{font-size:11px;border-radius:999px;padding:1px 8px;background:var(--okbg);color:var(--ok);font-weight:600}
+.empty{color:var(--ink2);font-size:13px}
+.msg{font-size:13px;color:var(--ok)} .msg.bad{color:var(--red)}
+.bar{position:sticky;bottom:0;margin-top:12px;background:var(--ink);color:#fff;border-radius:20px;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+@media (max-width:420px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></div>
+    <button class="btn" id="lang"></button>
+  </header>
+  <div class="how"><strong data-t="howT"></strong><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li></ol></div>
+  <div class="name"><label for="who" data-t="name"></label><input id="who" maxlength="60" autocomplete="name"><span class="msg" id="whoMsg"></span></div>
+  <div class="grid" id="grid"></div>
+  <div class="bar"><span id="count"></span><span style="display:flex;gap:8px;align-items:center"><span class="msg" id="roundMsg" style="color:#fff"></span><button class="btn pri" id="round"></button></span></div>
+</div>
+<script>
+const FN = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback';
+const VIDEOS = [
+  { id: 'v-students', file: 'CTG-01-Students.mp4', ver: 'v6', ar: '١ · طلاب 2073', en: '1 · Team 2073 students' },
+  { id: 'v-connor', file: 'CTG-02-Connor.mp4', ver: 'v6', ar: '٢ · Connor', en: '2 · Connor' },
+  { id: 'v-ben', file: 'CTG-03-Ben.mp4', ver: 'v6', ar: '٣ · Ben', en: '3 · Ben' },
+  { id: 'v-mentors', file: 'CTG-04-Mentors.mp4', ver: 'v6', ar: '٤ · المنتورز', en: '4 · Mentors' },
+  { id: 'v-nishan', file: 'CTG-05-Nishan.mp4', ver: 'v6', ar: '٥ · Nishan', en: '5 · Nishan' },
+];
+const T = {
+  title: ['CTG · مراجعة الفيديوهات', 'CTG · Video review'],
+  sub: ['مقابلات Closing the Gap · ٥ فيديوهات', 'Closing the Gap interviews · 5 videos'],
+  howT: ['طريقة المراجعة', 'How to review'],
+  how1: ['شغّل الفيديو. لما تبلّش تكتب، الفيديو بيوقف وبينحفظ الوقت (مثلاً 0:17).', 'Play the video. When you start typing, it pauses and keeps the time (for example 0:17).'],
+  how2: ['اكتب الملاحظة واضغط حفظ. اكتب كل الملاحظات على كل الفيديوهات.', 'Write the note and press Save. Add all notes on all videos.'],
+  how3: ['لما تخلص، اضغط «خلصت الجولة». بنعدّل كل الملاحظات مرة وحدة وبنرفع النسخة الجديدة هون.', 'When you finish, press "Round done". We apply all notes at once and put the new version here.'],
+  name: ['اسمك', 'Your name'], save: ['حفظ', 'Save'], ph: ['شو بدك نغيّر هون؟', 'What should change here?'],
+  none: ['ما في ملاحظات بعد.', 'No notes yet.'], applied: ['تعدّلت', 'Done'], saved: ['انحفظت', 'Saved'], fail: ['ما انحفظت، جرّب كمان مرة', 'Not saved, try again'],
+  needName: ['اكتب اسمك اول', 'Enter your name first'], round: ['خلصت الجولة', 'Round done'], roundSent: ['وصلتنا، بنبلّش التعديل', 'Received, we start the changes'],
+  count: ['ملاحظات مفتوحة: {n}', 'Open notes: {n}'], loadFail: ['ما قدرنا نحمّل الملاحظات', 'Could not load the notes'], lang: ['English', 'العربية'],
+};
+let L = (localStorage.getItem('ctgr.lang') || 'ar') === 'en' ? 1 : 0;
+let NOTES = [], LOADED = 'wait';
+const stamps = {};
+const t = (k, v = {}) => T[k][L].replace(/\{(\w+)\}/g, (_, x) => v[x]);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const who = document.getElementById('who');
+try { who.value = localStorage.getItem('ctgr.name') || ''; } catch {}
+who.addEventListener('change', () => { try { localStorage.setItem('ctgr.name', who.value.trim()); } catch {} });
+
+function staticText() {
+  document.documentElement.lang = L ? 'en' : 'ar'; document.documentElement.dir = L ? 'ltr' : 'rtl';
+  document.querySelectorAll('[data-t]').forEach(e => { e.textContent = t(e.dataset.t); });
+  document.getElementById('lang').textContent = t('lang'); document.getElementById('round').textContent = t('round');
+}
+function notesFor(id) {
+  return NOTES.filter(n => n.section === id && n.kind !== 'reply').sort((a, b) => (a.sec - b.sec) || a.at.localeCompare(b.at));
+}
+function notesHtml(v) {
+  if (LOADED === 'fail') return `<p class="empty">${t('loadFail')}</p>`;
+  const ns = notesFor(v.id);
+  if (!ns.length) return `<p class="empty">${t('none')}</p>`;
+  return ns.map(n => `<div class="note">${n.sec >= 0 ? `<button class="stamp" data-seek="${n.sec}" data-v="${v.id}">${fmt(n.sec)}</button>` : ''}<div style="flex:1"><div dir="auto">${esc(n.body)}</div><div class="who">${esc(n.author)}${n.ver ? ' · ' + esc(n.ver) : ''} ${n.status === 'applied' ? `<span class="tag">${t('applied')}</span>` : ''}</div></div></div>`).join('');
+}
+function draw() {
+  staticText();
+  document.getElementById('grid').innerHTML = VIDEOS.map(v => `<section class="card" id="c-${v.id}">
+    <h2><span>${esc(L ? v.en : v.ar)}</span><span class="ver">${v.ver}</span></h2>
+    <video id="vid-${v.id}" src="${v.file}" controls playsinline preload="metadata"></video>
+    <div class="cmp"><button class="stamp" id="st-${v.id}" data-seek-cur="${v.id}">${fmt(stamps[v.id] || 0)}</button>
+      <textarea id="tx-${v.id}" maxlength="1800" dir="auto" placeholder="${esc(t('ph'))}"></textarea>
+      <button class="btn dark" data-save="${v.id}">${t('save')}</button></div>
+    <span class="msg" id="m-${v.id}"></span>
+    <div class="notes" id="n-${v.id}">${notesHtml(v)}</div></section>`).join('');
+  VIDEOS.forEach(v => {
+    const vid = document.getElementById('vid-' + v.id), tx = document.getElementById('tx-' + v.id);
+    tx.addEventListener('focus', () => { vid.pause(); stamps[v.id] = vid.currentTime; document.getElementById('st-' + v.id).textContent = fmt(vid.currentTime); });
+  });
+  countOpen();
+}
+function countOpen() { document.getElementById('count').textContent = t('count', { n: NOTES.filter(n => n.section.startsWith('v-') && n.section !== 'v-round' && n.kind !== 'reply' && n.status !== 'applied').length }); }
+function redrawNotes() { VIDEOS.forEach(v => { const el = document.getElementById('n-' + v.id); if (el) el.innerHTML = notesHtml(v); }); countOpen(); }
+
+async function load() {
+  try {
+    const r = await fetch(FN + '?site=ctg', { cache: 'no-store' }); const j = await r.json();
+    if (!r.ok || !j.ok || !Array.isArray(j.notes)) throw new Error('bad');
+    NOTES = j.notes.filter(x => String(x.section || '').startsWith('v-')).map(x => {
+      const m = /^\[(\d+):(\d\d)(?: · ([^\]]+))?\]\s*/.exec(String(x.text || ''));
+      return { id: Number(x.id), at: String(x.at || ''), section: String(x.section), author: String(x.author || ''), kind: String(x.kind || 'note'), status: String(x.status || 'open'),
+        sec: m ? Number(m[1]) * 60 + Number(m[2]) : -1, ver: m && m[3] ? m[3] : '', body: m ? String(x.text).slice(m[0].length) : String(x.text || '') };
+    });
+    LOADED = 'ok';
+  } catch { if (LOADED !== 'ok') LOADED = 'fail'; }
+  redrawNotes();
+}
+async function post(section, comment) {
+  const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ site: 'ctg', section, label: section, comment, author: who.value.trim(), lang: L ? 'en' : 'ar', fields: { kind: 'note' } }) });
+  const j = await r.json().catch(() => ({})); if (!r.ok || !j.ok) throw new Error(j.error || 'fail');
+}
+document.addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.id === 'lang') { L = 1 - L; try { localStorage.setItem('ctgr.lang', L ? 'en' : 'ar'); } catch {} return draw(); }
+  if (b.dataset.seek) { const vid = document.getElementById('vid-' + b.dataset.v); vid.currentTime = Number(b.dataset.seek); vid.play(); return; }
+  if (b.dataset.seekCur) { const vid = document.getElementById('vid-' + b.dataset.seekCur); vid.currentTime = stamps[b.dataset.seekCur] || 0; return; }
+  const id = b.dataset.save || (b.id === 'round' ? 'v-round' : null); if (!id) return;
+  const msg = document.getElementById(id === 'v-round' ? 'roundMsg' : 'm-' + id);
+  if (!who.value.trim()) { msg.className = 'msg bad'; msg.textContent = t('needName'); who.focus(); return; }
+  try { localStorage.setItem('ctgr.name', who.value.trim()); } catch {}
+  let comment;
+  if (id === 'v-round') comment = 'Round done · ' + NOTES.filter(n => n.section !== 'v-round' && n.status !== 'applied').length + ' open notes';
+  else {
+    const tx = document.getElementById('tx-' + id); if (!tx.value.trim()) { tx.focus(); return; }
+    const v = VIDEOS.find(x => x.id === id);
+    comment = `[${fmt(stamps[id] || 0)} · ${v.ver}] ${tx.value.trim()}`;
+  }
+  b.disabled = true;
+  try {
+    await post(id, comment);
+    if (id !== 'v-round') document.getElementById('tx-' + id).value = '';
+    msg.className = 'msg'; msg.textContent = t(id === 'v-round' ? 'roundSent' : 'saved'); await load();
+  } catch { msg.className = 'msg bad'; msg.textContent = t('fail'); }
+  b.disabled = false;
+});
+draw(); load(); setInterval(load, 60000);
+</script>
+</body>
+</html>
