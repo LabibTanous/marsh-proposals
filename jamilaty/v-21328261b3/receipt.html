@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Aya's Ark · Jamilaty</title>
+<title>Jamilaty</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -54,12 +54,12 @@ bdi{unicode-bidi:isolate}
       plan: 'الخيار', add: 'الإضافات', inc: 'مشمول في الخيار', grand: 'المجموع', tbd: 'للتأكيد',
       n1: 'نؤكد الأسعار وموعد التسليم بعد استلام هذا الاختيار.', n2: 'جولة تعديل واحدة مشمولة. المشهد التجريبي (10 ثوانٍ) بعد الموافقة.',
       save: 'احفظي PDF', wa: 'أرسلي على واتساب', back: 'رجوع إلى الخطط', hint: 'في نافذة الطباعة اختاري «حفظ كـ PDF»، ثم أرسلي الملف لنا.', empty: 'لا يوجد اختيار. ارجعي إلى صفحة الخطط.',
-      foot: 'جميلتي · Aya\'s Ark' },
+      foot: 'جميلتي' },
     en: { title: 'Chosen option', sub: 'The mansaf film · 60 s · 16:9 · 4K', client: 'Client', date: 'Date', wdate: 'Wedding date', due: 'Delivery date', none: '—', item: 'Item', price: 'Price',
       plan: 'Option', add: 'Add-ons', inc: 'Included in the option', grand: 'Total', tbd: 'To confirm',
       n1: 'We confirm the prices and the delivery date after we get this choice.', n2: 'One revision round is included. The 10-second test scene comes after approval.',
       save: 'Save PDF', wa: 'Send on WhatsApp', back: 'Back to the plans', hint: 'In the print window, choose "Save as PDF", then send the file to us.', empty: 'No choice found. Go back to the plans page.',
-      foot: 'Jamilaty · Aya\'s Ark' },
+      foot: 'Jamilaty' },
   };
   const el = (tag, attrs, kids) => { const n = document.createElement(tag); Object.entries(attrs || {}).forEach(([k, v]) => { if (k === 'text') n.textContent = v; else n.setAttribute(k, v); }); (kids || []).forEach((c) => n.append(c)); return n; };
   const num = (x) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(x);
@@ -77,7 +77,7 @@ bdi{unicode-bidi:isolate}
   const money = (p) => (p == null ? tbd() : el('bdi', { dir: 'ltr', text: `${num(p)}${cur ? ' ' + cur : ''}` }));
   const str = (x, n) => String(x || '').slice(0, n);
   const sheet = el('div', { class: 'sheet' });
-  sheet.append(el('div', { class: 'top' }, [el('h1', {}, [document.createTextNode(`${t.title} · Aya's Ark`), el('small', { text: t.sub })])]));
+  sheet.append(el('div', { class: 'top' }, [el('h1', {}, [document.createTextNode(`${t.title}`), el('small', { text: t.sub })])]));
   const cell = (k, v) => el('div', {}, [el('small', { text: k }), v == null ? el('b', {}, [tbd()]) : el('b', { text: v || t.none })]);
   sheet.append(el('div', { class: 'meta' }, [cell(t.client, str(r.name, 80)), cell(t.date, str(r.date, 40)), cell(t.wdate, str(r.wdate, 40)), cell(t.due, r.due ? str(r.due, 40) : null)]));
   [['plan', t.plan], ['add', t.add]].forEach(([g, h]) => {
@@ -95,11 +95,11 @@ bdi{unicode-bidi:isolate}
   sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+1 916 465 0197' })]));
   out.append(sheet);
   const totalTxt = miss ? (known ? `${num(known)} ${cur} + ${t.tbd}` : t.tbd) : `${num(known)} ${cur}`;
-  const waTxt = [`${t.title} · Aya's Ark${r.name ? ' · ' + str(r.name, 80) : ''}`, `${t.plan}: ${str(r.lines[0].n, 120)}`, ...r.lines.filter((l) => l.g === 'add').map((l) => `+ ${str(l.n, 120)}`), r.wdate ? `${t.wdate}: ${str(r.wdate, 40)}` : '', `${t.grand}: ${totalTxt}`].filter(Boolean).join('\n');
+  const waTxt = [`${t.title}${r.name ? ' · ' + str(r.name, 80) : ''}`, `${t.plan}: ${str(r.lines[0].n, 120)}`, ...r.lines.filter((l) => l.g === 'add').map((l) => `+ ${str(l.n, 120)}`), r.wdate ? `${t.wdate}: ${str(r.wdate, 40)}` : '', `${t.grand}: ${totalTxt}`].filter(Boolean).join('\n');
   const save = el('button', { type: 'button', class: 'fill', text: t.save }); save.addEventListener('click', () => window.print());
   bar.append(save, el('a', { href: `https://wa.me/${/^\d{8,15}$/.test(String(r.wa)) ? r.wa : '19164650197'}?text=${encodeURIComponent(waTxt)}`, target: '_blank', rel: 'noopener', text: t.wa }), back, el('p', { text: t.hint }));
   bar.hidden = false;
-  document.title = `${t.title} · Aya's Ark${r.name ? ' · ' + str(r.name, 80) : ''}`;
+  document.title = `${t.title}${r.name ? ' · ' + str(r.name, 80) : ''}`;
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iOS prints only from a tap
   if (!ios && !/[?&]noprint/.test(location.search)) setTimeout(() => window.print(), 600);
 })();
