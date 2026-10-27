@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Aya's Ark · Marsh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17191b;--ink2:#4a4f54;--line:#e1e3e0;--acc:#E9212A;--bg:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#F2F3F1;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bar{max-width:820px;margin:16px auto 0;padding:0 16px;display:flex;flex-wrap:wrap;gap:10px}
+.bar button,.bar a{font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:11px 20px;border:1px solid var(--ink);background:var(--bg);color:var(--ink);text-decoration:none;cursor:pointer;min-height:44px;display:inline-flex;align-items:center}
+.bar .fill{background:var(--acc);border-color:var(--acc);color:#fff}
+.bar p{flex-basis:100%;font-size:13.5px;color:var(--ink2)}
+.sheet{max-width:820px;margin:14px auto 32px;background:var(--bg);padding:36px 40px;border:1px solid var(--line);border-radius:20px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid var(--acc);padding-bottom:16px}
+.top img{height:34px}
+.top h1{font-size:22px;line-height:1.25}
+.top h1 small{display:block;font-size:14px;font-weight:600;color:var(--ink2)}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 18px;margin:18px 0 6px;font-size:14px}
+.meta small{display:block;color:var(--ink2);font-size:12px}
+.meta b{font-weight:600}
+h2{font-size:14px;margin:22px 0 6px;color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;table-layout:fixed}
+th:nth-child(1){width:66%}
+th{font-size:12px;color:var(--ink2);font-weight:600;text-align:start;border-bottom:1px solid var(--ink);padding:6px 4px}
+td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:end;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbd{display:inline-block;padding:0 .5em;border:1px dashed var(--acc);border-radius:6px;color:var(--ink);background:#fdeaea}
+.inc{color:var(--ink2);font-size:13px;margin-top:8px}
+.tot{margin-top:18px;margin-inline-start:auto;width:min(100%,380px);font-size:14px}
+.tot div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line)}
+.tot .g{border-bottom:0;border-top:2px solid var(--ink);margin-top:4px;padding-top:10px;font-size:18px;font-weight:700}
+.tot span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.notes{margin-top:18px;font-size:12.5px;color:var(--ink2);display:flex;flex-direction:column;gap:4px}
+.foot{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.empty{max-width:820px;margin:60px auto;padding:0 16px;font-size:16px}
+bdi{unicode-bidi:isolate}
+@media(max-width:600px){.sheet{padding:22px 16px;border-radius:0;border-left:0;border-right:0}.meta{grid-template-columns:1fr 1fr}.top h1{font-size:18px}table{font-size:12.5px}}
+@page{size:A4;margin:14mm}
+@media print{body{background:#fff}.bar{display:none}.sheet{margin:0;max-width:none;border:0;border-radius:0;padding:0}tr,.tot,.notes{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar" hidden></div>
+<main id="out"></main>
+<script>
+(function () {
+  const L = {
+    ar: { title: 'الخيار المختار', sub: 'فيلم المنسف · 60 ثانية · 16:9 · 4K', client: 'العميل', date: 'التاريخ', wdate: 'تاريخ العرس', due: 'موعد التسليم', none: '—', item: 'البند', price: 'السعر',
+      plan: 'الخيار', add: 'الإضافات', inc: 'مشمول في الخيار', grand: 'المجموع', tbd: 'للتأكيد',
+      n1: 'الأسعار وموعد التسليم يؤكدها صافي بعد استلام هذا الاختيار.', n2: 'جولة تعديل واحدة مشمولة. المشهد التجريبي (10 ثوانٍ) بعد الموافقة.',
+      save: 'احفظي PDF', wa: 'أرسلي على واتساب', back: 'رجوع إلى الخطط', hint: 'في نافذة الطباعة اختاري «حفظ كـ PDF»، ثم أرسلي الملف لنا.', empty: 'لا يوجد اختيار. ارجعي إلى صفحة الخطط.',
+      foot: 'مارش للتسويق والتطوير · Aya\'s Ark' },
+    en: { title: 'Chosen option', sub: 'The mansaf film · 60 s · 16:9 · 4K', client: 'Client', date: 'Date', wdate: 'Wedding date', due: 'Delivery date', none: '—', item: 'Item', price: 'Price',
+      plan: 'Option', add: 'Add-ons', inc: 'Included in the option', grand: 'Total', tbd: 'To confirm',
+      n1: 'Safi confirms the prices and the delivery date after he gets this choice.', n2: 'One revision round is included. The 10-second test scene comes after approval.',
+      save: 'Save PDF', wa: 'Send on WhatsApp', back: 'Back to the plans', hint: 'In the print window, choose "Save as PDF", then send the file to us.', empty: 'No choice found. Go back to the plans page.',
+      foot: 'Marsh Marketing and Development · Aya\'s Ark' },
+  };
+  const el = (tag, attrs, kids) => { const n = document.createElement(tag); Object.entries(attrs || {}).forEach(([k, v]) => { if (k === 'text') n.textContent = v; else n.setAttribute(k, v); }); (kids || []).forEach((c) => n.append(c)); return n; };
+  const num = (x) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(x);
+  let r = null;
+  try { r = JSON.parse(decodeURIComponent(location.hash.slice(1))); } catch (e) { r = null; }
+  const okP = (p) => p === null || (typeof p === 'number' && isFinite(p));
+  const ok = r && r.v === 2 && Array.isArray(r.lines) && r.lines.length && r.lines.every((l) => typeof l.n === 'string' && okP(l.p));
+  const lang = ok && r.lang === 'ar' ? 'ar' : (ok ? 'en' : (navigator.language || '').startsWith('ar') ? 'ar' : 'en'), t = L[lang];
+  document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  const out = document.getElementById('out'), bar = document.getElementById('bar');
+  const back = el('a', { href: `./?view=plans&lang=${lang}`, text: t.back });
+  if (!ok) { out.append(el('p', { class: 'empty' }, [t.empty + ' ', back])); return; }
+  const cur = String(r.cur || '').slice(0, 12);
+  const tbd = () => el('span', { class: 'tbd', text: t.tbd });
+  const money = (p) => (p == null ? tbd() : el('bdi', { dir: 'ltr', text: `${num(p)}${cur ? ' ' + cur : ''}` }));
+  const str = (x, n) => String(x || '').slice(0, n);
+  const sheet = el('div', { class: 'sheet' });
+  sheet.append(el('div', { class: 'top' }, [el('h1', {}, [document.createTextNode(`${t.title} · Aya's Ark`), el('small', { text: t.sub })]), el('img', { src: 'assets/marsh-lockup.svg', alt: 'Marsh' })]));
+  const cell = (k, v) => el('div', {}, [el('small', { text: k }), v == null ? el('b', {}, [tbd()]) : el('b', { text: v || t.none })]);
+  sheet.append(el('div', { class: 'meta' }, [cell(t.client, str(r.name, 80)), cell(t.date, str(r.date, 40)), cell(t.wdate, str(r.wdate, 40)), cell(t.due, r.due ? str(r.due, 40) : null)]));
+  [['plan', t.plan], ['add', t.add]].forEach(([g, h]) => {
+    const rows = r.lines.filter((l) => l.g === g); if (!rows.length) return;
+    sheet.append(el('h2', { text: h }));
+    sheet.append(el('table', {}, [el('thead', {}, [el('tr', {}, [el('th', { text: t.item }), el('th', { class: 'n', text: t.price })])]),
+      el('tbody', {}, rows.map((l) => el('tr', {}, [el('td', { text: str(l.n, 120) }), el('td', { class: 'n' }, [money(l.p)])])))]));
+  });
+  const inc = Array.isArray(r.inc) ? r.inc.filter((x) => typeof x === 'string').map((x) => x.slice(0, 80)) : [];
+  if (inc.length) sheet.append(el('p', { class: 'inc', text: `${t.inc}: ${inc.join(lang === 'ar' ? '، ' : ', ')}` }));
+  const known = isFinite(r.known) ? +r.known : 0, miss = !!r.miss;
+  const totalNode = miss ? (known ? el('span', {}, [money(known), document.createTextNode(' + '), tbd()]) : tbd()) : money(known);
+  sheet.append(el('div', { class: 'tot' }, [el('div', { class: 'g' }, [el('span', { text: t.grand }), el('span', {}, [totalNode])])]));
+  sheet.append(el('div', { class: 'notes' }, [t.n1, t.n2].map((x) => el('p', { text: x }))));
+  sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+962 79 563 1364 · marshteamjo@gmail.com' })]));
+  out.append(sheet);
+  const totalTxt = miss ? (known ? `${num(known)} ${cur} + ${t.tbd}` : t.tbd) : `${num(known)} ${cur}`;
+  const waTxt = [`${t.title} · Aya's Ark${r.name ? ' · ' + str(r.name, 80) : ''}`, `${t.plan}: ${str(r.lines[0].n, 120)}`, ...r.lines.filter((l) => l.g === 'add').map((l) => `+ ${str(l.n, 120)}`), r.wdate ? `${t.wdate}: ${str(r.wdate, 40)}` : '', `${t.grand}: ${totalTxt}`].filter(Boolean).join('\n');
+  const save = el('button', { type: 'button', class: 'fill', text: t.save }); save.addEventListener('click', () => window.print());
+  bar.append(save, el('a', { href: `https://wa.me/${/^\d{8,15}$/.test(String(r.wa)) ? r.wa : '962795631364'}?text=${encodeURIComponent(waTxt)}`, target: '_blank', rel: 'noopener', text: t.wa }), back, el('p', { text: t.hint }));
+  bar.hidden = false;
+  document.title = `${t.title} · Aya's Ark${r.name ? ' · ' + str(r.name, 80) : ''}`;
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iOS prints only from a tap
+  if (!ios && !/[?&]noprint/.test(location.search)) setTimeout(() => window.print(), 600);
+})();
+</script>
+</body>
+</html>
