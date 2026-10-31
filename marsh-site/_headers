@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-ZE2dh7uK+dyE1yuElmWSEgGTfUzTKLxulfYkpPJI1oo='; style-src 'self' 'sha256-PWTCxR5yqFGzVyVKD3d5lGLr9K8vfubN/LL4314ThIw='; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://jwvgyktutbeszguevqoy.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-ZE2dh7uK+dyE1yuElmWSEgGTfUzTKLxulfYkpPJI1oo='; style-src 'self' 'sha256-x58dlBqdsHtqHNRHPAkT6CCfUHKxVkdhOpicB2kDbRQ='; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://jwvgyktutbeszguevqoy.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
