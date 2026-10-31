@@ -450,4 +450,35 @@
 
   var riverSec = document.querySelector("[data-river]");
   if (riverSec) safe("river", function () { river(riverSec); });
+  // ---- How we can help you: the arrows move the card row one card at a time. In RTL, scrollLeft runs from
+  // 0 to negative, so "next" scrolls toward negative x there. Disabled at each end.
+  function helpRow(sec) {
+    var row = sec.querySelector("[data-help-row]");
+    var prev = sec.querySelector("[data-help-prev]");
+    var next = sec.querySelector("[data-help-next]");
+    if (!row || !prev || !next) return;
+    var rtl = getComputedStyle(row).direction === "rtl";
+    function step() {
+      var card = row.querySelector("li");
+      var gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+      return card ? card.getBoundingClientRect().width + gap : row.clientWidth;
+    }
+    function update() {
+      var pos = Math.abs(row.scrollLeft);
+      var max = row.scrollWidth - row.clientWidth;
+      prev.disabled = pos <= 2;
+      next.disabled = pos >= max - 2;
+    }
+    function go(dir) {
+      row.scrollBy({ left: dir * step() * (rtl ? -1 : 1), behavior: "smooth" });
+    }
+    prev.addEventListener("click", function () { go(-1); });
+    next.addEventListener("click", function () { go(1); });
+    row.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
+
+  var helpSec = document.querySelector("[data-help]");
+  if (helpSec) safe("help", function () { helpRow(helpSec); });
 })();
