@@ -725,12 +725,13 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 /* ---------------------------------------------------------------
    FILL: the offer. Safi's voice note, 1 Nov 2026 22:41: buyer page, 3–4 reels a month, weekly stage photos,
    profile updates; 500–600 a month or 6,000 for the whole year, and he leans to yearly only.
+   Safi, 1 Nov 23:06: one yearly payment, 4,000 JOD.
    monthly: null = no monthly option shown. If set, also edit plansScope and payTerms (they say yearly only). Set [500, 600] only if Safi wants a monthly option.
    v1 (4 packages, 23 Oct) is kept in v1-2026-10-23.html.
    --------------------------------------------------------------- */
 const FILL = {
   date: ['1 تشرين الثاني 2026', '1 November 2026'],
-  offer: { year: 6000, months: 12, monthly: null },   // JOD
+  offer: { year: 4000, months: 12, monthly: null },   // JOD
 };
 const YEAR_TXT = FILL.offer.year.toLocaleString('en-US');
 
@@ -848,7 +849,7 @@ const D = {
     [['مُعدّ من', 'Prepared by'], ['مارش للتسويق والتطوير · صافي السكران ولبيب طنوس', 'Marsh Marketing and Development · Safi Al-Sakran and Labib Tanous'], 'wide'],
     [['العرض', 'The offer'], ['صفحة المشتري، 3–4 ريلز في الشهر، صور المرحلة كل أسبوع، وتحديث دائم للحساب.', 'The buyer page, 3–4 reels a month, stage photos each week, and steady account updates.'], 'wide'],
     [['السعر', 'The fee'], [`${YEAR_TXT} دينار للسنة كاملة (12 شهراً). مسودة من صافي.`, `${YEAR_TXT} JOD for the full year (12 months). A draft from Safi.`], ''],
-    [['الدفع', 'Payment'], ['دفعة واحدة أو على دفعات: للتأكيد.', 'In one payment or in parts: to confirm.'], ''],
+    [['الدفع', 'Payment'], ['دفعة واحدة سنوية.', 'One yearly payment.'], ''],
     [['ليس في هذا العرض', 'Not in this offer'], ['إعلانات ميتا وميزانيتها، وأسعار الشقق. الفيديو الرئيسي: للتأكيد.', 'Meta ads and their budget, and flat prices. The main video: to confirm.'], 'wide'],
     [['المحتوى', 'Content'], ['لا ننشر مواصفة أو ماركة قبل أن يؤكدها كنان. لا أسعار شقق ولا وعود بعائد في المحتوى.', 'No spec or brand goes up before Kenan confirms it. No flat prices and no promised returns in the content.'], 'wide'],
     [['الملكية والنتائج', 'Ownership and results'], ['الصفحات والصور والفيديو الخام ملك كنان. لا نعد بعدد مبيعات أو متابعين. التقرير يُظهر ما تجلبه الريلز والصفحة.', 'The pages, photos and raw footage stay Kenan\'s. No number of sales or followers is promised. The report shows what the reels and the page bring.'], 'wide'],
@@ -1006,7 +1007,7 @@ const D = {
     [['الفيديو الرئيسي', 'The main video'], ['فيديو احترافي منفصل للمشروع: للتأكيد.', 'A separate professional video of the project: to confirm.']],
     [['أسعار الشقق', 'Flat prices'], ['ليست في هذا العرض. كنان يقرر هل تظهر على الصفحة.', 'Not in this proposal. Kenan decides if they show on the page.']],
   ],
-  payTerms: ['العقد لسنة كاملة (12 شهراً). طريقة الدفع، دفعة واحدة أو على دفعات: للتأكيد. شروط الدفع مسودة.', 'The contract is for a full year (12 months). How it is paid, in one payment or in parts: to confirm. The payment terms are a draft.'],
+  payTerms: ['العقد لسنة كاملة (12 شهراً)، والدفع دفعة واحدة سنوية.', 'The contract is for a full year (12 months), paid in one yearly payment.'],
 };
 </script>
 <script>
