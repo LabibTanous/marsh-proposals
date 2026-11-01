@@ -14,7 +14,7 @@
 <meta name="description" content="عرض تسويق لكنان للإسكان، مشروع الجبيهة 3، عمّان. من مارش للتسويق والتطوير.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="كنان للإسكان · عرض تسويق">
-<meta property="og:description" content="العرض، صفحة المشروع، والباقات والأسعار. من مارش للتسويق والتطوير.">
+<meta property="og:description" content="عرض تسويق لكنان للإسكان: صفحة المشتري، 3–4 ريلز في الشهر، صور كل أسبوع، والسعر.">
 <script>
 /* theme before paint: ?style= ?mode= or the saved choice */
 (function () {
@@ -320,6 +320,8 @@ html[lang=en] .asked p{font-weight:600}
 .qty bdi{min-width:22px;text-align:center;font-family:var(--en);color:var(--text)}
 .qty input{width:96px;min-height:34px;border:1px solid var(--line2);border-radius:8px;background:var(--bg2);color:var(--text);padding:4px 8px;font:inherit;font-family:var(--en)}
 .item.dim .qty{opacity:.45}
+.item .ok{color:var(--accent);font-weight:800}
+.item.fixed{grid-template-columns:auto 1fr}
 .sumcol{position:sticky;top:96px;display:flex;flex-direction:column;gap:16px}
 .sumcol .sendbox{margin-top:0;grid-template-columns:minmax(0,1fr)}
 .sumcol .sendbox .btn{justify-content:center}
@@ -633,7 +635,7 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
   </div>
 </section>
 
-<section id="dash" class="sec" data-n="s_dash">
+<section id="dash" class="sec" data-n="s_dash" hidden>
   <div class="wrap">
     <span class="idx">05</span>
     <h2 class="rv" data-t="dashH"></h2>
@@ -644,14 +646,14 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 
 <section id="content" class="sec" data-n="s_content">
   <div class="wrap">
-    <span class="idx">06</span>
+    <span class="idx">05</span>
     <h2 class="rv" data-t="contH"></h2>
     <p class="sub" data-t="contSub"></p>
     <div class="ideas" id="contList"></div>
   </div>
 </section>
 
-<section id="channels" class="sec" data-n="s_channels">
+<section id="channels" class="sec" data-n="s_channels" hidden>
   <div class="wrap">
     <span class="idx">07</span>
     <h2 class="rv" data-t="chanH"></h2>
@@ -667,7 +669,7 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 
 <section id="phases" class="sec" data-n="s_phases">
   <div class="wrap">
-    <span class="idx">08</span>
+    <span class="idx">06</span>
     <h2 class="rv" data-t="phasesH"></h2>
     <p class="sub" data-t="phasesSub"></p>
     <div class="phases" id="phaseList"></div>
@@ -676,7 +678,7 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 
 <section id="terms" class="sec" data-n="s_terms">
   <div class="wrap">
-    <span class="idx">09</span>
+    <span class="idx">07</span>
     <h2 class="rv" data-t="termsH"></h2>
     <div class="terms-grid" id="termsGrid"></div>
   </div>
@@ -684,7 +686,7 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 
 <section id="next" class="next" data-n="s_next">
   <div class="wrap">
-    <span class="idx">10</span>
+    <span class="idx">08</span>
     <h2 class="rv" data-t="nextH"></h2>
     <p data-t="nextP"></p>
     <ol class="steps" id="nextSteps"></ol>
@@ -700,15 +702,8 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
     <h2 data-t="plansH"></h2>
     <ol class="guide-steps" id="guideSteps"></ol>
     <p class="scope" data-t="plansScope"></p>
-    <h3 style="margin-top:26px" data-t="termH"></h3>
-    <div class="termseg" id="termSeg" role="radiogroup"></div>
-    <div class="rhythm"><b data-t="rhythmH"></b><p data-t="rhythmP"></p></div>
-    <div class="sugg" id="sugg" aria-live="polite"></div>
-    <div class="cust-h"><h3 data-t="custH"></h3></div>
-    <p class="sub" data-t="plansSub"></p>
-    <div class="plans" id="plansEl" role="radiogroup"></div>
     <div class="setup">
-      <div class="box"><h3 data-t="monthlyH"></h3><div id="monthlyList"></div><h3 data-t="onceH" style="border-top:1px solid var(--line)"></h3><div id="onceList"></div></div>
+      <div class="box"><h3 data-t="offH"></h3><div id="offList"></div></div>
       <div class="sumcol"><div class="box sum" id="sum" aria-live="polite"></div>
 <form class="box sendbox" id="pkForm" novalidate>
       <div class="fld"><label for="pkName" data-t="pkName"></label><input id="pkName" name="name" type="text" maxlength="80" autocomplete="name"></div>
@@ -728,32 +723,29 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 <script src="js/lenis.min.js"></script>
 <script>
 /* ---------------------------------------------------------------
-   FILL: prices and dates. null = "to be set".
-   Draft prices from Safi (PRICES.md): 400 / 700 / 1,000 / 2,000 JOD a month, messages +150 a month.
+   FILL: the offer. Safi's voice note, 1 Nov 2026 22:41: buyer page, 3–4 reels a month, weekly stage photos,
+   profile updates; 500–600 a month or 6,000 for the whole year, and he leans to yearly only.
+   monthly: null = no monthly option shown. If set, also edit plansScope and payTerms (they say yearly only). Set [500, 600] only if Safi wants a monthly option.
+   v1 (4 packages, 23 Oct) is kept in v1-2026-10-23.html.
    --------------------------------------------------------------- */
 const FILL = {
-  date: ['23 تشرين الأول 2026', '23 October 2026'],
-  pkgs: { p400: 400, p700: 700, p1000: 1000, p2000: 2000 },   // JOD a month
-  msg: 150,                                                     // JOD a month, messages and leads list
-  adsPct: 15, adBudgetDefault: 300,                             // ads management: 15 % of the ad budget; the budget is paid to Meta
-  once: { page: null, hero: null, next: null, photos: null },   // one time, price to confirm (Safi)
-  term3: { p400: null, p700: null, p1000: null, p2000: null },  // 3-month start price per package: to confirm (Safi 41:49)
-  yearly: null,                                                 // yearly paid in advance: later (Labib 41:37), price to confirm
-  suggested: { pkg: 'p700', msg: false, ads: false, once: ['page', 'hero'] },
+  date: ['1 تشرين الثاني 2026', '1 November 2026'],
+  offer: { year: 6000, months: 12, monthly: null },   // JOD
 };
+const YEAR_TXT = FILL.offer.year.toLocaleString('en-US');
 
 const D = {
   loader: ['مارش × كنان للإسكان', 'Marsh × Kenan Housing'],
-  vProposal: ['العرض', 'Proposal'], vPages: ['صفحة المشروع', 'The page'], vPlans: ['الباقات والأسعار', 'Plans and fees'], viewL: ['الجزء', 'Part'],
+  vProposal: ['العرض', 'Proposal'], vPages: ['صفحة المشروع', 'The page'], vPlans: ['العرض والسعر', 'Offer and fee'], viewL: ['الجزء', 'Part'],
   pvGo: ['شاهد صفحة المشروع', 'See the project page'],
   brandTag: ['كنان للإسكان · عمّان', 'Kenan Housing · Amman'],
   scroll: ['انزل للأسفل', 'Scroll'],
   b_mm: ['كنان للإسكان', 'Kenan Housing'], b_br: ['مشروع الجبيهة 3', 'The Jubeiha 3 project'], b_sh: ['× مارش', '× Marsh'],
   heroKicker: ['عرض تسويق · عمّان · DATE', 'Marketing proposal · Amman · DATE'],
-  heroLede: ['كنان للإسكان (شركة حيدر ومحمد القرعان للإسكان) تبني في الجبيهة، عمّان. هذا العرض يغطي 3 أشياء: صفحة لمشروع الجبيهة 3، والستوري والفيديو على إنستغرام، والإعلانات في الأردن والخليج.', 'Kenan Housing (Haidar and Mohammad Al-Quraan Housing Company) builds in Jubeiha, Amman. This proposal covers 3 things: a page for the Jubeiha 3 project, stories and videos on Instagram, and ads in Jordan and the Gulf.'],
+  heroLede: ['كنان للإسكان (شركة حيدر ومحمد القرعان للإسكان) تبني في الجبيهة، عمّان. هذا العرض يغطي 4 أشياء: صفحة للمشتري فيها تفاصيل الإسكان كاملة، و3–4 ريلز في الشهر، وصور كل أسبوع للمرحلة التي وصلها البناء، وتحديث دائم لحساب كنان.', 'Kenan Housing (Haidar and Mohammad Al-Quraan Housing Company) builds in Jubeiha, Amman. This proposal covers 4 things: a buyer page with the full housing details, 3–4 reels a month, photos each week of the stage the build has reached, and steady updates on Kenan\'s account.'],
   heroMeta: ['مُعدّ من مارش للتسويق والتطوير · صافي السكران ولبيب طنوس', 'Prepared by Marsh Marketing and Development · Safi Al-Sakran and Labib Tanous'],
   heroAlt: ['رندر الواجهة الأمامية لمشروع الجبيهة 3، من عرض كنان.', 'Front facade render of Jubeiha 3, from Kenan\'s deck.'],
-  s_top: ['الغلاف', 'Cover'], s_heard: ['ما قلته لنا', 'What you told us'], s_today: ['الحساب اليوم', 'The account today'], s_project: ['صفحة المشروع', 'The project page'], s_content: ['المحتوى', 'Content'], s_channels: ['الإعلانات', 'Ads'], s_phases: ['أول 30 يوماً', 'The first 30 days'], s_terms: ['الشروط', 'Terms'], s_next: ['الخطوة التالية', 'Next step'], s_buyer: ['صفحة المشتري', 'The buyer page'], s_dash: ['لوحة مارش إسكان', 'Marsh Iskan dashboard'], s_plans: ['الباقات والأسعار', 'Plans and fees'], s_page: ['صفحة المشروع', 'The project page'],
+  s_top: ['الغلاف', 'Cover'], s_heard: ['ما قلته لنا', 'What you told us'], s_today: ['الحساب اليوم', 'The account today'], s_project: ['صفحة المشروع', 'The project page'], s_content: ['المحتوى', 'Content'], s_channels: ['الإعلانات', 'Ads'], s_phases: ['أول 30 يوماً', 'The first 30 days'], s_terms: ['الشروط', 'Terms'], s_next: ['الخطوة التالية', 'Next step'], s_buyer: ['صفحة المشتري', 'The buyer page'], s_dash: ['لوحة مارش إسكان', 'Marsh Iskan dashboard'], s_plans: ['العرض والسعر', 'Offer and fee'], s_page: ['صفحة المشروع', 'The project page'],
 
   heardH: ['ما قلته لنا، وما نعمله', 'What you told us, and what we do'],
   heardSub: ['1–5: ما كتبه صافي يوم 18 تشرين الأول، بالنص. 6–10: من اجتماع 23 تشرين الأول، ملخّص.', '1–5: what Safi wrote on 18 October, word for word. 6–10: from the meeting on 23 October, in short.'],
@@ -762,8 +754,8 @@ const D = {
   heard: [
     [['«بروبوزل لكل اسكان بشرح عن جميع تفاصيل الاسكان و المواصفات الي بتميز اسكانهم»', '"A proposal for each housing project that explains all its details and the specs that set it apart."'], ['صفحة لكل مشروع: المخططات، المواصفات حسب النظام، مراحل البناء، والموقع. نبدأ بالجبيهة 3.', 'A page for each project: the plans, the specs by system, the build stages and the location. We start with Jubeiha 3.']],
     [['«بدهم يضهروا احترافيتهم في الشغل عن طريقة التسويق و طريقة عرض الشقة»', '"They want to show how professional they are, through the marketing and the way the apartment is shown."'], ['الشقة تُعرض بمخطط تضغط عليه، وفيديو جولة داخلها، ورندرات المشروع.', 'The apartment is shown with a plan you tap, a walk-through video and the project renders.']],
-    [['«بدهم ستويات و تفاعل بسيط عن طريق الفيديوهات»', '"They want stories, and simple engagement through videos."'], ['من 10 إلى 30 ستوري في الشهر حسب الباقة، وفيديوهات قصيرة: نصفها بشخص ونصفها بدون.', '10 to 30 stories a month by package, and short videos: half with a person, half without.']],
-    [['«بهتموا بفيديو واحد بروفيشنل كثير حتى يكون هو نقطة البيع»', '"They care a lot about one professional video, so it is the selling point."'], ['فيديو رئيسي واحد للجبيهة 3: المبنى والشقة بتصوير احترافي. يُستخدم في الصفحة والإعلانات وواتساب.', 'One main video for Jubeiha 3: the building and the apartment, shot professionally. It runs on the page, in the ads and on WhatsApp.']],
+    [['«بدهم ستويات و تفاعل بسيط عن طريق الفيديوهات»', '"They want stories, and simple engagement through videos."'], ['3–4 ريلز في الشهر، بشخص أو بدون. وتحديث دائم على الحساب: أي مرحلة وصل البناء، بالستوري.', '3–4 reels a month, with a person or without. And steady updates on the account: the stage the build has reached, in stories.']],
+    [['«بهتموا بفيديو واحد بروفيشنل كثير حتى يكون هو نقطة البيع»', '"They care a lot about one professional video, so it is the selling point."'], ['الريلز تعرض المبنى والشقة كل شهر، وتُستخدم في الصفحة وواتساب. فيديو رئيسي منفصل: للتأكيد.', 'The reels show the building and the apartment each month, and run on the page and on WhatsApp. A separate main video: to confirm.']],
     [['«بدهم يواكبوا التطور حتى يزيدوا في اقناع الزبون و يبيعوا الشقق»', '"They want to keep up with new ways, to convince the buyer more and sell the apartments."'], ['رابط واحد يُرسل على واتساب. الصفحة تعمل على الموبايل، بالعربية والإنجليزية.', 'One link sent on WhatsApp. The page works on a phone, in Arabic and English.']],
   ],
   memo: [
@@ -771,7 +763,7 @@ const D = {
     [['مخطط تفاعلي: يختار الزبون الطابق، ويضغط على الشقة، ويرى مساحتها وكل غرفة بأبعادها.', 'An interactive plan: the buyer picks a floor, taps an apartment, and sees its area and each room with its size.'], ['مخططات الطوابق من عرض الجبيهة 3، وفيديو جولة لكل نوع شقة.', 'The floor plans from the Jubeiha 3 deck, and a walk-through video for each apartment type.']],
     [['المباع والمتاح على المبنى نفسه: ظل على كل شقة.', 'Sold and available on the building itself: a shade on each apartment.'], ['كل شقة عليها حالتها: متاحة، محجوزة، أو مباعة. كنان يغيّر الحالة من صفحة المالك.', 'Each apartment shows its status: available, reserved or sold. Kenan changes the status from the owner view.']],
     [['مراحل البناء: من الأساس، إلى الحديد، إلى الصبّة، حتى التشطيب.', 'Build stages: from the foundation, to the steel, to the concrete slab, up to finishing.'], ['خط زمني بالصور والفيديو لكل مرحلة، بتاريخ كل صورة.', 'A timeline with photos and video for each stage, with the date of each photo.']],
-    [['المشتري الأساسي: أردني يعيش في الخارج، مثلاً في دبي. يدفع ثمن الشقة كاملاً، ولا يراها إلا عند الاستلام.', 'The main buyer: a Jordanian who lives abroad, for example in Dubai. They pay the full price, and see the flat only at handover.'], ['كل تفصيل على الصفحة، وتحديث صور التقدّم، ورد على واتساب. والإعلانات تصل إلى الأردنيين في الخليج.', 'Every detail on the page, progress photo updates, and replies on WhatsApp. The ads reach Jordanians in the Gulf.']],
+    [['المشتري الأساسي: أردني يعيش في الخارج، مثلاً في دبي. يدفع ثمن الشقة كاملاً، ولا يراها إلا عند الاستلام.', 'The main buyer: a Jordanian who lives abroad, for example in Dubai. They pay the full price, and see the flat only at handover.'], ['كل تفصيل على صفحة المشتري، وصور التقدّم كل أسبوع، ورد على واتساب.', 'Every detail on the buyer page, progress photos each week, and replies on WhatsApp.']],
   ],
 
   todayH: ['الحساب اليوم', 'The account today'],
@@ -807,15 +799,15 @@ const D = {
   capB: ['الطابق المتكرر، من عرض الجبيهة 3.', 'The typical floor, from the Jubeiha 3 deck.'],
   capC: ['رندر الجلسة الخارجية، من عرض الجبيهة 3.', 'Outdoor seating render, from the Jubeiha 3 deck.'],
   whoH: ['لمن الصفحة', 'Who the page is for'],
-  whoP: ['المشتري الذي يعيش خارج الأردن ويدفع قبل أن يرى الشقة. يرى على الصفحة كل تفصيل في البناء، ويرى التقدّم كل أسبوع أو أسبوعين. والمشتري في عمّان يرسل الرابط لعائلته.', 'The buyer who lives outside Jordan and pays before they see the flat. On the page they see every detail of the build, and the progress every week or two. A buyer in Amman sends the link to the family.'],
+  whoP: ['المشتري الذي يعيش خارج الأردن ويدفع قبل أن يرى الشقة. يرى على الصفحة كل تفصيل في البناء، ويرى التقدّم كل أسبوع. والمشتري في عمّان يرسل الرابط لعائلته.', 'The buyer who lives outside Jordan and pays before they see the flat. On the page they see every detail of the build, and the progress every week. A buyer in Amman sends the link to the family.'],
 
   contH: ['المحتوى', 'Content'],
-  contSub: ['ستوري وفيديو على إنستغرام وفيسبوك. العدد حسب الباقة. كل منشور يوافق عليه كنان قبل النشر.', 'Stories and videos on Instagram and Facebook. The count depends on the package. Kenan approves each post before it goes up.'],
+  contSub: ['3–4 ريلز في الشهر على إنستغرام وفيسبوك، وصور المرحلة كل أسبوع، وتحديث دائم للحساب. كل منشور يوافق عليه كنان قبل النشر.', '3–4 reels a month on Instagram and Facebook, stage photos each week, and steady account updates. Kenan approves each post before it goes up.'],
   cont: [
-    [['الستوري', 'Stories'], ['من 10 إلى 30 في الشهر. ما حدث في الموقع اليوم، تفصيل واحد، وسؤال من مشترٍ مع جوابه.', '10 to 30 a month. What happened on site today, one detail, and a buyer\'s question with its answer.'], ['التفاعل البسيط الذي طلبه صافي في النقطة 3.', 'The simple engagement Safi asked for in point 3.']],
-    [['فيديو بشخص', 'Videos with a person'], ['صاحب الشركة أو المهندس في الموقع يشرح شيئاً واحداً: العزل، الزاوية 45°، نوع الحجر.', 'The owner or the engineer on site explains one thing: the insulation, the 45° corner, the stone.'], ['نصف فيديوهات كل باقة.', 'Half of the videos in each package.']],
-    [['فيديو بدون شخص', 'Videos without a person'], ['لقطات قريبة للتفاصيل، والرندرات، ومراحل البناء، مع موسيقى ونص.', 'Close shots of the details, the renders and the build stages, with music and text.'], ['فيديو البلاط من هذا النوع: 12,214 مشاهدة.', 'The tiles video is this type: 12,214 views.']],
-    [['الفيديو الرئيسي', 'The main video'], ['فيديو احترافي واحد للجبيهة 3: المبنى، والمدخل، وشقة من الداخل. بند لمرة واحدة.', 'One professional video for Jubeiha 3: the building, the entrance, and one apartment inside. A one-time item.'], ['يُستخدم في الصفحة والإعلانات وواتساب.', 'It runs on the page, in the ads and on WhatsApp.']],
+    [['الريلز', 'Reels'], ['3–4 في الشهر. بعضها بشخص: صاحب الشركة أو المهندس في الموقع يشرح شيئاً واحداً، مثل العزل أو الزاوية 45°. وبعضها بدون شخص: لقطات قريبة للتفاصيل ومراحل البناء.', '3–4 a month. Some with a person: the owner or the engineer on site explains one thing, such as the insulation or the 45° corner. Some without: close shots of the details and the build stages.'], ['فيديو البلاط بدون شخص: 12,214 مشاهدة.', 'The tiles video has no person in it: 12,214 views.']],
+    [['صور المرحلة كل أسبوع', 'Stage photos each week'], ['صور كل أسبوع للمرحلة التي وصلها البناء، بتاريخها. تُنشر على صفحة المشتري وعلى الحساب.', 'Photos each week of the stage the build has reached, with the date. They go on the buyer page and on the account.'], ['المشتري في الخارج يرى التقدّم كل أسبوع.', 'A buyer abroad sees the progress each week.']],
+    [['تحديث الحساب', 'Account updates'], ['ستوري على كل مرحلة يصلها البناء، وقصص مميزة لكل مشروع: المواصفات، التقدّم، الموقع.', 'Stories on each stage the build reaches, and a highlight for each project: specs, progress, location.'], ['التفاعل البسيط الذي طلبه صافي في النقطة 3.', 'The simple engagement Safi asked for in point 3.']],
+    [['صفحة المشتري', 'The buyer page'], ['تفاصيل الإسكان كاملة على صفحة واحدة: المخططات، المواصفات، مراحل البناء، الموقع، وواتساب. القسم 04.', 'The full housing details on one page: plans, specs, build stages, location and WhatsApp. Section 04.'], ['رابط واحد يُرسل على واتساب.', 'One link sent on WhatsApp.']],
   ],
 
   chanH: ['الإعلانات والقنوات', 'Ads and channels'],
@@ -843,10 +835,9 @@ const D = {
       [['يوم تصوير', 'Shoot day'], ['يوم التصوير الأول في الجبيهة 3: التفاصيل والمدخل وشقة من الداخل.', 'Shoot day 1 at Jubeiha 3: the details, the entrance and one apartment inside.']],
     ]],
     [['أول 30 يوماً', 'The first 30 days'], ['اليوم 8 إلى 30', 'Day 8 to 30'], [
-      [['الستوري والفيديو', 'Stories and videos'], ['العدد حسب الباقة، بعد موافقة كنان على كل منشور.', 'The count of the package, after Kenan approves each post.']],
-      [['صفحة الجبيهة 3', 'The Jubeiha 3 page'], ['إذا اخترتها: الصفحة بالقيم التي أكدها كنان، ورابطها في البايو.', 'If picked: the page with the values Kenan confirmed, and its link in the bio.']],
-      [['الفيديو الرئيسي', 'The main video'], ['إذا اخترته: خطة التصوير، ثم التصوير والمونتاج.', 'If picked: the shoot plan, then the shoot and the edit.']],
-      [['الإعلانات', 'Ads'], ['إذا اخترتها: الأردن والخليج، بالميزانية التي يحددها كنان.', 'If picked: Jordan and the Gulf, with the budget Kenan sets.']],
+      [['الريلز والصور', 'Reels and photos'], ['3–4 ريلز في الشهر، وصور المرحلة كل أسبوع، بعد موافقة كنان على كل منشور.', '3–4 reels in the month, and stage photos each week, after Kenan approves each post.']],
+      [['صفحة المشتري', 'The buyer page'], ['الصفحة بالقيم التي أكدها كنان، ورابطها في البايو.', 'The page with the values Kenan confirmed, and its link in the bio.']],
+      [['تحديث الحساب', 'Account updates'], ['ستوري على كل مرحلة، وقصص مميزة للمشروع.', 'Stories on each stage, and highlights for the project.']],
       [['التقرير', 'Report'], ['تقرير في اليوم 30، مقابل أرقام 17 تشرين الأول.', 'A report on day 30, against the 17 October numbers.']],
     ]],
   ],
@@ -855,18 +846,18 @@ const D = {
   terms: [
     [['مُعدّ لـ', 'Prepared for'], ['كنان للإسكان · شركة حيدر ومحمد القرعان للإسكان · الجبيهة، عمّان', 'Kenan Housing · Haidar and Mohammad Al-Quraan Housing Company · Jubeiha, Amman'], 'wide'],
     [['مُعدّ من', 'Prepared by'], ['مارش للتسويق والتطوير · صافي السكران ولبيب طنوس', 'Marsh Marketing and Development · Safi Al-Sakran and Labib Tanous'], 'wide'],
-    [['الباقات', 'Packages'], ['400، 700، 1,000، أو 2,000 دينار في الشهر. محتوى كل باقة مسودة يؤكدها صافي. البداية شهرية أو 3 أشهر (سعر 3 أشهر للتأكيد). الدفع السنوي مقدّماً لاحقاً.', '400, 700, 1,000 or 2,000 JOD a month. The contents of each package are a draft that Safi confirms. Start monthly or for 3 months (the 3-month price is to confirm). Yearly, paid in advance, comes later.'], ''],
-    [['إضافات شهرية', 'Monthly add-ons'], ['الرسائل وقائمة المهتمين 150 ديناراً في الشهر. إدارة إعلانات ميتا 15 % من ميزانية الإعلانات.', 'Messages and leads list 150 JOD a month. Meta ads management 15 % of the ad budget.'], ''],
-    [['لمرة واحدة', 'One time'], ['صفحة المشروع، الفيديو الرئيسي، صفحة كل مشروع جديد، والصور: السعر للتأكيد.', 'The project page, the main video, a page for each next project, and the photos: the price is to confirm.'], ''],
-    [['خارج الأسعار', 'Not in the fees'], ['ميزانية الإعلانات، وكلفة رسائل واتساب. يدفعها كنان مباشرة.', 'The ad budget and the WhatsApp message costs. Kenan pays them directly.'], ''],
+    [['العرض', 'The offer'], ['صفحة المشتري، 3–4 ريلز في الشهر، صور المرحلة كل أسبوع، وتحديث دائم للحساب.', 'The buyer page, 3–4 reels a month, stage photos each week, and steady account updates.'], 'wide'],
+    [['السعر', 'The fee'], [`${YEAR_TXT} دينار للسنة كاملة (12 شهراً). مسودة من صافي.`, `${YEAR_TXT} JOD for the full year (12 months). A draft from Safi.`], ''],
+    [['الدفع', 'Payment'], ['دفعة واحدة أو على دفعات: للتأكيد.', 'In one payment or in parts: to confirm.'], ''],
+    [['ليس في هذا العرض', 'Not in this offer'], ['إعلانات ميتا وميزانيتها، وأسعار الشقق. الفيديو الرئيسي: للتأكيد.', 'Meta ads and their budget, and flat prices. The main video: to confirm.'], 'wide'],
     [['المحتوى', 'Content'], ['لا ننشر مواصفة أو ماركة قبل أن يؤكدها كنان. لا أسعار شقق ولا وعود بعائد في المحتوى.', 'No spec or brand goes up before Kenan confirms it. No flat prices and no promised returns in the content.'], 'wide'],
-    [['الملكية والنتائج', 'Ownership and results'], ['الصفحات والصور والفيديو الخام ملك كنان. لا نعد بعدد مبيعات أو متابعين. التقرير يُظهر ما تجلبه كل قناة.', 'The pages, photos and raw footage stay Kenan\'s. No number of sales or followers is promised. The report shows what each channel brings.'], 'wide'],
+    [['الملكية والنتائج', 'Ownership and results'], ['الصفحات والصور والفيديو الخام ملك كنان. لا نعد بعدد مبيعات أو متابعين. التقرير يُظهر ما تجلبه الريلز والصفحة.', 'The pages, photos and raw footage stay Kenan\'s. No number of sales or followers is promised. The report shows what the reels and the page bring.'], 'wide'],
   ],
 
   nextH: ['الخطوة التالية', 'Next step'],
   nextP: ['نبدأ يوم تأكيد كنان.', 'We start the day Kenan confirms.'],
   nextSteps: [
-    ['يختار كنان الباقة والبنود في «الباقات والأسعار»، ويرسل ملف PDF.', 'Kenan picks the package and the items in "Plans and fees", and sends the PDF.'],
+    ['يؤكد كنان العرض في «العرض والسعر»، ويرسل ملف PDF.', 'Kenan confirms the offer in "Offer and fee", and sends the PDF.'],
     ['يرسل كنان: قائمة المواصفات والماركات، قائمة الشقق وحالتها، وصور الموقع لكل مرحلة.', 'Kenan sends: the spec and brand list, the apartment list with status, and site photos for each stage.'],
     ['صلاحية شريك على صفحات إنستغرام وفيسبوك.', 'Partner access to the Instagram and Facebook pages.'],
     ['يوم التصوير الأول في الجبيهة 3.', 'Shoot day 1 at Jubeiha 3.'],
@@ -887,7 +878,7 @@ const D = {
   b2H: ['2 · المخطط: اختر الطابق، ثم الشقة', '2 · The plan: pick a floor, then a flat'],
   b2P: ['المخططات من ملف «كنان للإسكان - جبيهة 3» الذي أرسله كنان يوم 18 تشرين الأول. اضغط على شقة في المبنى أو على المخطط. الشقة المباعة عليها ظل.', 'The plans are from the "Kenan Housing - Jubeiha 3" file Kenan sent on 18 October. Tap a flat on the building or on the plan. A sold flat has a shade on it.'],
   st_av: ['متاحة', 'Available'], st_rs: ['محجوزة', 'Reserved'], st_sd: ['مباعة', 'Sold'],
-  stSample: ['الحالات هنا عينة. كنان يغيّر حالة كل شقة من لوحته.', 'The statuses here are a sample. Kenan changes each flat\'s status from his dashboard.'],
+  stSample: ['الحالات هنا عينة. كنان يغيّر حالة كل شقة من صفحة المالك.', 'The statuses here are a sample. Kenan changes each flat\'s status from the owner view.'],
   fl_r: ['الروف', 'Roof'], fl_l: ['الطابق الأخير', 'Last floor'], fl_t: ['الطابق المتكرر', 'Typical floor'], fl_g: ['الطابق الأرضي', 'Ground floor'], fl_b: ['التسوية', 'Basement'],
   typCount: ['عدد الطوابق للتأكيد', 'floor count to confirm'],
   roofNote: ['الروف مع شقق الطابق الأخير (دوبلكس). التقسيم للتأكيد.', 'The roof goes with the last-floor flats (duplex). The split is to confirm.'],
@@ -964,9 +955,9 @@ const D = {
   pgNote: ['على الموبايل، افتح الصفحة كاملة لتجربة أوضح.', 'On a phone, open the full page for a clearer view.'],
 
   /* plans */
-  plansH: ['الباقات والأسعار', 'Plans and fees'],
-  guide: [['خذ الخطة المقترحة، أو اختر باقة وبنوداً في الأسفل.', 'Take the suggested plan, or pick a package and items below.'], ['اضغط «اطبع العرض PDF».', 'Press "Generate PDF".'], ['أرسل ملف PDF لنا على واتساب.', 'Send the PDF to us on WhatsApp.']],
-  plansScope: ['4 باقات شهرية بالدينار الأردني. الأسعار مسودة من صافي، ومحتوى كل باقة مسودة يؤكدها صافي.', '4 monthly packages in Jordanian dinars. The prices are Safi\'s draft, and the contents of each package are a draft that Safi confirms.'],
+  plansH: ['العرض والسعر', 'Offer and fee'],
+  guide: [['راجع ما يشمله العرض والسعر.', 'Check what the offer covers and the fee.'], ['اضغط «اطبع العرض PDF».', 'Press "Generate PDF".'], ['أرسل ملف PDF لنا على واتساب.', 'Send the PDF to us on WhatsApp.']],
+  plansScope: ['عرض واحد لسنة كاملة، 1 تشرين الثاني 2026. السعر بالدينار الأردني، مسودة من صافي.', 'One offer for a full year, 1 November 2026. The fee is in Jordanian dinars, a draft from Safi.'],
   suggH: ['الخطة المقترحة', 'Suggested plan'], custH: ['خصّص خطتك', 'Customize your plan'],
   suggWhy: ['لماذا: تغطي نقاط صافي الخمس: الستوري والفيديو (3)، الفيديو الرئيسي (4)، وصفحة المشروع (1، 2، 5).', 'Why: it covers Safi\'s 5 points: stories and videos (3), the main video (4), and the project page (1, 2, 5).'],
   suggOnce: ['مرة واحدة', 'One time'], suggMonth: ['كل شهر', 'Each month'], suggTotal: ['الشهر الأول', 'First month'],
@@ -994,19 +985,28 @@ const D = {
     ['next', ['صفحة لكل مشروع جديد', 'A page for each next project'], ['نفس الصفحة لمشروع كنان التالي. السعر لكل مشروع.', 'The same page for Kenan\'s next project. Priced per project.']],
     ['photos', ['مجموعة صور ورندرات احترافية', 'A professional photo and render set'], ['صور للمبنى والشقق، أو رندرات، حسب الحاجة.', 'Photos of the building and apartments, or renders, as needed.']],
   ],
-  sumH: ['اختيارك', 'Your choice'],
+  offH: ['ما يشمله العرض', 'What the offer covers'],
+  offPlan: ['العرض السنوي', 'Yearly offer'],
+  offItems: [
+    [['صفحة المشتري', 'The buyer page'], ['ميني ويب سايت فيها تفاصيل الإسكان كاملة: المخططات والشقق، المباع والمتاح، المواصفات حسب النظام، مراحل البناء، الموقع، وواتساب. بالعربية والإنجليزية.', 'A mini website with the full housing details: plans and flats, sold and available, specs by system, build stages, location and WhatsApp. In Arabic and English.']],
+    [['3–4 ريلز في الشهر', '3–4 reels a month'], ['تصوير ومونتاج ونشر على إنستغرام وفيسبوك. كنان يوافق على كل ريل قبل النشر.', 'Filming, editing and posting on Instagram and Facebook. Kenan approves each reel before it goes up.']],
+    [['صور كل أسبوع', 'Photos each week'], ['صور للمرحلة التي وصلها البناء، بتاريخها، على صفحة المشتري والحساب.', 'Photos of the stage the build has reached, with the date, on the buyer page and the account.']],
+    [['تحديث دائم للحساب', 'Steady account updates'], ['ستوري على كل مرحلة، وقصص مميزة لكل مشروع.', 'Stories on each stage, and a highlight for each project.']],
+  ],
+  sTerm: ['المدة', 'Term'], sYear: ['12 شهراً', '12 months'], sYearFee: ['السعر للسنة', 'Fee for the year'], sPerMonth: ['ما يعادل الشهر', 'Per month (equal)'], sMonthOpt: ['خيار شهري', 'Monthly option'], sPay: ['الدفع', 'Payment'],
+  sumH: ['السعر', 'The fee'],
   sPkg: ['الباقة', 'Package'], sMonthly: ['الإضافات الشهرية', 'Monthly add-ons'], sOnce: ['لمرة واحدة', 'One time'], sMonth: ['كل شهر', 'Each month'], sFirst: ['الشهر الأول', 'First month'],
-  sNote: ['البنود «للتأكيد» نُسعّرها بعد أن ترسل اختيارك. ميزانية الإعلانات ليست في المجموع.', 'We price the items marked "To confirm" after you send your choice. The ad budget is not in the total.'],
+  sNote: ['السعر مسودة من صافي. إعلانات ميتا ليست في هذا العرض. الفيديو الرئيسي: للتأكيد.', 'The fee is a draft from Safi. Meta ads are not in this offer. The main video: to confirm.'],
   pkWa: ['أرسل على واتساب', 'Send on WhatsApp'],
-  waHead: ['اختيار كنان للإسكان من عرض مارش', 'Kenan Housing\'s choice from the Marsh proposal'],
+  waHead: ['تأكيد كنان للإسكان لعرض مارش', 'Kenan Housing confirms the Marsh offer'],
   pkName: ['الاسم (اختياري)', 'Name (optional)'], pkSend: ['اطبع العرض PDF', 'Generate PDF'], pkSending: ['جاري الإرسال…', 'Sending…'],
-  pkOk: ['حفظنا اختيارك. أرسل ملف PDF لنا على واتساب.', 'Your choice is saved. Send the PDF to us on WhatsApp.'], pkErr: ['ما انرسل. جرّب مرة ثانية. اختيارك ضل محفوظ.', 'Not sent. Try again. Your choice is kept.'],
+  pkOk: ['وصلنا تأكيدك. أرسل ملف PDF لنا على واتساب.', 'Your confirmation is in. Send the PDF to us on WhatsApp.'], pkErr: ['ما انرسل. جرّب مرة ثانية، أو أرسل على واتساب.', 'Not sent. Try again, or send it on WhatsApp.'],
   paid: [
-    [['ميزانية الإعلانات', 'Ad budget'], ['يحددها كنان، وتُدفع لميتا من بطاقة باسم الشركة.', 'Kenan sets it, and pays it to Meta from a card in the company\'s name.']],
-    [['رسائل واتساب', 'WhatsApp messages'], ['كلفة الرسائل حسب الاستخدام، يدفعها كنان مباشرة.', 'Message costs depend on use, and Kenan pays them directly.']],
+    [['إعلانات ميتا', 'Meta ads'], ['ليست في هذا العرض.', 'Not in this offer.']],
+    [['الفيديو الرئيسي', 'The main video'], ['فيديو احترافي منفصل للمشروع: للتأكيد.', 'A separate professional video of the project: to confirm.']],
     [['أسعار الشقق', 'Flat prices'], ['ليست في هذا العرض. كنان يقرر هل تظهر على الصفحة.', 'Not in this proposal. Kenan decides if they show on the page.']],
   ],
-  payTerms: ['الباقة تُدفع في بداية كل شهر. البنود لمرة واحدة تُدفع عند البدء بها. إدارة الإعلانات تُدفع كل شهر: 15 % من ميزانية ذلك الشهر. شروط الدفع مسودة.', 'The package is paid at the start of each month. One-time items are paid when work on them starts. Ads management is paid each month: 15 % of that month\'s ad budget. The payment terms are a draft.'],
+  payTerms: ['العقد لسنة كاملة (12 شهراً). طريقة الدفع، دفعة واحدة أو على دفعات: للتأكيد. شروط الدفع مسودة.', 'The contract is for a full year (12 months). How it is paid, in one payment or in parts: to confirm. The payment terms are a draft.'],
 };
 </script>
 <script>
@@ -1140,171 +1140,43 @@ function renderDash() {
 }
 document.addEventListener('click', (e) => { const b = e.target.closest('[data-dtab]'); if (b) { DS.tab = b.dataset.dtab; renderDash(); $(`[data-dtab="${DS.tab}"]`).focus({ preventScroll: true }); } });
 
-/* ---------- plans + totals: 4 monthly packages, 2 monthly add-ons, one-time items (price to be set) ---------- */
-const clampInt = (v, a, b, d) => { const n = Math.round(Number(v)); return Number.isFinite(n) ? Math.min(b, Math.max(a, n)) : d; };
-const PK = D.pkgDefs.map((d) => d[0]), ONCE = D.onceDefs.map((d) => d[0]);
-const ST = {
-  pkg: store.get('pkg', FILL.suggested.pkg),
-  msg: store.get('msg', FILL.suggested.msg) === true,
-  ads: store.get('ads', FILL.suggested.ads) === true,
-  adBudget: clampInt(store.get('adBudget', FILL.adBudgetDefault), 0, 100000, FILL.adBudgetDefault),
-  once: new Set(store.get('once', FILL.suggested.once)),
-  term: store.get('term', 'm1') === 'm3' ? 'm3' : 'm1',
-};
-if (['m1', 'm3'].includes(qs.get('term'))) ST.term = qs.get('term');
-if (PK.includes(qs.get('pkg'))) ST.pkg = qs.get('pkg');
-if (!PK.includes(ST.pkg)) ST.pkg = FILL.suggested.pkg;
-ST.once = new Set([...ST.once].filter((k) => ONCE.includes(k)));
+/* ---------- the offer: one yearly offer (Safi, 1 Nov 22:41); a monthly row shows only if FILL.offer.monthly is set ---------- */
+const OF = FILL.offer, PER_MONTH = Math.round(OF.year / OF.months);
 const tbd = () => `<span class="tbd">${esc(T('tbd'))}</span>`;
 const jodH = (n) => `<bdi dir="ltr">${fmt(n)}</bdi> ${esc(T('jod'))}`;
-const money = (v) => (v == null ? tbd() : jodH(v));
-const adsFee = () => Math.round((ST.adBudget * FILL.adsPct) / 100);
-const pkgDef = (k) => D.pkgDefs.find((d) => d[0] === k);
-function calc() {
-  const pkgM = ST.term === 'm3' ? FILL.term3[ST.pkg] : FILL.pkgs[ST.pkg], pkgMiss = pkgM == null, monOn = [];
-  let addM = 0;
-  if (ST.msg) { addM += FILL.msg; monOn.push('msg'); }
-  if (ST.ads) { addM += adsFee(); monOn.push('ads'); }
-  const onceOn = ONCE.filter((k) => ST.once.has(k));
-  let onceT = 0, onceMiss = false;
-  onceOn.forEach((k) => { const v = FILL.once[k]; if (v == null) onceMiss = true; else onceT += v; });
-  const month = (pkgM || 0) + addM;
-  return { pkgM, pkgMiss, addM, monOn, onceOn, onceT, onceMiss: onceMiss || pkgMiss, month, first: month + onceT };
-}
-const withTbd = (n, miss) => (miss ? `${n ? `${jodH(n)} + ` : ''}${tbd()}` : jodH(n));
-function renderSum() {
-  const c = calc();
+const rangeTxt = (r) => r.map(fmt).join('–');
+function renderOffer() {
+  $('#offList').innerHTML = D.offItems.map(([n, d]) => `<div class="item fixed"><span class="ok" aria-hidden="true">✓</span><span class="nm"><b>${rich(tx(n))}</b><span>${rich(tx(d))}</span></span></div>`).join('');
   $('#sum').innerHTML = `<h3>${esc(T('sumH'))}</h3><div class="rows">
-    <div class="r"><span>${esc(T('sPkg'))} · ${esc(tx(pkgDef(ST.pkg)[1]))} · ${esc(termName())}</span><b>${c.pkgMiss ? tbd() : jodH(c.pkgM)}</b></div>
-    <div class="r"><span>${esc(T('sMonthly'))}</span><b>${c.monOn.length ? jodH(c.addM) : '—'}</b></div>
-    <div class="r"><span>${esc(T('sMonth'))}</span><b>${withTbd(c.month, c.pkgMiss)}</b></div>
-    <div class="r"><span>${esc(T('sOnce'))}</span><b>${c.onceOn.length ? withTbd(c.onceT, ONCE.some((k) => ST.once.has(k) && FILL.once[k] == null)) : '—'}</b></div>
-    <div class="r big"><span>${esc(T('sFirst'))}</span><b>${withTbd(c.first, c.onceMiss)}</b></div>
+    <div class="r"><span>${esc(T('sTerm'))}</span><b>${esc(T('sYear'))}</b></div>
+    <div class="r"><span>${esc(T('sPerMonth'))}</span><b>${jodH(PER_MONTH)}</b></div>
+    ${Array.isArray(OF.monthly) ? `<div class="r"><span>${esc(T('sMonthOpt'))}</span><b><bdi dir="ltr">${rangeTxt(OF.monthly)}</bdi> ${esc(T('perMonth'))}</b></div>` : ''}
+    <div class="r"><span>${esc(T('sPay'))}</span><b>${tbd()}</b></div>
+    <div class="r big"><span>${esc(T('sYearFee'))}</span><b>${jodH(OF.year)}</b></div>
   </div><p class="note">${esc(T('sNote'))}</p>`;
   if (pk.key) pkStatus(T(pk.key), pk.kind);
-  renderSugg();
   $('#pkWa').href = waHref(receiptData());
-  store.set('term', ST.term); store.set('pkg', ST.pkg); store.set('msg', ST.msg); store.set('ads', ST.ads); store.set('adBudget', ST.adBudget); store.set('once', [...ST.once]);
 }
-const termName = () => tx(D.termDefs.find((d) => d[0] === ST.term)[1]);
-function renderTerm() {
-  $('#termSeg').innerHTML = D.termDefs.map(([k, n, s]) => k === 'y'
-    ? `<button type="button" role="radio" aria-checked="false" disabled><b>${esc(tx(n))}</b><span class="later">${esc(T('later'))}</span><span>${esc(tx(s))}</span></button>`
-    : `<button type="button" role="radio" data-term="${k}" aria-checked="${ST.term === k}" tabindex="${ST.term === k ? 0 : -1}"><b>${rich(tx(n))}</b><span>${rich(tx(s))}</span></button>`).join('');
-}
-document.addEventListener('click', (e) => { const b = e.target.closest('[data-term]'); if (b && b.dataset.term !== ST.term) { ST.term = b.dataset.term; clearStatus(); renderPlans(); $(`[data-term="${ST.term}"]`).focus({ preventScroll: true }); } });
-function renderPlans() {
-  renderTerm();
-  $('#plansEl').innerHTML = D.pkgDefs.map(([k, n, items]) => `<button type="button" class="plan" role="radio" aria-checked="${ST.pkg === k}" tabindex="${ST.pkg === k ? 0 : -1}" data-pkg="${k}">
-      <div class="pt"><h3>${rich(tx(n))}</h3><span class="dot" aria-hidden="true"></span></div>
-      <div class="price">${ST.term === 'm3' ? `${esc(termName())}: ${tbd()}<br><small>${fmt(FILL.pkgs[k])} ${esc(T('perMonth'))}</small>` : `<b>${fmt(FILL.pkgs[k])}</b> ${esc(T('perMonth'))}`}</div>
-      <span class="draft">${esc(T('draft'))}</span>
-      <ul>${items.map((t) => `<li>${rich(tx(t))}</li>`).join('')}</ul></button>`).join('') + `<p class="note" style="grid-column:1/-1;color:var(--muted);font-size:13px">${esc(T('pkgStar'))}</p>`;
-  $('#monthlyList').innerHTML = D.monthlyDefs.map(([k, n, s]) => {
-    const on = k === 'msg' ? ST.msg : ST.ads;
-    const extra = k === 'ads' ? `<br><span class="qty"><input type="number" inputmode="numeric" min="0" step="50" value="${ST.adBudget}" data-adb aria-label="${esc(T('adBudgetL'))}">${esc(T('adBudgetL'))}</span>` : '';
-    const price = k === 'msg' ? `+${fmt(FILL.msg)} ${esc(T('perMonth'))}` : (on ? `${fmt(adsFee())} ${esc(T('perMonth'))}` : `${FILL.adsPct} %`);
-    return `<label class="item"><input type="checkbox" data-mon="${k}" ${on ? 'checked' : ''}><span class="nm"><b>${esc(tx(n))}</b><span>${rich(tx(s))}</span>${extra}</span><span class="amt" data-amt="${k}">${price}</span></label>`;
-  }).join('');
-  $('#onceList').innerHTML = D.onceDefs.map(([k, n, s]) => `<label class="item"><input type="checkbox" data-once="${k}" ${ST.once.has(k) ? 'checked' : ''}><span class="nm"><b>${rich(tx(n))}</b><span>${rich(tx(s))}</span></span><span class="amt">${money(FILL.once[k])}</span></label>`).join('');
-  renderSum();
-}
-/* suggested plan: a preset of the picker below */
-const SG = { undo: null };
-const snap = () => ({ term: ST.term, pkg: ST.pkg, msg: ST.msg, ads: ST.ads, adBudget: ST.adBudget, once: new Set(ST.once) });
-const put = (o) => Object.keys(o).forEach((k) => { ST[k] = o[k]; });
-const suggState = () => { const S = FILL.suggested; return { term: 'm1', pkg: S.pkg, msg: S.msg, ads: S.ads, adBudget: ST.adBudget, once: new Set(S.once) }; };
-const sameSet = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
-const isSugg = () => { const o = suggState(); return ST.term === o.term && ST.pkg === o.pkg && ST.msg === o.msg && ST.ads === o.ads && sameSet(ST.once, o.once); };
-const calcFor = (o) => { const keep = snap(); put(o); const c = calc(); put(keep); return c; };
-function renderSugg() {
-  const S = FILL.suggested, c = calcFor(suggState()), on = isSugg(), p = pkgDef(S.pkg);
-  const od = (k) => tx(D.onceDefs.find((d) => d[0] === k)[1]);
-  const items = [`${tx(p[1])}: ${tx(p[2][0])} · ${tx(p[2][1])}`, ...S.once.map(od)];
-  const el = $('#sugg'); el.className = `sugg${on ? ' on' : ''}`;
-  el.innerHTML = `<div class="sg-top"><h3>${esc(T('suggH'))}</h3></div>
-    <p class="why">${rich(T('suggWhy'))}</p>
-    <ul>${items.map((t) => `<li>${rich(t)}</li>`).join('')}</ul>
-    <div class="sg-sum">
-      <div class="r"><span>${esc(T('suggMonth'))}</span><b>${jodH(c.month)}</b></div>
-      <div class="r"><span>${esc(T('suggOnce'))}</span><b>${withTbd(c.onceT, c.onceMiss)}</b></div>
-      <div class="r big"><span>${esc(T('suggTotal'))}</span><b id="suggTotal">${withTbd(c.first, c.onceMiss)}</b></div>
-      <div class="sg-act">${on ? `<span class="sg-on">✓ ${esc(T('suggOn'))}</span>${SG.undo ? `<button type="button" class="btn" data-sgundo>${esc(T('suggUndo'))}</button>` : ''}` : `<button type="button" class="btn fill" data-sgpick>${esc(T('suggPick'))}</button>`}</div>
-    </div>`;
-}
-const clearStatus = () => { pk.key = null; pkStatus(''); };
-document.addEventListener('click', (e) => {
-  const pick = e.target.closest('[data-sgpick]'), undo = e.target.closest('[data-sgundo]');
-  if (pick) { clearStatus(); SG.undo = snap(); put(suggState()); renderPlans(); ($('#sugg [data-sgundo]') || $('#sugg'))?.focus({ preventScroll: true }); return; }
-  if (undo) { clearStatus(); if (SG.undo) put(SG.undo); SG.undo = null; renderPlans(); $('#sugg [data-sgpick]')?.focus({ preventScroll: true }); return; }
-  if (e.target.closest('.qty') && !e.target.closest('input')) { e.preventDefault(); return; }   // the unit text inside a label must not tick the box
-  const p = e.target.closest('[data-pkg]'); if (p) pickPkg(p.dataset.pkg, true);
-});
-function pickPkg(k, focus) { ST.pkg = k; clearStatus(); renderPlans(); if (focus) $(`[data-pkg="${k}"]`).focus({ preventScroll: true }); }
-$('#plansEl').addEventListener('keydown', (e) => {
-  const keys = { ArrowRight: LANG === 'ar' ? -1 : 1, ArrowLeft: LANG === 'ar' ? 1 : -1, ArrowDown: 1, ArrowUp: -1 };
-  if (!(e.key in keys)) return; e.preventDefault();
-  pickPkg(PK[(PK.indexOf(ST.pkg) + keys[e.key] + PK.length) % PK.length], true);
-});
-document.addEventListener('input', (e) => {
-  if (!('adb' in e.target.dataset)) return;
-  ST.adBudget = clampInt(e.target.value, 0, 100000, 0); clearStatus();
-  const amtEl = $('[data-amt="ads"]'); if (amtEl) amtEl.textContent = ST.ads ? `${fmt(adsFee())} ${T('perMonth')}` : `${FILL.adsPct} %`;
-  renderSum();
-});
-document.addEventListener('change', (e) => {
-  const m = e.target.dataset.mon, o = e.target.dataset.once;
-  if (!m && !o) return;
-  clearStatus();
-  if (m === 'msg') ST.msg = e.target.checked;
-  if (m === 'ads') ST.ads = e.target.checked;
-  if (o) { e.target.checked ? ST.once.add(o) : ST.once.delete(o); }
-  renderPlans(); $(m ? `[data-mon="${m}"]` : `[data-once="${o}"]`)?.focus();
-});
-
-/* ---------- send the choice: Supabase function site-feedback, site key kenan-proposal ---------- */
+/* ---------- send the confirmation: Supabase function site-feedback, site key kenan-proposal ---------- */
 const pk = { busy: false, key: null, kind: '' };
 function pkStatus(msg, kind) { const el = $('#pkStatus'); el.textContent = msg || ''; el.className = 'st' + (kind ? ' ' + kind : ''); }
 function pkSet(key, kind) { pk.key = key; pk.kind = kind || ''; pkStatus(T(key), kind); }
 const pkId = () => { let id = store.get('cid', null); if (!id) { id = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).slice(0, 36); store.set('cid', id); } return id; };
-const totalTxt = (n, miss) => `${fmt(n)} JOD${miss ? ' + to confirm' : ''}`;
-function packageData() {
-  const c = calc(), p = pkgDef(ST.pkg);
-  const onceTxt = c.onceOn.map((k) => D.onceDefs.find((d) => d[0] === k)[1][1] + ' (to confirm)').join(', ') || 'None';
-  const monthly = [ST.msg ? `Messages and leads list ${FILL.msg} JOD a month` : '', ST.ads ? `Meta ads management ${FILL.adsPct} % of ${fmt(ST.adBudget)} JOD = ${fmt(adsFee())} JOD a month` : ''].filter(Boolean).join(', ') || 'None';
-  const total = totalTxt(c.first, c.onceMiss);
-  const readable = [
-    ['Suggested plan', isSugg() ? 'Yes, as suggested' : 'No, changed'],
-    ['Start term', ST.term === 'm3' ? '3 months (price to confirm)' : 'Monthly'],
-    ['Package', c.pkgMiss ? `${p[1][1]}: 3-month price to confirm (contents are a draft)` : `${p[1][1]}: ${fmt(c.pkgM)} JOD a month (contents are a draft)`],
-    ['Monthly add-ons', monthly],
-    ['Each month', `${fmt(c.month)} JOD`],
-    ['One time', onceTxt],
-    ['First month', total],
-  ];
-  const fields = { term: ST.term, pkg: ST.pkg, msg: ST.msg, adBudget: ST.ads ? ST.adBudget : 0, once: c.onceOn, month: c.month, total };
-  return { fields, readable, total };
-}
 const FEEDBACK_URL = 'https://jwvgyktutbeszguevqoy.supabase.co/functions/v1/site-feedback';   // shared Marsh endpoint (this project holds no keys)
 const WA = '962795631364';   // Safi, the number on the Next step
 function receiptData() {
-  const c = calc(), lines = [], tbdL = [], name = $('#pkName').value.trim().slice(0, 80), p = pkgDef(ST.pkg);
-  if (c.pkgMiss) tbdL.push(`${tx(p[1])} · ${termName()}`); else lines.push({ g: 'v', n: tx(p[1]), u: c.pkgM, q: 1, t: c.pkgM });
-  if (ST.msg) lines.push({ g: 'm', n: tx(D.monthlyDefs[0][1]), u: FILL.msg, q: 1, t: FILL.msg });
-  if (ST.ads) lines.push({ g: 'm', n: `${tx(D.monthlyDefs[1][1])} (${FILL.adsPct} % × ${fmt(ST.adBudget)})`, u: adsFee(), q: 1, t: adsFee() });
-  const onceTbd = [];
-  c.onceOn.forEach((k) => { const def = D.onceDefs.find((d) => d[0] === k), v = FILL.once[k]; if (v == null) { tbdL.push(tx(def[1])); onceTbd.push(tx(def[1])); } else lines.push({ g: 'o', n: tx(def[1]), u: v, q: 1, t: v }); });
-  return { v: 1, lang: LANG, name, date: new Date().toLocaleDateString(LANG === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
-    plan: `${tx(p[1])} · ${termName()}`, months: ST.term === 'm3' ? 3 : 1, lines, tbd: tbdL, onceTbd, pkgTbd: c.pkgMiss, once: c.onceT, month: c.month, grand: c.first, adBudget: ST.ads ? ST.adBudget : 0, wa: WA };
+  const name = $('#pkName').value.trim().slice(0, 80);
+  return { v: 2, lang: LANG, name, date: new Date().toLocaleDateString(LANG === 'ar' ? 'ar-JO-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+    plan: T('offPlan'), lines: D.offItems.map(([n]) => tx(n)), year: OF.year, months: OF.months, perMonth: PER_MONTH, monthly: Array.isArray(OF.monthly) ? OF.monthly : null, wa: WA };
 }
-const amtTbd = (n, miss) => (miss ? (n ? `${fmt(n)} ${T('jod')} + ${T('tbd')}` : T('tbd')) : `${fmt(n)} ${T('jod')}`);
-const waText = (r) => [T('waHead') + (r.name ? ` · ${r.name}` : ''), r.plan, `${T('suggMonth')}: ${amtTbd(r.month, r.pkgTbd)}`, `${T('suggOnce')}: ${r.onceTbd.length ? r.onceTbd.join(LANG === 'ar' ? '، ' : ', ') + ` (${T('tbd')})` : '—'}`, `${T('suggTotal')}: ${amtTbd(r.grand, r.tbd.length > 0)}`].join('\n');
+const waText = (r) => [T('waHead') + (r.name ? ` · ${r.name}` : ''), ...r.lines.map((l) => `- ${l}`), `${T('sYearFee')}: ${fmt(r.year)} ${T('jod')}`, `${T('sPay')}: ${T('tbd')}`].join('\n');
 const waHref = (r) => `https://wa.me/${WA}?text=${encodeURIComponent(waText(r))}`;
 const receiptUrl = (r) => `receipt.html#${encodeURIComponent(JSON.stringify(r))}`;
 async function sendChoice() {
   if (pk.busy) return;
-  const d = packageData(), name = $('#pkName').value.trim().slice(0, 80);
-  const body = { site: 'kenan-proposal', page: '/kenan', section: '/kenan#plans', label: 'Package choice', choice: '', fields: d.fields, readable: d.readable, comment: `First month: ${d.total}`, author: name || 'Client', lang: LANG, client_id: pkId() };
+  const name = $('#pkName').value.trim().slice(0, 80);
+  const readable = [['Offer', 'Yearly: ' + D.offItems.map(([n]) => n[1]).join(', ')], ['Fee for the year', `${fmt(OF.year)} JOD`], ['Payment', 'to confirm']];
+  const body = { site: 'kenan-proposal', page: '/kenan', section: '/kenan#plans', label: 'Offer confirm', choice: '', fields: { offer: 'yearly', year: OF.year, months: OF.months }, readable, comment: `Year: ${fmt(OF.year)} JOD`, author: name || 'Client', lang: LANG, client_id: pkId() };
   pk.busy = true; $('#pkSend').disabled = true; pkSet('pkSending');
   const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 20000);
   try {
@@ -1313,7 +1185,7 @@ async function sendChoice() {
     if (!r.ok || !j.ok) throw new Error(j.error || `HTTP ${r.status}`);
     pkSet('pkOk', 'ok');
   } catch (err) {
-    console.warn('package choice not sent:', err.message);
+    console.warn('offer confirm not sent:', err.message);
     pkSet('pkErr', 'err');
   } finally { clearTimeout(timer); pk.busy = false; $('#pkSend').disabled = false; }
 }
@@ -1323,11 +1195,12 @@ $('#pkForm').addEventListener('submit', (e) => {
   sendChoice();
   if (!w) setTimeout(() => { location.href = url; }, 600);   // a blocked pop-up opens the receipt here instead
 });
+document.addEventListener('input', (e) => { if (e.target.id === 'pkName') $('#pkWa').href = waHref(receiptData()); });
 
 /* ---------- section progress ---------- */
 let VIEW = 'proposal';
 const viewMain = () => $(VIEW === 'pages' ? '#pagesView' : VIEW === 'plans' ? '#plansView' : '#propView');
-const curSections = () => $$('section[data-n]', viewMain()).filter((x) => x.closest('main') === viewMain());
+const curSections = () => $$('section[data-n]', viewMain()).filter((x) => x.closest('main') === viewMain() && !x.hidden);
 function onScrollUI() {
   const max = document.documentElement.scrollHeight - innerHeight;
   $('#prog').style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
@@ -1431,7 +1304,7 @@ function applyLang() {
   $('#langSeg').setAttribute('aria-label', T('langL')); $('#viewSeg').setAttribute('aria-label', T('viewL')); $('#index').setAttribute('aria-label', T('secL'));
   $('#heroImg').alt = T('heroAlt'); $('#shotA').alt = T('capA'); $('#shotB').alt = T('capB'); $('#shotC').alt = T('capC');
   $$('.logo-d,.logo-l').forEach((i) => { i.alt = T('logoAlt'); });
-  setChip(chipSel); renderBuyer(); renderDash(); renderPlans(); onScrollUI();
+  setChip(chipSel); renderBuyer(); renderDash(); renderOffer(); onScrollUI();
   store.set('lang', LANG);
   if (VIEW === 'pages') renderPages();
   buildIndex();

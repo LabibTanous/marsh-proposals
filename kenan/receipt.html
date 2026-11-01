@@ -51,18 +51,21 @@ bdi{unicode-bidi:isolate}
       v: 'الباقة الشهرية', o: 'مرة واحدة', m: 'شهرياً', once: 'المجموع لمرة واحدة', month: 'كل شهر', grand: 'مجموع الشهر الأول', months: (n) => (n === 1 ? 'شهر واحد' : `${n} أشهر`),
       tbd: 'للتأكيد', ads: (b) => `ميزانية الإعلانات ${b} دينار في الشهر تُدفع لميتا، وليست في المجموع.`, valid: 'الأسعار بالدينار الأردني. الأسعار ومحتوى الباقات مسودة.',
       save: 'احفظ PDF', wa: 'أرسل على واتساب', back: 'رجوع إلى الخطط', hint: 'في نافذة الطباعة اختر «حفظ كـ PDF»، ثم أرسل الملف لنا.', empty: 'لا يوجد اختيار. ارجع إلى صفحة الخطط.',
-      foot: 'مارش للتسويق والتطوير · كنان للإسكان' },
+      foot: 'مارش للتسويق والتطوير · كنان للإسكان',
+      inc: 'ما يشمله العرض', offerL: 'العرض', title2: 'العرض', term: 'المدة', year12: '12 شهراً', perm: 'ما يعادل الشهر', mopt: 'خيار شهري', pay: 'الدفع', yfee: 'السعر للسنة', valid2: 'الأسعار بالدينار الأردني. السعر مسودة.' },
     en: { title: 'Chosen package', client: 'Client', date: 'Date', plan: 'Package', none: '—', item: 'Item', unit: 'Unit price', qty: 'Qty', total: 'Total', jod: 'JOD',
       v: 'Monthly package', o: 'One time', m: 'Monthly', once: 'One-time total', month: 'Each month', grand: 'First month total', months: (n) => (n === 1 ? '1 month' : `${n} months`),
       tbd: 'To confirm', ads: (b) => `The ad budget of ${b} JOD a month is paid to Meta and is not in the total.`, valid: 'Prices are in Jordanian dinars (JOD). Prices and package contents are a draft.',
       save: 'Save PDF', wa: 'Send on WhatsApp', back: 'Back to the plans', hint: 'In the print window, choose "Save as PDF", then send the file to us.', empty: 'No choice found. Go back to the plans page.',
-      foot: 'Marsh Marketing and Development · Kenan Housing' },
+      foot: 'Marsh Marketing and Development · Kenan Housing',
+      inc: 'What the offer covers', offerL: 'Offer', title2: 'The offer', term: 'Term', year12: '12 months', perm: 'Per month (equal)', mopt: 'Monthly option', pay: 'Payment', yfee: 'Fee for the year', valid2: 'Prices are in Jordanian dinars (JOD). The fee is a draft.' },
   };
   const el = (tag, attrs, kids) => { const n = document.createElement(tag); Object.entries(attrs || {}).forEach(([k, v]) => { if (k === 'text') n.textContent = v; else n.setAttribute(k, v); }); (kids || []).forEach((c) => n.append(c)); return n; };
   const num = (x) => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(x);
   let r = null;
   try { r = JSON.parse(decodeURIComponent(location.hash.slice(1))); } catch (e) { r = null; }
-  const ok = r && r.v === 1 && Array.isArray(r.lines) && r.lines.every((l) => typeof l.n === 'string' && isFinite(l.u) && isFinite(l.q) && isFinite(l.t));
+  const v2 = r && r.v === 2 && Array.isArray(r.lines) && r.lines.every((l) => typeof l === 'string') && isFinite(r.year) && isFinite(r.perMonth) && (r.monthly == null || (Array.isArray(r.monthly) && r.monthly.every(isFinite)));
+  const ok = v2 || r && r.v === 1 && Array.isArray(r.lines) && r.lines.every((l) => typeof l.n === 'string' && isFinite(l.u) && isFinite(l.q) && isFinite(l.t));
   const lang = ok && r.lang === 'ar' ? 'ar' : (ok ? 'en' : (navigator.language || '').startsWith('ar') ? 'ar' : 'en'), t = L[lang];
   document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   const out = document.getElementById('out'), bar = document.getElementById('bar');
@@ -70,12 +73,26 @@ bdi{unicode-bidi:isolate}
   if (!ok) { out.append(el('p', { class: 'empty' }, [t.empty + ' ', back])); return; }
   const money = (x) => `${num(x)} ${t.jod}`;
   const sheet = el('div', { class: 'sheet' });
-  sheet.append(el('div', { class: 'top' }, [el('h1', { text: `${t.title} · ${lang === 'ar' ? 'كنان للإسكان' : 'Kenan Housing'}` }), el('img', { src: 'assets/marsh-lockup.svg', alt: 'Marsh' })]));
+  sheet.append(el('div', { class: 'top' }, [el('h1', { text: `${v2 ? t.title2 : t.title} · ${lang === 'ar' ? 'كنان للإسكان' : 'Kenan Housing'}` }), el('img', { src: 'assets/marsh-lockup.svg', alt: 'Marsh' })]));
   sheet.append(el('div', { class: 'meta' }, [
     el('div', {}, [el('small', { text: t.client }), el('b', { text: (r.name || '').slice(0, 80) || t.none })]),
     el('div', {}, [el('small', { text: t.date }), el('b', { text: String(r.date || '') })]),
-    el('div', {}, [el('small', { text: t.plan }), el('b', { text: String(r.plan || '') })]),
+    el('div', {}, [el('small', { text: v2 ? t.offerL : t.plan }), el('b', { text: String(r.plan || '') })]),
   ]));
+  if (v2) {
+    sheet.append(el('h2', { text: t.inc }));
+    sheet.append(el('table', {}, [el('tbody', {}, r.lines.map((l) => el('tr', {}, [el('td', { text: '✓ ' + l })])))]));
+    const rows = [[t.term, t.year12], [t.perm, money(r.perMonth)]];
+    if (r.monthly) rows.push([t.mopt, `${r.monthly.map(num).join('–')} ${t.jod}`]);
+    rows.push([t.pay, t.tbd]);
+    sheet.append(el('div', { class: 'tot' }, rows.map(([a, b]) => el('div', {}, [el('span', { text: a }), el('span', { text: b })])).concat([el('div', { class: 'g' }, [el('span', { text: t.yfee }), el('span', { text: money(r.year) })])])));
+    sheet.append(el('div', { class: 'notes' }, [el('p', { text: t.valid2 })]));
+    sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+962 79 563 1364 · marshteamjo@gmail.com' })]));
+    out.append(sheet);
+    const waTxt2 = [`${v2 ? t.title2 : t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, String(r.plan || ''), ...r.lines.map((l) => '- ' + l), `${t.yfee}: ${money(r.year)}`, `${t.pay}: ${t.tbd}`].join('\n');
+    finish(waTxt2);
+    return;
+  }
   [['v', t.v], ['o', t.o], ['m', t.m]].forEach(([g, h]) => {
     const rows = r.lines.filter((l) => l.g === g); if (!rows.length) return;
     sheet.append(el('h2', { text: h }));
@@ -93,13 +110,16 @@ bdi{unicode-bidi:isolate}
   sheet.append(el('div', { class: 'notes' }, notes.map((x) => el('p', { text: x }))));
   sheet.append(el('div', { class: 'foot' }, [el('span', { text: t.foot }), el('bdi', { dir: 'ltr', text: '+962 79 563 1364 · marshteamjo@gmail.com' })]));
   out.append(sheet);
-  const waTxt = [`${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${onceTbd.length ? (r.once ? money(r.once) + ' + ' + t.tbd : t.tbd) : money(r.once)}`, `${t.month}: ${r.pkgTbd ? t.tbd : money(Math.round(r.month))}`, `${t.grand}: ${tbd.length && !r.grand ? t.tbd : money(r.grand) + (tbd.length ? ' + ' + t.tbd : '')}`].join('\n');
+  const waTxt = [`${v2 ? t.title2 : t.title} · Kenan${r.name ? ' · ' + r.name : ''}`, `${r.plan}`, `${t.once}: ${onceTbd.length ? (r.once ? money(r.once) + ' + ' + t.tbd : t.tbd) : money(r.once)}`, `${t.month}: ${r.pkgTbd ? t.tbd : money(Math.round(r.month))}`, `${t.grand}: ${tbd.length && !r.grand ? t.tbd : money(r.grand) + (tbd.length ? ' + ' + t.tbd : '')}`].join('\n');
+  finish(waTxt);
+  function finish(waTxt) {
   const save = el('button', { type: 'button', class: 'fill', text: t.save }); save.addEventListener('click', () => window.print());
   bar.append(save, el('a', { href: `https://wa.me/${/^\d{8,15}$/.test(String(r.wa)) ? r.wa : '962795631364'}?text=${encodeURIComponent(waTxt)}`, target: '_blank', rel: 'noopener', text: t.wa }), back, el('p', { text: t.hint }));
   bar.hidden = false;
-  document.title = `${t.title} · Kenan${r.name ? ' · ' + r.name : ''}`;
+  document.title = `${v2 ? t.title2 : t.title} · Kenan${r.name ? ' · ' + r.name : ''}`;
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iOS prints only from a tap
   if (!ios && !/[?&]noprint/.test(location.search)) setTimeout(() => window.print(), 600);
+  }
 })();
 </script>
 </body>
