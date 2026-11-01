@@ -414,11 +414,12 @@
   }
 
   const STORIES = [
+    { id: 's0', kind: 'finishing', img: '../img/ig/j2-living.jpg', ar: 'تشطيب كنان', en: 'Kenan finishing', frames: [{ img: '../img/ig/j2-living.jpg', ar: 'الصالة · الجبيهة 2', en: 'Living room · Jubeiha 2', src: 'DU0PsiNjPaQ' }, { img: '../img/ig/j2-entrance.jpg', ar: 'باب المدخل · الجبيهة 2', en: 'Entrance door · Jubeiha 2', src: 'DU0PsiNjPaQ' }, { img: '../img/ig/j2-hall.jpg', ar: 'المعيشة · الجبيهة 2', en: 'Family room · Jubeiha 2', src: 'DU0PsiNjPaQ' }, { img: '../img/ig/j2-tv-wall.jpg', ar: 'جدار التلفزيون · الجبيهة 2', en: 'TV wall · Jubeiha 2', src: 'DU0PsiNjPaQ' }, { img: '../img/ig/j2-bath-1.jpg', ar: 'الحمّام · الجبيهة 2', en: 'Bathroom · Jubeiha 2', src: 'DU0PsiNjPaQ' }, { img: '../img/ig/j2-bath-2.jpg', ar: 'الحمّام · الجبيهة 2', en: 'Bathroom · Jubeiha 2', src: 'DU0PsiNjPaQ' }] },
     { id: 's1', kind: 'finishing', ar: 'التشطيب', en: 'Finishing', frames: [{ k: 'finishing', ar: 'تشطيب الطابق الثاني', en: 'Second floor finishing' }, { k: 'bath', ar: 'حمام الماستر', en: 'Master bathroom' }, { k: 'paint', ar: 'الوجه الثاني من الدهان', en: 'Second paint coat' }] },
     { id: 's2', kind: 'bath', ar: 'الحمام', en: 'Bathroom', frames: [{ k: 'bath', ar: 'بلاط 60×120 حتى السقف', en: '60×120 tiles to the ceiling' }, { k: 'finishing', ar: 'زوايا 45°', en: '45° corners' }] },
     { id: 's3', kind: 'insulation', ar: 'العزل', en: 'Insulation', frames: [{ k: 'insulation', ar: 'طبقات الجدار الخارجي', en: 'Outside wall layers' }, { k: 'insulation', ar: 'اختبار غمر الحمام', en: 'Bathroom flood test' }] },
     { id: 's4', kind: 'tiles', img: 'assets/tiles-video.jpg', ar: 'بلاط 120', en: '120 tiles', frames: [{ img: 'assets/tiles-video.jpg', ar: 'بلاط حتى 120×120 سم · من فيديو كنان (الجبيهة 2)', en: 'Tiles up to 120×120 cm · from Kenan\'s video (Jubeiha 2)', src: 'DQCWqOOCFw1' }] },
-    { id: 's5', kind: 'facade', img: 'assets/facade-night-1.jpg', ar: 'الواجهة', en: 'Facade', frames: [{ img: 'assets/facade-night-1.jpg', ar: 'الواجهة ليلاً · 16 أيلول', en: 'Facade at night · 16 Sep', src: 'DdXSbvmoxL7' }, { img: 'assets/facade-night-2.jpg', ar: 'المدخل · 15 أيلول', en: 'Entrance · 15 Sep', src: 'DdUsVkMDXyN' }] },
+    { id: 's5', kind: 'facade', img: 'assets/facade-night-1.jpg', ar: 'الواجهة', en: 'Facade', frames: [{ img: 'assets/facade-night-1.jpg', ar: 'الواجهة ليلاً · 16 أيلول', en: 'Facade at night · 16 Sep', src: 'DdXSbvmoxL7' }, { img: 'assets/facade-night-2.jpg', ar: 'المدخل · 15 أيلول', en: 'Entrance · 15 Sep', src: 'DdUsVkMDXyN' }, { img: '../img/ig/j3-night-3.jpg', ar: 'اسم كنان على المدخل · 15 أيلول', en: 'The Kenan sign at the entrance · 15 Sep', src: 'DdUsVkMDXyN' }] },
     { id: 's6', kind: 'mep', ar: 'المواسير', en: 'Pipes', frames: [{ k: 'mep', ar: 'اختبار الضغط 10 بار', en: '10 bar pressure test' }] }
   ];
   const REELS = [
@@ -459,7 +460,8 @@
     { id: 'side', ar: 'الزاوية · رندر', en: 'Corner · render', kind: 'facade-side', img: '../img/facade-corner.jpg', deck: true },
     { id: 'garden', ar: 'الحديقة الأرضية · رندر', en: 'Ground garden · render', kind: 'facade-side', img: '../img/ground-garden.jpg', deck: true },
     { id: 'night1', ar: 'ليلية', en: 'Night', img: 'assets/facade-night-1.jpg', src: 'DdXSbvmoxL7', d: '2026-09-16' },
-    { id: 'night2', ar: 'ليلية · المدخل', en: 'Night · entrance', img: 'assets/facade-night-2.jpg', src: 'DdUsVkMDXyN', d: '2026-09-15' }
+    { id: 'night2', ar: 'ليلية · المدخل', en: 'Night · entrance', img: 'assets/facade-night-2.jpg', src: 'DdUsVkMDXyN', d: '2026-09-15' },
+    { id: 'night3', ar: 'ليلية · اسم كنان', en: 'Night · Kenan sign', img: '../img/ig/j3-night-3.jpg', src: 'DdUsVkMDXyN', d: '2026-09-15' }
   ];
 
   const FAQ = [

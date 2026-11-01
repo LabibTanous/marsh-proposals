@@ -426,6 +426,13 @@ html[lang=en] .asked p{font-weight:600}
 .bstep{margin-top:56px}
 .bstep>h3{font-size:clamp(20px,1.9vw,27px)}
 .bstep>p.bp{color:var(--text2);max-width:70ch;margin-top:6px}
+.igal{margin-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.igal figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg3)}
+.igal a{display:block}
+.igal img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.igal figcaption{padding:8px 12px;font-size:13.5px;color:var(--text2)}
+.igal-h{margin-top:22px;font-weight:700;font-size:15px}
+@media(max-width:700px){.igal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .abroad{margin-top:30px;padding:18px 22px;border:1px solid var(--accent-b);border-radius:var(--radius);background:var(--accent-a);font-weight:700}
 .inside{margin-top:18px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
 .vid{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg3);aspect-ratio:16/10}
@@ -632,6 +639,10 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
       <div class="co" id="co"></div>
     </div>
     <div class="bstep"><h3 data-t="b5H"></h3><p class="bp" data-t="b5P"></p></div>
+    <div class="bstep" id="igPhotos"><h3 data-t="b6H"></h3><p class="bp" data-t="b6P"></p>
+      <p class="igal-h" data-t="igJ3H"></p><div class="igal"><figure><a href="img/ig/j3-night-1.jpg" target="_blank" rel="noopener"><img src="img/ig/j3-night-1.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igJ3c"></figcaption></figure><figure><a href="img/ig/j3-night-2.jpg" target="_blank" rel="noopener"><img src="img/ig/j3-night-2.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igJ3c"></figcaption></figure><figure><a href="img/ig/j3-night-3.jpg" target="_blank" rel="noopener"><img src="img/ig/j3-night-3.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igJ3c"></figcaption></figure></div>
+      <p class="igal-h" data-t="igJ2H"></p><div class="igal"><figure><a href="img/ig/j2-living.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-living.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC1"></figcaption></figure><figure><a href="img/ig/j2-entrance.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-entrance.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC2"></figcaption></figure><figure><a href="img/ig/j2-hall.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-hall.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC3"></figcaption></figure><figure><a href="img/ig/j2-tv-wall.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-tv-wall.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC4"></figcaption></figure><figure><a href="img/ig/j2-bath-1.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-bath-1.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC5"></figcaption></figure><figure><a href="img/ig/j2-bath-2.jpg" target="_blank" rel="noopener"><img src="img/ig/j2-bath-2.jpg" alt="" loading="lazy" width="1200" height="1500"></a><figcaption data-t="igC5"></figcaption></figure></div>
+    </div>
   </div>
 </section>
 
@@ -916,6 +927,12 @@ const D = {
   dateTbd: ['التاريخ للتأكيد', 'Date to confirm'],
   co: [['المشاريع السابقة (منها الجبيهة 2): للتأكيد', 'Earlier projects (Jubeiha 2 is one): to confirm'], ['سنوات العمل والضمانات والتسجيل في دائرة الأراضي: للتأكيد', 'Years of work, warranties and Lands Department registration: to confirm']],
   b5H: ['5 · ميزة لها مكانها', '5 · A feature with its own spot'],
+  b6H: ['6 · صور من حساب كنان', '6 · Photos from Kenan\'s account'],
+  b6P: ['صور حقيقية من حساب كنان على انستغرام (kenanhousing.jo). على صفحة المشتري تظهر الصور، وتُضاف إليها صور المرحلة كل أسبوع. اضغط على أي صورة لتراها كاملة.', 'Real photos from Kenan\'s Instagram account (kenanhousing.jo). The buyer page shows these photos, and the weekly stage photos are added to them. Tap any photo to see it in full.'],
+  igJ3H: ['مبنى الجبيهة 3 بالليل', 'The Jubeiha 3 building at night'],
+  igJ3c: ['الجبيهة 3 · حي الريان', 'Jubeiha 3 · Al-Rayyan'],
+  igJ2H: ['مستوى التشطيب: من مشروع الجبيهة 2', 'The finishing level: from the Jubeiha 2 project'],
+  igC1: ['الصالة', 'The living room'], igC2: ['باب المدخل', 'The entrance door'], igC3: ['المعيشة', 'The family room'], igC4: ['جدار التلفزيون', 'The TV wall'], igC5: ['الحمّام', 'The bathroom'],
   b5P: ['أي ميزة في المبنى، مثل باب المدخل الزجاجي المنزلق، تأخذ مكاناً خاصاً على الصفحة، لا سطراً في قائمة. هل الميزة موجودة في الجبيهة 3: للتأكيد مع كنان.', 'Any feature of the building, such as a glass sliding entrance door, gets its own spot on the page, not a line in a list. Whether Jubeiha 3 has it: to confirm with Kenan.'],
 
   /* Marsh Iskan dashboard */
