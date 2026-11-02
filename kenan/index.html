@@ -733,13 +733,7 @@ html[lang=en] .dapp{font-family:'Albert Sans','Tajawal',sans-serif}
 <script src="js/ScrollTrigger.min.js"></script>
 <script src="js/lenis.min.js"></script>
 <script>
-/* ---------------------------------------------------------------
-   FILL: the offer. Safi's voice note, 1 Nov 2026 22:41: buyer page, 3–4 reels a month, weekly stage photos,
-   profile updates; 500–600 a month or 6,000 for the whole year, and he leans to yearly only.
-   Safi, 1 Nov 23:06: one yearly payment, 4,000 JOD. Safi, 1 Nov 23:12: raise to 5,000 JOD a year.
-   monthly: null = no monthly option shown. If set, also edit plansScope and payTerms (they say yearly only). Set [500, 600] only if Safi wants a monthly option.
-   v1 (4 packages, 23 Oct) is kept in v1-2026-10-23.html.
-   --------------------------------------------------------------- */
+/* FILL: the offer. monthly: null = no monthly row; if set, also edit plansScope and payTerms. */
 const FILL = {
   date: ['1 تشرين الثاني 2026', '1 November 2026'],
   offer: { year: 5000, months: 12, monthly: null },   // JOD
@@ -878,9 +872,9 @@ const D = {
   safiName: ['صافي السكران', 'Safi Al-Sakran'], langL: ['اللغة', 'Language'], secL: ['الأقسام', 'Sections'], logoAlt: ['مارش للتسويق والتطوير', 'Marsh Marketing and Development'],
   modeL: ['فاتح أو داكن', 'Light or dark'], modeDark: ['داكن', 'dark'], modeLight: ['فاتح', 'light'],
 
-  /* the buyer page (Safi's voice note, 23 Oct 14:08, in his order) */
+  /* the buyer page */
   buyH: ['صفحة المشتري', 'The buyer page'],
-  buySub: ['ما يراه المشتري على صفحة الجبيهة 3، بترتيب ملاحظة صافي الصوتية يوم 23 تشرين الأول. كل قيمة «للتأكيد» يرسلها كنان قبل النشر.', 'What a buyer sees on the Jubeiha 3 page, in the order of Safi\'s voice note of 23 October. Kenan sends each value marked "To confirm" before the page goes live.'],
+  buySub: ['ما يراه المشتري على صفحة الجبيهة 3. كل قيمة «للتأكيد» يرسلها كنان قبل النشر.', 'What a buyer sees on the Jubeiha 3 page. Kenan sends each value marked "To confirm" before the page goes live.'],
   buyAbroad: ['المشتري في الخارج لا يأتي ليرى الشقة. يدفع، ولا يراها إلا عند الاستلام. لذلك تعرض الصفحة كل تفصيل.', 'A buyer abroad does not come to see the flat. They pay, and see it only at handover. So the page shows every detail.'],
   b1H: ['1 · الشقة من الداخل', '1 · The flat from inside'],
   b1P: ['فيديو 360 أو فيديو عادي لكل نوع شقة: من المدخل، على الدرج، حتى الروف. يُصوَّر في يوم التصوير.', 'A 360 video or a normal video for each flat type: from the entrance, up the stairs, to the roof. We film it on the shoot day.'],
@@ -1158,7 +1152,7 @@ function renderDash() {
 }
 document.addEventListener('click', (e) => { const b = e.target.closest('[data-dtab]'); if (b) { DS.tab = b.dataset.dtab; renderDash(); $(`[data-dtab="${DS.tab}"]`).focus({ preventScroll: true }); } });
 
-/* ---------- the offer: one yearly offer (Safi, 1 Nov 22:41); a monthly row shows only if FILL.offer.monthly is set ---------- */
+/* ---------- the offer: one yearly offer; a monthly row shows only if FILL.offer.monthly is set ---------- */
 const OF = FILL.offer, PER_MONTH = Math.round(OF.year / OF.months);
 const tbd = () => `<span class="tbd">${esc(T('tbd'))}</span>`;
 const jodH = (n) => `<bdi dir="ltr">${fmt(n)}</bdi> ${esc(T('jod'))}`;
